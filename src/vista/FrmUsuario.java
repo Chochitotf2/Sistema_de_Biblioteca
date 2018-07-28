@@ -5,7 +5,6 @@
  */
 package vista;
 
-import javax.swing.UIManager;
 import vista.utilidades.UtilidadesComponente;
 
 /**

@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vistas;
+package vista;
 
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
+import vista.utilidades.UtilidadesComponente;
 
 /**
  *
  * @author Francis
  */
 public class FrmBibliotecario extends javax.swing.JDialog {
+
     /**
      * Creates new form FrmNoticias
      */
@@ -20,7 +20,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -72,6 +72,9 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         txt_nroLibro = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Panel de Bibliotecario");
+        setIconImage(UtilidadesComponente.obtenerIcono()
+        );
         getContentPane().setLayout(null);
 
         jPanel1.setLayout(null);
@@ -385,7 +388,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

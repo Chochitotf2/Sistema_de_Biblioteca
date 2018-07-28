@@ -47,8 +47,8 @@ public class FrmRegistro extends javax.swing.JDialog {
         txtParalelo = new rojeru_san.RSMTextFull();
         jSeparator1 = new javax.swing.JSeparator();
         btnRegistrarse = new rojeru_san.RSButtonRiple();
+        btnRegresar = new org.edisoncor.gui.button.ButtonAction();
         panelCurves1 = new org.edisoncor.gui.panel.PanelCurves();
-        buttonAction1 = new org.edisoncor.gui.button.ButtonAction();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -134,27 +134,17 @@ public class FrmRegistro extends javax.swing.JDialog {
         jSeparator1.setBounds(150, 380, 200, 10);
 
         btnRegistrarse.setText("Registrarse");
-        btnRegistrarse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarseActionPerformed(evt);
-            }
-        });
         jPanel2.add(btnRegistrarse);
-        btnRegistrarse.setBounds(180, 390, 160, 40);
-        jPanel2.add(panelCurves1);
-        panelCurves1.setBounds(0, 0, 490, 460);
+        btnRegistrarse.setBounds(160, 390, 170, 40);
 
-        buttonAction1.setText("< Regresar");
-        buttonAction1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAction1ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(buttonAction1);
-        buttonAction1.setBounds(10, 10, 120, 30);
+        btnRegresar.setText("< Regresar");
+        jPanel2.add(btnRegresar);
+        btnRegresar.setBounds(10, 10, 120, 30);
+        jPanel2.add(panelCurves1);
+        panelCurves1.setBounds(0, 0, 490, 450);
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(150, 50, 490, 450);
+        jPanel2.setBounds(120, 40, 490, 450);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/B004.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -167,14 +157,6 @@ public class FrmRegistro extends javax.swing.JDialog {
         setSize(new java.awt.Dimension(742, 548));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
-
-    }//GEN-LAST:event_btnRegistrarseActionPerformed
-
-    private void buttonAction1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAction1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonAction1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -221,7 +203,7 @@ public class FrmRegistro extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rojeru_san.RSButtonRiple btnRegistrarse;
-    private org.edisoncor.gui.button.ButtonAction buttonAction1;
+    private org.edisoncor.gui.button.ButtonAction btnRegresar;
     private javax.swing.JComboBox<String> cbxTipoUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;

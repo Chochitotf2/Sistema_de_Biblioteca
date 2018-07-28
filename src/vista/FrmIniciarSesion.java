@@ -101,11 +101,6 @@ public class FrmIniciarSesion extends javax.swing.JDialog {
         jLabel2.setBounds(50, 0, 130, 120);
 
         txtUsuario.setPlaceholder("Usuario");
-        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUsuarioActionPerformed(evt);
-            }
-        });
         jPanel3.add(txtUsuario);
         txtUsuario.setBounds(20, 120, 200, 42);
 
@@ -114,11 +109,6 @@ public class FrmIniciarSesion extends javax.swing.JDialog {
         txtClave.setBounds(20, 180, 200, 42);
 
         btnIniciarSesion.setText("Iniciar Sesión");
-        btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIniciarSesionActionPerformed(evt);
-            }
-        });
         jPanel3.add(btnIniciarSesion);
         btnIniciarSesion.setBounds(40, 230, 160, 40);
 
@@ -132,11 +122,6 @@ public class FrmIniciarSesion extends javax.swing.JDialog {
         btnRegistrar.setText("Registrate!");
         btnRegistrar.setColorHover(new java.awt.Color(169, 169, 169));
         btnRegistrar.setColorText(new java.awt.Color(0, 0, 0));
-        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarActionPerformed(evt);
-            }
-        });
         jPanel3.add(btnRegistrar);
         btnRegistrar.setBounds(70, 300, 110, 20);
 
@@ -149,22 +134,6 @@ public class FrmIniciarSesion extends javax.swing.JDialog {
         setSize(new java.awt.Dimension(464, 372));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-
-    }//GEN-LAST:event_btnIniciarSesionActionPerformed
-
-    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
-        if (!UtilidadesComponente.validarCorreo(txtUsuario.getText())) {
-            UtilidadesComponente.mensajeError("ERROR", "correo inválido");
-        }else{
-            UtilidadesComponente.mensajeOK("Aviso", "es valido");
-        }
-    }//GEN-LAST:event_txtUsuarioActionPerformed
-
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegistrarActionPerformed
 
     /**
      * @param args the command line arguments
