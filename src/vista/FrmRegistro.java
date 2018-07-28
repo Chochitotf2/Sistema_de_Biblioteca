@@ -47,7 +47,9 @@ public class FrmRegistro extends javax.swing.JDialog {
         txtParalelo = new rojeru_san.RSMTextFull();
         jSeparator1 = new javax.swing.JSeparator();
         btnRegistrarse = new rojeru_san.RSButtonRiple();
-        btnRegresar = new rojeru_san.RSButtonRiple();
+        panelCurves1 = new org.edisoncor.gui.panel.PanelCurves();
+        buttonAction1 = new org.edisoncor.gui.button.ButtonAction();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrarse");
@@ -58,6 +60,7 @@ public class FrmRegistro extends javax.swing.JDialog {
         jPanel1.setLayout(null);
 
         jPanel2.setBackground(new java.awt.Color(119, 136, 153));
+        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.setLayout(null);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -65,7 +68,7 @@ public class FrmRegistro extends javax.swing.JDialog {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Nuevo Registro");
         jPanel2.add(jLabel5);
-        jLabel5.setBounds(140, 20, 210, 30);
+        jLabel5.setBounds(130, 10, 210, 30);
 
         txtNombre.setPlaceholder("Nombre");
         jPanel2.add(txtNombre);
@@ -75,7 +78,7 @@ public class FrmRegistro extends javax.swing.JDialog {
         txtApellido.setBotonColor(new java.awt.Color(169, 169, 169));
         txtApellido.setPlaceholder("Apellido");
         jPanel2.add(txtApellido);
-        txtApellido.setBounds(250, 50, 200, 40);
+        txtApellido.setBounds(252, 50, 200, 40);
 
         txtUsuario.setPlaceholder("Usuario");
         jPanel2.add(txtUsuario);
@@ -85,7 +88,7 @@ public class FrmRegistro extends javax.swing.JDialog {
         txtClave.setBotonColor(new java.awt.Color(169, 169, 169));
         txtClave.setPlaceholder("Contraseña");
         jPanel2.add(txtClave);
-        txtClave.setBounds(250, 90, 200, 40);
+        txtClave.setBounds(252, 90, 200, 40);
 
         txtCorreoElectronico.setPlaceholder("Correo Electrónico");
         jPanel2.add(txtCorreoElectronico);
@@ -95,7 +98,7 @@ public class FrmRegistro extends javax.swing.JDialog {
         txtDni.setBotonColor(new java.awt.Color(169, 169, 169));
         txtDni.setPlaceholder("Cédula");
         jPanel2.add(txtDni);
-        txtDni.setBounds(250, 130, 200, 42);
+        txtDni.setBounds(252, 130, 200, 42);
 
         txtDireccion.setPlaceholder("Dirección");
         jPanel2.add(txtDireccion);
@@ -105,18 +108,18 @@ public class FrmRegistro extends javax.swing.JDialog {
         txtTelefono.setBotonColor(new java.awt.Color(169, 169, 169));
         txtTelefono.setPlaceholder("Teléfono");
         jPanel2.add(txtTelefono);
-        txtTelefono.setBounds(250, 172, 200, 40);
+        txtTelefono.setBounds(252, 172, 200, 40);
 
         cbxTipoUsuario.setForeground(new java.awt.Color(0, 112, 192));
         cbxTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel2.add(cbxTipoUsuario);
-        cbxTipoUsuario.setBounds(50, 230, 200, 40);
+        cbxTipoUsuario.setBounds(150, 220, 200, 40);
 
         txtCarrera.setBordeColorFocus(new java.awt.Color(169, 169, 169));
         txtCarrera.setBotonColor(new java.awt.Color(169, 169, 169));
         txtCarrera.setPlaceholder("Carrera");
         jPanel2.add(txtCarrera);
-        txtCarrera.setBounds(250, 230, 200, 40);
+        txtCarrera.setBounds(50, 312, 402, 40);
 
         txtCiclo.setPlaceholder("Ciclo");
         jPanel2.add(txtCiclo);
@@ -126,9 +129,9 @@ public class FrmRegistro extends javax.swing.JDialog {
         txtParalelo.setBotonColor(new java.awt.Color(169, 169, 169));
         txtParalelo.setPlaceholder("Paralelo");
         jPanel2.add(txtParalelo);
-        txtParalelo.setBounds(250, 272, 200, 40);
+        txtParalelo.setBounds(252, 272, 200, 40);
         jPanel2.add(jSeparator1);
-        jSeparator1.setBounds(150, 320, 200, 10);
+        jSeparator1.setBounds(150, 380, 200, 10);
 
         btnRegistrarse.setText("Registrarse");
         btnRegistrarse.addActionListener(new java.awt.event.ActionListener() {
@@ -137,26 +140,31 @@ public class FrmRegistro extends javax.swing.JDialog {
             }
         });
         jPanel2.add(btnRegistrarse);
-        btnRegistrarse.setBounds(170, 330, 160, 40);
+        btnRegistrarse.setBounds(180, 390, 160, 40);
+        jPanel2.add(panelCurves1);
+        panelCurves1.setBounds(0, 0, 490, 460);
 
-        btnRegresar.setBackground(new java.awt.Color(112, 128, 144));
-        btnRegresar.setText("< Regresar");
-        btnRegresar.setColorHover(new java.awt.Color(169, 169, 169));
-        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+        buttonAction1.setText("< Regresar");
+        buttonAction1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarActionPerformed(evt);
+                buttonAction1ActionPerformed(evt);
             }
         });
-        jPanel2.add(btnRegresar);
-        btnRegresar.setBounds(0, 0, 120, 30);
+        jPanel2.add(buttonAction1);
+        buttonAction1.setBounds(10, 10, 120, 30);
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, 0, 500, 380);
+        jPanel2.setBounds(150, 50, 490, 450);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/B004.jpg"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(0, 20, 730, 510);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 500, 380);
+        jPanel1.setBounds(0, -20, 740, 540);
 
-        setSize(new java.awt.Dimension(516, 419));
+        setSize(new java.awt.Dimension(742, 548));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -164,9 +172,9 @@ public class FrmRegistro extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btnRegistrarseActionPerformed
 
-    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+    private void buttonAction1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAction1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegresarActionPerformed
+    }//GEN-LAST:event_buttonAction1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -213,12 +221,14 @@ public class FrmRegistro extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rojeru_san.RSButtonRiple btnRegistrarse;
-    private rojeru_san.RSButtonRiple btnRegresar;
+    private org.edisoncor.gui.button.ButtonAction buttonAction1;
     private javax.swing.JComboBox<String> cbxTipoUsuario;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
+    private org.edisoncor.gui.panel.PanelCurves panelCurves1;
     private rojeru_san.RSMTextFull txtApellido;
     private rojeru_san.RSMTextFull txtCarrera;
     private rojeru_san.RSMTextFull txtCiclo;

@@ -43,6 +43,7 @@ public class FrmIniciarSesion extends javax.swing.JDialog {
         txtUsuario = new rojeru_san.RSMTextFull();
         txtClave = new rojeru_san.RSMPassView();
         btnIniciarSesion = new rojeru_san.RSButtonRiple();
+        jLabel4 = new javax.swing.JLabel();
         btnRegistrar = new rojeru_san.RSButtonRiple();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -119,21 +120,33 @@ public class FrmIniciarSesion extends javax.swing.JDialog {
             }
         });
         jPanel3.add(btnIniciarSesion);
-        btnIniciarSesion.setBounds(40, 250, 160, 40);
+        btnIniciarSesion.setBounds(40, 230, 160, 40);
+
+        jLabel4.setText("¿No tienes cuenta?");
+        jPanel3.add(jLabel4);
+        jLabel4.setBounds(80, 280, 110, 14);
+
+        btnRegistrar.setBackground(new java.awt.Color(240, 240, 240));
+        btnRegistrar.setBorder(null);
+        btnRegistrar.setForeground(new java.awt.Color(0, 0, 0));
+        btnRegistrar.setText("Registrate!");
+        btnRegistrar.setColorHover(new java.awt.Color(169, 169, 169));
+        btnRegistrar.setColorText(new java.awt.Color(0, 0, 0));
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnRegistrar);
+        btnRegistrar.setBounds(70, 300, 110, 20);
 
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(0, 30, 240, 300);
-
-        btnRegistrar.setBackground(new java.awt.Color(119, 136, 153));
-        btnRegistrar.setText("Registrarse");
-        btnRegistrar.setColorHover(new java.awt.Color(169, 169, 169));
-        jPanel1.add(btnRegistrar);
-        btnRegistrar.setBounds(0, 0, 120, 30);
+        jPanel3.setBounds(0, 0, 240, 330);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 450, 330);
 
-        setSize(new java.awt.Dimension(466, 369));
+        setSize(new java.awt.Dimension(464, 372));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -148,6 +161,10 @@ public class FrmIniciarSesion extends javax.swing.JDialog {
             UtilidadesComponente.mensajeOK("Aviso", "es valido");
         }
     }//GEN-LAST:event_txtUsuarioActionPerformed
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,6 +214,7 @@ public class FrmIniciarSesion extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

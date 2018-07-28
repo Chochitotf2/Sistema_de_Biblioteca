@@ -48,12 +48,12 @@ public class FrmUsuario extends javax.swing.JDialog {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblMultas = new javax.swing.JTable();
-        btnCerrar = new javax.swing.JButton();
+        buttonAction1 = new org.edisoncor.gui.button.ButtonAction();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Panel de Usuario");
         setIconImage(UtilidadesComponente.obtenerIcono());
-        setPreferredSize(new java.awt.Dimension(0, 0));
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(169, 169, 169));
@@ -110,7 +110,7 @@ public class FrmUsuario extends javax.swing.JDialog {
         btnSolicitar.setBounds(260, 230, 73, 20);
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(10, 10, 480, 260);
+        jPanel2.setBounds(20, 10, 480, 260);
 
         jPanel3.setBackground(new java.awt.Color(85, 111, 122));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Préstamos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(230, 231, 233))); // NOI18N
@@ -133,7 +133,7 @@ public class FrmUsuario extends javax.swing.JDialog {
         jScrollPane2.setBounds(10, 20, 460, 110);
 
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(10, 270, 480, 150);
+        jPanel3.setBounds(20, 270, 480, 150);
 
         jPanel4.setBackground(new java.awt.Color(121, 128, 134));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Multas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(230, 231, 233))); // NOI18N
@@ -153,19 +153,24 @@ public class FrmUsuario extends javax.swing.JDialog {
         jScrollPane3.setViewportView(tblMultas);
 
         jPanel4.add(jScrollPane3);
-        jScrollPane3.setBounds(10, 20, 460, 100);
+        jScrollPane3.setBounds(10, 20, 300, 360);
 
         jPanel1.add(jPanel4);
-        jPanel4.setBounds(10, 420, 480, 140);
+        jPanel4.setBounds(500, 10, 320, 410);
 
-        btnCerrar.setText("Cerrar");
-        jPanel1.add(btnCerrar);
-        btnCerrar.setBounds(220, 570, 63, 23);
+        buttonAction1.setText("Cerrar Sesion");
+        jPanel1.add(buttonAction1);
+        buttonAction1.setBounds(20, 430, 116, 35);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/shutterstock_159503864.jpg"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(0, -30, 830, 500);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 500, 600);
+        jPanel1.setBounds(0, 0, 860, 610);
 
-        setSize(new java.awt.Dimension(516, 639));
+        setSize(new java.awt.Dimension(845, 511));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -213,11 +218,12 @@ public class FrmUsuario extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBusquedaAvanzada;
-    private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnInformacion;
     private javax.swing.JButton btnSolicitar;
+    private org.edisoncor.gui.button.ButtonAction buttonAction1;
     private javax.swing.JComboBox<String> cbxTipoBuscar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
