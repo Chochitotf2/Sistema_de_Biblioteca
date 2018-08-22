@@ -6,16 +6,25 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * @author MAYLI
  */
 @Entity
+@Getter
+@Setter
+@Table (name = "Prestamo")
 public class Prestamo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -23,13 +32,14 @@ public class Prestamo implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date FechaEntrega;
+    
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date FechaDevolucion;
+    
+//    @Column(length = 30)
+//    private TipoPrestamo tipoPrestamo;
 
     @Override
     public int hashCode() {
