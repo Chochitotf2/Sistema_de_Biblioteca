@@ -8,26 +8,29 @@ import lombok.Setter;
 
 /**
  *
- * @author MAYLI
+ * @author Víctor Andrés Rojas
  */
-@Entity
 @Getter
 @Setter
-@Table(name = "Sansion")
-public class Sansion implements Serializable {
+@Entity
+public class Cuenta implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Double monto;
+    @Column(length = 40)
+    private String usuario;
+    @Column(length = 40)
+    private String clave;
+    private Boolean estado = true;
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaInicio;
+    private Date creadoEn;
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaFin;
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(referencedColumnName = "id", name = "idPrestamo")
-    private Prestamo prestamo;
+    private Date modificadoEn;
+    @OneToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(referencedColumnName = "id", name = "idPersona")
+    private Persona persona;
 
     @Override
     public int hashCode() {
@@ -39,10 +42,10 @@ public class Sansion implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Sansion)) {
+        if (!(object instanceof Cuenta)) {
             return false;
         }
-        Sansion other = (Sansion) object;
+        Cuenta other = (Cuenta) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -51,7 +54,7 @@ public class Sansion implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.Sansion[ id=" + id + " ]";
+        return "modelo.Cuenta[ id=" + id + " ]";
     }
 
 }

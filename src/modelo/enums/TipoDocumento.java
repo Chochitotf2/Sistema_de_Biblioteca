@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelo.enums;
 
 /**
@@ -10,11 +5,11 @@ package modelo.enums;
  * @author MAYLI
  */
 public enum TipoDocumento {
-     LIBROS("Libros"),
-    REVISTAS("Revistas"),
-    DOCUMENTOS_NO_CONVENCIONALES("Documentos no convencionales"),
-    TESIS("Tesis");
-    
+    Libros("Libros"),
+    Revistas("Revistas"),
+    Documentos_no_Convencionales("Documentos no convencionales"),
+    Tesis("Tesis");
+
     String tipo;
 
     private TipoDocumento(String tipo) {
@@ -28,5 +23,4 @@ public enum TipoDocumento {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-    
 }

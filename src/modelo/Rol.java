@@ -1,33 +1,29 @@
 package modelo;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
  *
- * @author MAYLI
+ * @author Víctor Andrés Rojas
  */
-@Entity
 @Getter
 @Setter
-@Table(name = "Sansion")
-public class Sansion implements Serializable {
+@Entity
+public class Rol implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Double monto;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaInicio;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaFin;
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(referencedColumnName = "id", name = "idPrestamo")
-    private Prestamo prestamo;
+    @Column(length = 25)
+    private String nombre;
+    @OneToMany(mappedBy = "rol", cascade = CascadeType.ALL)
+    private List<Persona> listaPersona = new ArrayList<>();
 
     @Override
     public int hashCode() {
@@ -39,10 +35,10 @@ public class Sansion implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Sansion)) {
+        if (!(object instanceof Rol)) {
             return false;
         }
-        Sansion other = (Sansion) object;
+        Rol other = (Rol) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -51,7 +47,7 @@ public class Sansion implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.Sansion[ id=" + id + " ]";
+        return "modelo.Rol[ id=" + id + " ]";
     }
 
 }

@@ -1,19 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
+import java.util.List;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,22 +15,24 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table (name = "Prestamo")
+@Table(name = "Prestamo")
 public class Prestamo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date FechaEntrega;
-    
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date FechaDevolucion;
-    
-//    @Column(length = 30)
-//    private TipoPrestamo tipoPrestamo;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaEntrega;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaDevolucion;
+    private Boolean estado = true;
+    private String tipoPrestamo;
+    @OneToMany(mappedBy = "prestamo", cascade = CascadeType.ALL)
+    private List<Sansion> listaSansion = new ArrayList<>();
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(referencedColumnName = "id", name = "idDocumento")
+    private Documento documento;
 
     @Override
     public int hashCode() {
@@ -65,5 +58,5 @@ public class Prestamo implements Serializable {
     public String toString() {
         return "modelo.Prestamo[ id=" + id + " ]";
     }
-    
+
 }

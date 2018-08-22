@@ -1,33 +1,40 @@
 package modelo;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
  *
- * @author MAYLI
+ * @author Víctor Andrés Rojas
  */
-@Entity
 @Getter
 @Setter
-@Table(name = "Sansion")
-public class Sansion implements Serializable {
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Persona implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Double monto;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaInicio;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaFin;
+    @Column(length = 40)
+    private String nombres;
+    @Column(length = 40)
+    private String apellidos;
+    @Column(length = 40)
+    private String correo;
+    @Column(length = 13, unique = true)
+    private String dni;
+    private String direccion;
+    @Column(length = 15)
+    private String telefono;
+    @OneToOne(mappedBy = "persona", cascade = CascadeType.ALL)
+    private Cuenta cuenta;
     @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(referencedColumnName = "id", name = "idPrestamo")
-    private Prestamo prestamo;
+    @JoinColumn(referencedColumnName = "id", name = "idRol")
+    private Rol rol;
 
     @Override
     public int hashCode() {
@@ -39,10 +46,10 @@ public class Sansion implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Sansion)) {
+        if (!(object instanceof Persona)) {
             return false;
         }
-        Sansion other = (Sansion) object;
+        Persona other = (Persona) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -51,7 +58,7 @@ public class Sansion implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.Sansion[ id=" + id + " ]";
+        return "modelo.Persona[ id=" + id + " ]";
     }
 
 }
