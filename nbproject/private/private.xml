@@ -2,18 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/modelo/Bibliotecario.java</file>
-            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/modelo/enums/TipoDocumento.java</file>
-            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/modelo/Documento.java</file>
-            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/modelo/Libro.java</file>
-            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/modelo/Sansion.java</file>
-            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/controlador/dao/PersonaDao.java</file>
-            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/controlador/Conexion.java</file>
-            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/META-INF/persistence.xml</file>
-            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/controlador/servicio/BibliotecarioServicio.java</file>
-            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/modelo/Prestamo.java</file>
-            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/controlador/dao/AdaptadorDao.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

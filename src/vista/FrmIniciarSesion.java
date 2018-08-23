@@ -5,7 +5,9 @@
  */
 package vista;
 
-import vista.utilidades.UtilidadesComponente;
+import controlador.servicio.CuentaServicio;
+import controlador.utilidades.Sesion;
+import static vista.utilidades.UtilidadesComponente.*;
 
 /**
  *
@@ -19,6 +21,22 @@ public class FrmIniciarSesion extends javax.swing.JDialog {
     public FrmIniciarSesion(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+
+    private void inicioSesion() {
+        if (!mostrarError(txtUsuario, "El campo es obligatorio", 'n')
+                && !mostrarError(txtClave, "El campo es obligatorio", 'n')) {
+            Sesion.setCuenta(new CuentaServicio().inicioSesion(txtUsuario.getText().trim(), String.valueOf(txtClave.getPassword()).trim()));
+            if (Sesion.getCuenta() != null) {
+                if (Sesion.getCuenta().getEstado()) {
+                    dispose();
+                    new FrmPrincipal().setVisible(true);
+                }
+            } else {
+                lblMensaje.setText("El usuario o la clave no son correctos");
+                lblMensaje.setVisible(true);
+            }
+        }
     }
 
     /**
@@ -45,10 +63,11 @@ public class FrmIniciarSesion extends javax.swing.JDialog {
         btnIniciarSesion = new rojeru_san.RSButtonRiple();
         jLabel4 = new javax.swing.JLabel();
         btnRegistrar = new rojeru_san.RSButtonRiple();
+        lblMensaje = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Iniciar Sesión");
-        setIconImage(UtilidadesComponente.obtenerIcono());
+        setIconImage(obtenerIcono());
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -96,19 +115,34 @@ public class FrmIniciarSesion extends javax.swing.JDialog {
 
         jPanel3.setLayout(null);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/libros.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/Libros.png"))); // NOI18N
         jPanel3.add(jLabel2);
         jLabel2.setBounds(50, 0, 130, 120);
 
         txtUsuario.setPlaceholder("Usuario");
+        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsuarioActionPerformed(evt);
+            }
+        });
         jPanel3.add(txtUsuario);
         txtUsuario.setBounds(20, 120, 200, 42);
 
         txtClave.setPlaceholder("Contraseña");
+        txtClave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtClaveActionPerformed(evt);
+            }
+        });
         jPanel3.add(txtClave);
-        txtClave.setBounds(20, 180, 200, 42);
+        txtClave.setBounds(20, 170, 200, 42);
 
         btnIniciarSesion.setText("Iniciar Sesión");
+        btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniciarSesionActionPerformed(evt);
+            }
+        });
         jPanel3.add(btnIniciarSesion);
         btnIniciarSesion.setBounds(40, 230, 160, 40);
 
@@ -122,8 +156,19 @@ public class FrmIniciarSesion extends javax.swing.JDialog {
         btnRegistrar.setText("Registrate!");
         btnRegistrar.setColorHover(new java.awt.Color(169, 169, 169));
         btnRegistrar.setColorText(new java.awt.Color(0, 0, 0));
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
         jPanel3.add(btnRegistrar);
         btnRegistrar.setBounds(70, 300, 110, 20);
+
+        lblMensaje.setForeground(new java.awt.Color(255, 0, 0));
+        lblMensaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblMensaje.setEnabled(false);
+        jPanel3.add(lblMensaje);
+        lblMensaje.setBounds(10, 210, 220, 20);
 
         jPanel1.add(jPanel3);
         jPanel3.setBounds(0, 0, 240, 330);
@@ -134,6 +179,23 @@ public class FrmIniciarSesion extends javax.swing.JDialog {
         setSize(new java.awt.Dimension(464, 372));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
+        inicioSesion();
+    }//GEN-LAST:event_btnIniciarSesionActionPerformed
+
+    private void txtClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClaveActionPerformed
+        inicioSesion();
+    }//GEN-LAST:event_txtClaveActionPerformed
+
+    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
+        inicioSesion();
+    }//GEN-LAST:event_txtUsuarioActionPerformed
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        dispose();
+        new FrmRegistro(null, true).setVisible(true);
+    }//GEN-LAST:event_btnRegistrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,6 +222,7 @@ public class FrmIniciarSesion extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FrmIniciarSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
@@ -191,6 +254,7 @@ public class FrmIniciarSesion extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblMensaje;
     private rojeru_san.RSMPassView txtClave;
     private rojeru_san.RSMTextFull txtUsuario;
     // End of variables declaration//GEN-END:variables

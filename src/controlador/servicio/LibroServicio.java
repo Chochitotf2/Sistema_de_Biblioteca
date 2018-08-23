@@ -1,6 +1,6 @@
 package controlador.servicio;
 
-import controlador.dao.libroDao;
+import controlador.dao.LibroDao;
 import java.util.List;
 import modelo.Libro;
 
@@ -8,9 +8,9 @@ import modelo.Libro;
  *
  * @author Chochitotf2
  */
-public class libroServicio {
+public class LibroServicio {
 
-    private libroDao libro = new libroDao();
+    private LibroDao libro = new LibroDao();
 
     public Libro obtenerLibro() {
         return libro.getLibro();

@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package vista.utilidades;
 
+import controlador.utilidades.Utilidades;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -18,20 +14,57 @@ import javax.swing.text.JTextComponent;
  */
 public class UtilidadesComponente {
 
-    public static boolean campoVacio(JComponent componente, String mensaje) {
-        boolean band = true;
+    public static boolean mostrarError(JComponent componente, String mensaje, char tipoValidacion) {
+        boolean estado = false;
         if (componente instanceof JTextComponent) {
             JTextComponent txt = (JTextComponent) componente;
-            if (txt.getText().isEmpty()) {
+            if (Utilidades.isEmpty(txt.getText().trim())) {
                 componente.setBackground(new Color(250, 216, 216));
-                componente.setToolTipText(mensaje);
+                componente.setToolTipText("El campo es requerido.");
+                estado = true;
             } else {
-                componente.setBackground(Color.WHITE);
-                componente.setToolTipText(null);
-                band = false;
+                switch (tipoValidacion) {
+                    case 'c'://Cédula
+                        if (!Utilidades.esValido(txt.getText(), tipoValidacion)) {
+                            estado = true;
+                        }
+                        break;
+                    case 'd'://Número Decimal
+                        if (!Utilidades.esValido(txt.getText(), tipoValidacion)) {
+                            estado = true;
+                        }
+                        break;
+                    case 'e'://Número Entero
+                        if (!Utilidades.esValido(txt.getText(), tipoValidacion)) {
+                            estado = true;
+                        }
+                        break;
+                    case 'm'://Correo Electrónico
+                        if (!Utilidades.esValido(txt.getText(), tipoValidacion)) {
+                            estado = true;
+                        }
+                        break;
+                    case 't'://Texto
+                        if (!Utilidades.esValido(txt.getText(), tipoValidacion)) {
+                            estado = true;
+                        }
+                        break;
+                    case 'u'://Único caractér
+                        if (!Utilidades.esValido(txt.getText(), tipoValidacion)) {
+                            estado = true;
+                        }
+                        break;
+                }
+                if (estado) {
+                    componente.setBackground(new Color(250, 216, 216));
+                    componente.setToolTipText(mensaje);
+                } else {
+                    componente.setBackground(Color.WHITE);
+                    componente.setToolTipText(null);
+                }
             }
         }
-        return band;
+        return estado;
     }
 
     public static Image obtenerIcono() {
@@ -45,61 +78,5 @@ public class UtilidadesComponente {
 
     public static void mensajeOK(String titulo, String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje, titulo, JOptionPane.INFORMATION_MESSAGE);
-    }
-
-    public static boolean esValido(JComponent componente, char tipo) {
-        boolean band = false;
-        if (componente instanceof JTextComponent) {
-            JTextComponent txt = (JTextComponent) componente;
-            switch (tipo) {
-                case 'm'://Correo Electrónico
-                    if (txt.getText().trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
-                        band = true;
-                    }
-                    break;
-                case 'c'://Cédula
-                    if (txt.getText().trim().length() == 10) {
-                        int tercerDigito = Integer.parseInt(txt.getText().trim().substring(2, 3));
-                        if (tercerDigito < 6) {
-                            int[] coefCedula = {2, 1, 2, 1, 2, 1, 2, 1, 2};
-                            int verificador = Integer.parseInt(txt.getText().trim().substring(9, 10));
-                            int suma = 0;
-                            int digito = 0;
-                            for (int i = 0; i < (txt.getText().trim().length() - 1); i++) {
-                                digito = Integer.parseInt(txt.getText().trim().substring(i, i + 1)) * coefCedula[i];
-                                suma += ((digito % 10) + (digito / 10));
-                            }
-                            if ((suma % 10 == 0) && (suma % 10 == verificador)) {
-                                band = true;
-                            } else if ((10 - (suma % 10)) == verificador) {
-                                band = true;
-                            } else {
-                                band = false;
-                            }
-                        } else {
-                            band = false;
-                        }
-                    } else {
-                        band = false;
-                    }
-                    break;
-                case 'e'://Número Entero
-                    if (txt.getText().trim().matches("[0-9]*")) {
-                        band = true;
-                    }
-                case 'd'://Número Decimal
-                    if (txt.getText().trim().matches("^[0-9]+([,][0-9]+)?$")) {
-                        band = true;
-                    }
-                    break;
-                case 't'://Texto
-                    if (txt.getText().trim().matches("^[a-zA-Zá-úÁ-ú ]*$")) {
-                        band = true;
-                    }
-                    break;
-            }
-        }
-        return band;
     }
 }

@@ -50,6 +50,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         mnCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/Cerrar Sesión.png"))); // NOI18N
         mnCerrarSesion.setText("Cerrar Sesión");
+        mnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnCerrarSesionActionPerformed(evt);
+            }
+        });
         jMenu1.add(mnCerrarSesion);
 
         jMenuBar1.add(jMenu1);
@@ -62,6 +67,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(416, 338));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void mnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCerrarSesionActionPerformed
+        dispose();
+        new FrmIniciarSesion(this, true).setVisible(true);
+    }//GEN-LAST:event_mnCerrarSesionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -88,6 +98,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

@@ -6,11 +6,11 @@ import modelo.Libro;
  *
  * @author Chochitotf2
  */
-public class libroDao extends AdaptadorDao<Libro> {
+public class LibroDao extends AdaptadorDao<Libro> {
 
     private Libro libro;
 
-    public libroDao() {
+    public LibroDao() {
         super(Libro.class);
     }
 

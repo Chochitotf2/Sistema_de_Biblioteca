@@ -5,13 +5,25 @@
  */
 package vista;
 
-import vista.utilidades.UtilidadesComponente;
+import controlador.servicio.AlumnoServicio;
+import controlador.servicio.CuentaServicio;
+import controlador.servicio.PersonaServicio;
+import controlador.servicio.RolServicio;
+import it.sauronsoftware.base64.Base64;
+import java.awt.Color;
+import java.util.Date;
+import javax.swing.ButtonGroup;
+import static vista.utilidades.UtilidadesComponente.*;
 
 /**
  *
  * @author user
  */
 public class FrmRegistro extends javax.swing.JDialog {
+    
+    private PersonaServicio pS = new PersonaServicio();
+    private AlumnoServicio aS = new AlumnoServicio();
+    private CuentaServicio cS = new CuentaServicio();
 
     /**
      * Creates new form FrmIniciarSesion
@@ -19,6 +31,127 @@ public class FrmRegistro extends javax.swing.JDialog {
     public FrmRegistro(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        ButtonGroup grupo = new ButtonGroup();
+        grupo.add(rdAlumno);
+        grupo.add(rdProfesor);
+        limpiar();
+    }
+    
+    private void habilitarCampos() {
+        if (rdAlumno.isSelected()) {
+            cbxCiclo.setEnabled(true);
+            cbxCarrera.setEnabled(true);
+            txtParalelo.setEnabled(true);
+        } else if (rdProfesor.isSelected()) {
+            cbxCiclo.setEnabled(false);
+            cbxCarrera.setEnabled(false);
+            txtParalelo.setEnabled(false);
+            txtParalelo.setBackground(Color.WHITE);
+        }
+    }
+    
+    private void limpiar() {
+        pS.fijarPersona(null);
+        aS.fijarAlumno(null);
+        cS.fijarCuenta(null);
+        txtNombre.setText(null);
+        txtApellido.setText(null);
+        txtUsuario.setText(null);
+        txtClave.setText(null);
+        txtCorreoElectronico.setText(null);
+        txtDni.setText(null);
+        txtDireccion.setText(null);
+        txtTelefono.setText(null);
+        cbxCiclo.setSelectedIndex(0);
+        cbxCarrera.setSelectedIndex(0);
+        txtParalelo.setText(null);
+        habilitarCampos();
+    }
+    
+    private void cargarObjeto() {
+        cS.obtenerCuenta().setUsuario(txtUsuario.getText().trim());
+        cS.obtenerCuenta().setClave(String.valueOf(Base64.encode(txtClave.getText().trim())));
+        cS.obtenerCuenta().setCreadoEn(new Date());
+        cS.obtenerCuenta().setModificadoEn(new Date());
+        if (rdAlumno.isSelected()) {
+            aS.obtenerAlumno().setNombres(txtNombre.getText().trim());
+            aS.obtenerAlumno().setApellidos(txtApellido.getText().trim());
+            aS.obtenerAlumno().setCorreo(txtCorreoElectronico.getText().trim());
+            aS.obtenerAlumno().setDni(txtDni.getText().trim());
+            aS.obtenerAlumno().setDireccion(txtDireccion.getText().trim());
+            aS.obtenerAlumno().setTelefono(txtTelefono.getText().trim());
+            aS.obtenerAlumno().setCiclo(cbxCiclo.getSelectedItem().toString());
+            aS.obtenerAlumno().setParalelo(txtParalelo.getText().trim().charAt(0));
+            aS.obtenerAlumno().setCarrera(cbxCarrera.getSelectedItem().toString());
+            aS.obtenerAlumno().setRol(new RolServicio().buscarRol("Alumno"));
+            aS.obtenerAlumno().setCuenta(cS.obtenerCuenta());
+            cS.obtenerCuenta().setPersona(aS.obtenerAlumno());
+        } else if (rdProfesor.isSelected()) {
+            pS.obtenerPersona().setNombres(txtNombre.getText().trim());
+            pS.obtenerPersona().setApellidos(txtApellido.getText().trim());
+            pS.obtenerPersona().setCorreo(txtCorreoElectronico.getText().trim());
+            pS.obtenerPersona().setDni(txtDni.getText().trim());
+            pS.obtenerPersona().setDireccion(txtDireccion.getText().trim());
+            pS.obtenerPersona().setTelefono(txtTelefono.getText().trim());
+            pS.obtenerPersona().setRol(new RolServicio().buscarRol("Profesor"));
+            pS.obtenerPersona().setCuenta(cS.obtenerCuenta());
+            cS.obtenerCuenta().setPersona(pS.obtenerPersona());
+        }
+    }
+    
+    private boolean errores() {
+        boolean verificador = false;
+        if (mostrarError(txtNombre, "El Nombre solo puede contener letras.", 't')) {
+            verificador = true;
+        }
+        if (mostrarError(txtApellido, "El Apellido solo puede contener letras.", 't')) {
+            verificador = true;
+        }
+        if (mostrarError(txtUsuario, null, 'n')) {
+            verificador = true;
+        }
+        if (mostrarError(txtClave, null, 'n')) {
+            verificador = true;
+        }
+        if (mostrarError(txtCorreoElectronico, "El Email ingresado no es válido.", 'm')) {
+            verificador = true;
+        }
+        if (mostrarError(txtDni, "La cédula ingresada no es válida.", 'c')) {
+            verificador = true;
+        }
+        if (mostrarError(txtDireccion, null, 'n')) {
+            verificador = true;
+        }
+        if (mostrarError(txtTelefono, "El Teléfono solo puede contener números.", 'e')) {
+            verificador = true;
+        }
+        if (rdAlumno.isSelected()) {
+            if (mostrarError(txtParalelo, "El Paralelo solo puede contener un caracter.", 'u')) {
+                verificador = true;
+            }
+        }
+        return verificador;
+    }
+    
+    private void registrar() {
+        if (!errores()) {
+            cargarObjeto();
+            if (rdAlumno.isSelected()) {
+                if (aS.guardar()) {
+                    mensajeOK("Aviso", "Se ha registrado con éxito.");
+                    limpiar();
+                } else {
+                    mensajeError("Error", "Ha ocurrido un error al realizar su registro.");
+                }
+            } else if (rdProfesor.isSelected()) {
+                if (pS.guardar()) {
+                    mensajeOK("Aviso", "Se ha registrado con éxito.");
+                    limpiar();
+                } else {
+                    mensajeError("Error", "Ha ocurrido un error al realizar su registro.");
+                }
+            }
+        }
     }
 
     /**
@@ -40,20 +173,22 @@ public class FrmRegistro extends javax.swing.JDialog {
         txtCorreoElectronico = new rojeru_san.RSMTextFull();
         txtDni = new rojeru_san.RSMTextFull();
         txtDireccion = new rojeru_san.RSMTextFull();
-        txtTelefono = new rojeru_san.RSMTextFull();
-        cbxTipoUsuario = new javax.swing.JComboBox<>();
-        txtCarrera = new rojeru_san.RSMTextFull();
-        txtCiclo = new rojeru_san.RSMTextFull();
         txtParalelo = new rojeru_san.RSMTextFull();
         jSeparator1 = new javax.swing.JSeparator();
         btnRegistrarse = new rojeru_san.RSButtonRiple();
         btnRegresar = new org.edisoncor.gui.button.ButtonAction();
+        cbxCarrera = new javax.swing.JComboBox<>();
+        cbxCiclo = new javax.swing.JComboBox<>();
+        rdProfesor = new javax.swing.JRadioButton();
+        jLabel2 = new javax.swing.JLabel();
+        rdAlumno = new javax.swing.JRadioButton();
+        txtTelefono = new rojeru_san.RSMTextFull();
         panelCurves1 = new org.edisoncor.gui.panel.PanelCurves();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrarse");
-        setIconImage(UtilidadesComponente.obtenerIcono());
+        setIconImage(obtenerIcono());
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -104,59 +239,109 @@ public class FrmRegistro extends javax.swing.JDialog {
         jPanel2.add(txtDireccion);
         txtDireccion.setBounds(50, 172, 200, 40);
 
+        txtParalelo.setBordeColorFocus(new java.awt.Color(169, 169, 169));
+        txtParalelo.setBotonColor(new java.awt.Color(169, 169, 169));
+        txtParalelo.setPlaceholder("Paralelo");
+        jPanel2.add(txtParalelo);
+        txtParalelo.setBounds(250, 250, 200, 40);
+        jPanel2.add(jSeparator1);
+        jSeparator1.setBounds(140, 340, 210, 10);
+
+        btnRegistrarse.setText("Registrarse");
+        btnRegistrarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarseActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnRegistrarse);
+        btnRegistrarse.setBounds(160, 350, 170, 40);
+
+        btnRegresar.setText("< Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnRegresar);
+        btnRegresar.setBounds(10, 10, 120, 30);
+
+        cbxCarrera.setForeground(new java.awt.Color(0, 112, 192));
+        cbxCarrera.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ingeniería en Sistemas", "Ingeniería en Electrónica y Telecomunicaciones", "Ingeniería Electromecánica", "Ingeniería en Geología Ambiental y Ordenamiento Territorial" }));
+        jPanel2.add(cbxCarrera);
+        cbxCarrera.setBounds(110, 290, 300, 40);
+
+        cbxCiclo.setForeground(new java.awt.Color(0, 112, 192));
+        cbxCiclo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto", "Séptimo", "Octavo", "Noveno", "Décimo" }));
+        jPanel2.add(cbxCiclo);
+        cbxCiclo.setBounds(50, 250, 200, 40);
+
+        rdProfesor.setForeground(new java.awt.Color(240, 240, 240));
+        rdProfesor.setText("Profesor");
+        rdProfesor.setOpaque(false);
+        rdProfesor.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdProfesorItemStateChanged(evt);
+            }
+        });
+        jPanel2.add(rdProfesor);
+        rdProfesor.setBounds(270, 220, 70, 20);
+
+        jLabel2.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel2.setText("Usted es:");
+        jPanel2.add(jLabel2);
+        jLabel2.setBounds(150, 220, 50, 20);
+
+        rdAlumno.setForeground(new java.awt.Color(240, 240, 240));
+        rdAlumno.setSelected(true);
+        rdAlumno.setText("Alumno");
+        rdAlumno.setOpaque(false);
+        rdAlumno.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdAlumnoItemStateChanged(evt);
+            }
+        });
+        jPanel2.add(rdAlumno);
+        rdAlumno.setBounds(200, 220, 70, 20);
+
         txtTelefono.setBordeColorFocus(new java.awt.Color(169, 169, 169));
         txtTelefono.setBotonColor(new java.awt.Color(169, 169, 169));
         txtTelefono.setPlaceholder("Teléfono");
         jPanel2.add(txtTelefono);
         txtTelefono.setBounds(252, 172, 200, 40);
-
-        cbxTipoUsuario.setForeground(new java.awt.Color(0, 112, 192));
-        cbxTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(cbxTipoUsuario);
-        cbxTipoUsuario.setBounds(150, 220, 200, 40);
-
-        txtCarrera.setBordeColorFocus(new java.awt.Color(169, 169, 169));
-        txtCarrera.setBotonColor(new java.awt.Color(169, 169, 169));
-        txtCarrera.setPlaceholder("Carrera");
-        jPanel2.add(txtCarrera);
-        txtCarrera.setBounds(50, 312, 402, 40);
-
-        txtCiclo.setPlaceholder("Ciclo");
-        jPanel2.add(txtCiclo);
-        txtCiclo.setBounds(50, 272, 200, 40);
-
-        txtParalelo.setBordeColorFocus(new java.awt.Color(169, 169, 169));
-        txtParalelo.setBotonColor(new java.awt.Color(169, 169, 169));
-        txtParalelo.setPlaceholder("Paralelo");
-        jPanel2.add(txtParalelo);
-        txtParalelo.setBounds(252, 272, 200, 40);
-        jPanel2.add(jSeparator1);
-        jSeparator1.setBounds(150, 380, 200, 10);
-
-        btnRegistrarse.setText("Registrarse");
-        jPanel2.add(btnRegistrarse);
-        btnRegistrarse.setBounds(160, 390, 170, 40);
-
-        btnRegresar.setText("< Regresar");
-        jPanel2.add(btnRegresar);
-        btnRegresar.setBounds(10, 10, 120, 30);
         jPanel2.add(panelCurves1);
-        panelCurves1.setBounds(0, 0, 490, 450);
+        panelCurves1.setBounds(0, 0, 490, 410);
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(120, 40, 490, 450);
+        jPanel2.setBounds(50, 20, 490, 410);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/B004.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(0, 20, 730, 510);
+        jLabel1.setBounds(0, 0, 600, 450);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, -20, 740, 540);
+        jPanel1.setBounds(0, 0, 600, 450);
 
-        setSize(new java.awt.Dimension(742, 548));
+        setSize(new java.awt.Dimension(616, 488));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        dispose();
+        new FrmIniciarSesion(null, true).setVisible(true);
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
+        registrar();
+    }//GEN-LAST:event_btnRegistrarseActionPerformed
+
+    private void rdAlumnoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdAlumnoItemStateChanged
+        habilitarCampos();
+    }//GEN-LAST:event_rdAlumnoItemStateChanged
+
+    private void rdProfesorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdProfesorItemStateChanged
+        habilitarCampos();
+    }//GEN-LAST:event_rdProfesorItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -185,6 +370,8 @@ public class FrmRegistro extends javax.swing.JDialog {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -204,16 +391,18 @@ public class FrmRegistro extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rojeru_san.RSButtonRiple btnRegistrarse;
     private org.edisoncor.gui.button.ButtonAction btnRegresar;
-    private javax.swing.JComboBox<String> cbxTipoUsuario;
+    private javax.swing.JComboBox<String> cbxCarrera;
+    private javax.swing.JComboBox<String> cbxCiclo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private org.edisoncor.gui.panel.PanelCurves panelCurves1;
+    private javax.swing.JRadioButton rdAlumno;
+    private javax.swing.JRadioButton rdProfesor;
     private rojeru_san.RSMTextFull txtApellido;
-    private rojeru_san.RSMTextFull txtCarrera;
-    private rojeru_san.RSMTextFull txtCiclo;
     private rojeru_san.RSMPassView txtClave;
     private rojeru_san.RSMTextFull txtCorreoElectronico;
     private rojeru_san.RSMTextFull txtDireccion;
