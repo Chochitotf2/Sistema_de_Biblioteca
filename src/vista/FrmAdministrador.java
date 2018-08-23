@@ -31,43 +31,71 @@ public class FrmAdministrador extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        tabbedSelector21 = new org.edisoncor.gui.tabbedPane.TabbedSelector2();
         jPanel2 = new javax.swing.JPanel();
+        panelReflect1 = new org.edisoncor.gui.panel.PanelReflect();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_bibliotecario = new javax.swing.JTable();
-        jSeparator1 = new javax.swing.JSeparator();
-        jLabel3 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tbl_usuario = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable();
+        buttonAeroLeft3 = new org.edisoncor.gui.button.ButtonAeroLeft();
+        buttonAeroRight7 = new org.edisoncor.gui.button.ButtonAeroRight();
+        jLabel8 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        btn_agregarBibli = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        btn_agregarBibli1 = new javax.swing.JButton();
-        btn_agregarBibli2 = new javax.swing.JButton();
+        panelCurves1 = new org.edisoncor.gui.panel.PanelCurves();
+        jLabel6 = new javax.swing.JLabel();
+        textFieldRound1 = new org.edisoncor.gui.textField.TextFieldRound();
+        jLabel12 = new javax.swing.JLabel();
+        textFieldRound2 = new org.edisoncor.gui.textField.TextFieldRound();
+        jLabel13 = new javax.swing.JLabel();
+        textFieldRound3 = new org.edisoncor.gui.textField.TextFieldRound();
+        jLabel14 = new javax.swing.JLabel();
+        textFieldRound4 = new org.edisoncor.gui.textField.TextFieldRound();
+        jLabel15 = new javax.swing.JLabel();
+        textFieldRound5 = new org.edisoncor.gui.textField.TextFieldRound();
+        jLabel16 = new javax.swing.JLabel();
+        comboBoxRectIcon1 = new org.edisoncor.gui.comboBox.ComboBoxRectIcon();
+        jLabel7 = new javax.swing.JLabel();
+        panelCurves2 = new org.edisoncor.gui.panel.PanelCurves();
+        jLabel17 = new javax.swing.JLabel();
+        textFieldRound6 = new org.edisoncor.gui.textField.TextFieldRound();
+        jLabel18 = new javax.swing.JLabel();
+        passwordFieldRound1 = new org.edisoncor.gui.passwordField.PasswordFieldRound();
+        buttonIpod1 = new org.edisoncor.gui.button.ButtonIpod();
+        jPanel4 = new javax.swing.JPanel();
+        panelReflect5 = new org.edisoncor.gui.panel.PanelReflect();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        panelReflect6 = new org.edisoncor.gui.panel.PanelReflect();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        buttonRect1 = new org.edisoncor.gui.button.ButtonRect();
+        labelCustom2 = new org.edisoncor.gui.label.LabelCustom();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Panel de Administrador");
         setIconImage(UtilidadesComponente.obtenerIcono());
-        setPreferredSize(new java.awt.Dimension(0, 0));
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
 
+        tabbedSelector21.setBackground(new java.awt.Color(0, 102, 102));
+        tabbedSelector21.setColorBackGround(new java.awt.Color(0, 102, 102));
+
+        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
         jPanel2.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("BIENVENIDO ADMINISTRADOR");
-        jPanel2.add(jLabel1);
-        jLabel1.setBounds(60, 40, 332, 29);
+        panelReflect1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panelReflect1.setLayout(null);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Lista de Bibliotecario");
-        jPanel2.add(jLabel2);
-        jLabel2.setBounds(10, 90, 121, 17);
+        jLabel1.setFont(new java.awt.Font("Cantarell", 1, 15)); // NOI18N
+        jLabel1.setText("Bibliotecarios");
+        panelReflect1.add(jLabel1);
+        jLabel1.setBounds(270, 10, 120, 20);
 
-        tbl_bibliotecario.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -78,62 +106,198 @@ public class FrmAdministrador extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tbl_bibliotecario);
+        jScrollPane1.setViewportView(jTable1);
 
-        jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 118, 430, 108);
-        jPanel2.add(jSeparator1);
-        jSeparator1.setBounds(20, 250, 410, 13);
+        panelReflect1.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 60, 710, 160);
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Lista de Usuario");
-        jPanel2.add(jLabel3);
-        jLabel3.setBounds(10, 270, 95, 17);
+        jPanel2.add(panelReflect1);
+        panelReflect1.setBounds(0, 0, 740, 320);
 
-        tbl_usuario.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(tbl_usuario);
+        buttonAeroLeft3.setBackground(new java.awt.Color(0, 255, 255));
+        buttonAeroLeft3.setText("Editar");
+        jPanel2.add(buttonAeroLeft3);
+        buttonAeroLeft3.setBounds(230, 260, 110, 25);
 
-        jPanel2.add(jScrollPane2);
-        jScrollPane2.setBounds(10, 294, 430, 106);
+        buttonAeroRight7.setBackground(new java.awt.Color(0, 204, 204));
+        buttonAeroRight7.setText("Dar de baja");
+        jPanel2.add(buttonAeroRight7);
+        buttonAeroRight7.setBounds(350, 260, 120, 25);
 
-        jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, 1, 450, 450);
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/books.png"))); // NOI18N
+        jLabel8.setText("jLabel7");
+        jPanel2.add(jLabel8);
+        jLabel8.setBounds(520, 150, 260, 210);
 
+        tabbedSelector21.addTab("Bibliotecarios", jPanel2);
+
+        jPanel3.setBackground(new java.awt.Color(0, 102, 102));
         jPanel3.setLayout(null);
+        jPanel3.add(panelCurves1);
+        panelCurves1.setBounds(0, 0, 100, 100);
 
-        btn_agregarBibli.setText("Agregar");
-        jPanel3.add(btn_agregarBibli);
-        btn_agregarBibli.setBounds(20, 280, 110, 30);
+        jLabel6.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Telefono:");
+        jPanel3.add(jLabel6);
+        jLabel6.setBounds(300, 70, 70, 20);
 
-        jButton1.setText("SALIR");
-        jPanel3.add(jButton1);
-        jButton1.setBounds(20, 400, 110, 30);
+        textFieldRound1.setText("textFieldRound1");
+        jPanel3.add(textFieldRound1);
+        textFieldRound1.setBounds(70, 120, 520, 30);
 
-        btn_agregarBibli1.setText("Agregar");
-        jPanel3.add(btn_agregarBibli1);
-        btn_agregarBibli1.setBounds(20, 180, 110, 30);
+        jLabel12.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Nombre:");
+        jPanel3.add(jLabel12);
+        jLabel12.setBounds(10, 20, 70, 20);
 
-        btn_agregarBibli2.setText("Agregar");
-        jPanel3.add(btn_agregarBibli2);
-        btn_agregarBibli2.setBounds(20, 230, 110, 30);
+        textFieldRound2.setText("textFieldRound1");
+        jPanel3.add(textFieldRound2);
+        textFieldRound2.setBounds(270, 210, 160, 30);
 
-        jPanel1.add(jPanel3);
-        jPanel3.setBounds(450, 0, 150, 450);
+        jLabel13.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Apellidos:");
+        jPanel3.add(jLabel13);
+        jLabel13.setBounds(300, 20, 70, 20);
+
+        textFieldRound3.setText("textFieldRound1");
+        jPanel3.add(textFieldRound3);
+        textFieldRound3.setBounds(370, 20, 220, 30);
+
+        jLabel14.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Seccion:");
+        jPanel3.add(jLabel14);
+        jLabel14.setBounds(210, 170, 70, 20);
+
+        textFieldRound4.setText("textFieldRound1");
+        jPanel3.add(textFieldRound4);
+        textFieldRound4.setBounds(70, 20, 220, 30);
+
+        jLabel15.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Cedula:");
+        jPanel3.add(jLabel15);
+        jLabel15.setBounds(10, 70, 70, 20);
+
+        textFieldRound5.setText("textFieldRound1");
+        jPanel3.add(textFieldRound5);
+        textFieldRound5.setBounds(70, 70, 220, 30);
+
+        jLabel16.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Contraseña:");
+        jPanel3.add(jLabel16);
+        jLabel16.setBounds(190, 250, 100, 20);
+        jPanel3.add(comboBoxRectIcon1);
+        comboBoxRectIcon1.setBounds(270, 170, 160, 20);
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/books.png"))); // NOI18N
+        jLabel7.setText("jLabel7");
+        jPanel3.add(jLabel7);
+        jLabel7.setBounds(530, 140, 260, 210);
+        jPanel3.add(panelCurves2);
+        panelCurves2.setBounds(0, 0, 120, 100);
+
+        jLabel17.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Correo:");
+        jPanel3.add(jLabel17);
+        jLabel17.setBounds(10, 120, 70, 20);
+
+        textFieldRound6.setText("textFieldRound1");
+        jPanel3.add(textFieldRound6);
+        textFieldRound6.setBounds(370, 70, 220, 30);
+
+        jLabel18.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("Usuario:");
+        jPanel3.add(jLabel18);
+        jLabel18.setBounds(210, 210, 70, 20);
+
+        passwordFieldRound1.setText("passwordFieldRound1");
+        jPanel3.add(passwordFieldRound1);
+        passwordFieldRound1.setBounds(270, 250, 160, 30);
+
+        buttonIpod1.setText("Registrar");
+        jPanel3.add(buttonIpod1);
+        buttonIpod1.setBounds(310, 290, 73, 20);
+
+        tabbedSelector21.addTab("Añadir Bibliotecario", jPanel3);
+
+        jPanel4.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel4.setLayout(null);
+
+        panelReflect5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panelReflect5.setLayout(null);
+
+        jLabel3.setFont(new java.awt.Font("Cantarell", 1, 15)); // NOI18N
+        jLabel3.setText("Buscar :");
+        panelReflect5.add(jLabel3);
+        jLabel3.setBounds(10, 20, 90, 20);
+        panelReflect5.add(jTextField2);
+        jTextField2.setBounds(70, 20, 280, 20);
+
+        jRadioButton1.setBackground(new java.awt.Color(0, 102, 102));
+        jRadioButton1.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
+        jRadioButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jRadioButton1.setText("Profesor");
+        panelReflect5.add(jRadioButton1);
+        jRadioButton1.setBounds(380, 5, 90, 50);
+
+        jRadioButton2.setBackground(new java.awt.Color(0, 102, 102));
+        jRadioButton2.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
+        jRadioButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jRadioButton2.setText("Alumno");
+        panelReflect5.add(jRadioButton2);
+        jRadioButton2.setBounds(470, 10, 120, 40);
+
+        jPanel4.add(panelReflect5);
+        panelReflect5.setBounds(10, 10, 710, 70);
+
+        panelReflect6.setBackground(new java.awt.Color(0, 102, 102));
+        panelReflect6.setLayout(null);
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable3);
+
+        panelReflect6.add(jScrollPane3);
+        jScrollPane3.setBounds(0, 10, 700, 120);
+
+        buttonRect1.setBackground(new java.awt.Color(255, 51, 51));
+        buttonRect1.setText("Dar de baja");
+        panelReflect6.add(buttonRect1);
+        buttonRect1.setBounds(270, 150, 111, 30);
+
+        jPanel4.add(panelReflect6);
+        panelReflect6.setBounds(10, 90, 710, 220);
+
+        tabbedSelector21.addTab("Usuarios", jPanel4);
+
+        jPanel1.add(tabbedSelector21);
+        tabbedSelector21.setBounds(10, 50, 880, 330);
+
+        labelCustom2.setBackground(new java.awt.Color(0, 102, 102));
+        labelCustom2.setText("Administrador");
+        jPanel1.add(labelCustom2);
+        labelCustom2.setBounds(0, 0, 890, 50);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 600, 450);
+        jPanel1.setBounds(-10, 0, 890, 380);
 
-        setSize(new java.awt.Dimension(616, 489));
+        setSize(new java.awt.Dimension(898, 422));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -180,20 +344,47 @@ public class FrmAdministrador extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_agregarBibli;
-    private javax.swing.JButton btn_agregarBibli1;
-    private javax.swing.JButton btn_agregarBibli2;
-    private javax.swing.JButton jButton1;
+    private org.edisoncor.gui.button.ButtonAeroLeft buttonAeroLeft3;
+    private org.edisoncor.gui.button.ButtonAeroRight buttonAeroRight7;
+    private org.edisoncor.gui.button.ButtonIpod buttonIpod1;
+    private org.edisoncor.gui.button.ButtonRect buttonRect1;
+    private org.edisoncor.gui.comboBox.ComboBoxRectIcon comboBoxRectIcon1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable tbl_bibliotecario;
-    private javax.swing.JTable tbl_usuario;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JTextField jTextField2;
+    private org.edisoncor.gui.label.LabelCustom labelCustom2;
+    private org.edisoncor.gui.panel.PanelCurves panelCurves1;
+    private org.edisoncor.gui.panel.PanelCurves panelCurves2;
+    private org.edisoncor.gui.panel.PanelReflect panelReflect1;
+    private org.edisoncor.gui.panel.PanelReflect panelReflect5;
+    private org.edisoncor.gui.panel.PanelReflect panelReflect6;
+    private org.edisoncor.gui.passwordField.PasswordFieldRound passwordFieldRound1;
+    private org.edisoncor.gui.tabbedPane.TabbedSelector2 tabbedSelector21;
+    private org.edisoncor.gui.textField.TextFieldRound textFieldRound1;
+    private org.edisoncor.gui.textField.TextFieldRound textFieldRound2;
+    private org.edisoncor.gui.textField.TextFieldRound textFieldRound3;
+    private org.edisoncor.gui.textField.TextFieldRound textFieldRound4;
+    private org.edisoncor.gui.textField.TextFieldRound textFieldRound5;
+    private org.edisoncor.gui.textField.TextFieldRound textFieldRound6;
     // End of variables declaration//GEN-END:variables
 }
