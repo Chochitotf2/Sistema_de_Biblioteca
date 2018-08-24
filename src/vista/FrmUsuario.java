@@ -30,7 +30,8 @@ public class FrmUsuario extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        tabbedSelector21 = new org.edisoncor.gui.tabbedPane.TabbedSelector2();
+        jPanel6 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         cbxTipoBuscar = new javax.swing.JComboBox<>();
         txtBuscar = new javax.swing.JTextField();
@@ -39,25 +40,38 @@ public class FrmUsuario extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblResultados = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
-        btnInformacion = new javax.swing.JButton();
-        btnSolicitar = new javax.swing.JButton();
+        buttonSeven1 = new org.edisoncor.gui.button.ButtonSeven();
+        buttonSeven3 = new org.edisoncor.gui.button.ButtonSeven();
+        jLabel4 = new javax.swing.JLabel();
+        panelCurves5 = new org.edisoncor.gui.panel.PanelCurves();
+        jPanel7 = new javax.swing.JPanel();
+        panelCurves1 = new org.edisoncor.gui.panel.PanelCurves();
+        panelCurves2 = new org.edisoncor.gui.panel.PanelCurves();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblPrestamos = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        panelCurves4 = new org.edisoncor.gui.panel.PanelCurves();
+        jPanel8 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblMultas = new javax.swing.JTable();
-        buttonAction1 = new org.edisoncor.gui.button.ButtonAction();
+        jLabel6 = new javax.swing.JLabel();
+        panelCurves3 = new org.edisoncor.gui.panel.PanelCurves();
+        panel1 = new org.edisoncor.gui.panel.Panel();
         jLabel2 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        buttonSeven2 = new org.edisoncor.gui.button.ButtonSeven();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Panel de Usuario");
         setIconImage(UtilidadesComponente.obtenerIcono());
         getContentPane().setLayout(null);
 
-        jPanel1.setBackground(new java.awt.Color(169, 169, 169));
-        jPanel1.setLayout(null);
+        tabbedSelector21.setBackground(new java.awt.Color(0, 102, 102));
+        tabbedSelector21.setColorBackGround(new java.awt.Color(0, 102, 102));
+
+        jPanel6.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel6.setLayout(null);
 
         jPanel2.setBackground(new java.awt.Color(84, 125, 138));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Documentos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(230, 231, 233))); // NOI18N
@@ -67,7 +81,7 @@ public class FrmUsuario extends javax.swing.JDialog {
         jPanel2.add(cbxTipoBuscar);
         cbxTipoBuscar.setBounds(30, 30, 70, 20);
         jPanel2.add(txtBuscar);
-        txtBuscar.setBounds(110, 30, 250, 20);
+        txtBuscar.setBounds(110, 30, 390, 20);
 
         btnBusquedaAvanzada.setForeground(new java.awt.Color(230, 231, 233));
         btnBusquedaAvanzada.setText("Búsqueda Avanzada");
@@ -75,13 +89,13 @@ public class FrmUsuario extends javax.swing.JDialog {
         btnBusquedaAvanzada.setBorderPainted(false);
         btnBusquedaAvanzada.setContentAreaFilled(false);
         jPanel2.add(btnBusquedaAvanzada);
-        btnBusquedaAvanzada.setBounds(360, 30, 110, 20);
+        btnBusquedaAvanzada.setBounds(510, 30, 110, 20);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(240, 240, 240));
         jLabel1.setText("Resultados de Busqueda");
         jPanel2.add(jLabel1);
-        jLabel1.setBounds(170, 70, 140, 14);
+        jLabel1.setBounds(270, 60, 140, 14);
 
         tblResultados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -97,20 +111,36 @@ public class FrmUsuario extends javax.swing.JDialog {
         jScrollPane1.setViewportView(tblResultados);
 
         jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 90, 460, 120);
+        jScrollPane1.setBounds(10, 80, 640, 250);
         jPanel2.add(jSeparator1);
-        jSeparator1.setBounds(10, 220, 460, 2);
+        jSeparator1.setBounds(10, 350, 610, 10);
 
-        btnInformacion.setText("Ver Información");
-        jPanel2.add(btnInformacion);
-        btnInformacion.setBounds(120, 230, 120, 20);
+        buttonSeven1.setText("Solicitar");
+        jPanel2.add(buttonSeven1);
+        buttonSeven1.setBounds(390, 360, 150, 30);
 
-        btnSolicitar.setText("Solicitar");
-        jPanel2.add(btnSolicitar);
-        btnSolicitar.setBounds(260, 230, 73, 20);
+        buttonSeven3.setText("Ver informacion");
+        jPanel2.add(buttonSeven3);
+        buttonSeven3.setBounds(130, 360, 180, 30);
 
-        jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, 0, 480, 260);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/ue_biblioteca-mediateca-icono.png"))); // NOI18N
+        jLabel4.setText("jLabel2");
+        jPanel2.add(jLabel4);
+        jLabel4.setBounds(410, 150, 510, 330);
+
+        jPanel6.add(jPanel2);
+        jPanel2.setBounds(10, 10, 670, 400);
+        jPanel6.add(panelCurves5);
+        panelCurves5.setBounds(0, 0, 690, 430);
+
+        tabbedSelector21.addTab("Documentos", jPanel6);
+
+        jPanel7.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel7.setLayout(null);
+        jPanel7.add(panelCurves1);
+        panelCurves1.setBounds(0, 0, 0, 0);
+        jPanel7.add(panelCurves2);
+        panelCurves2.setBounds(0, 0, 120, 0);
 
         jPanel3.setBackground(new java.awt.Color(85, 111, 122));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Préstamos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(230, 231, 233))); // NOI18N
@@ -130,10 +160,22 @@ public class FrmUsuario extends javax.swing.JDialog {
         jScrollPane2.setViewportView(tblPrestamos);
 
         jPanel3.add(jScrollPane2);
-        jScrollPane2.setBounds(10, 20, 460, 110);
+        jScrollPane2.setBounds(20, 30, 630, 330);
 
-        jPanel1.add(jPanel3);
-        jPanel3.setBounds(0, 260, 480, 180);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/ue_biblioteca-mediateca-icono.png"))); // NOI18N
+        jLabel5.setText("jLabel2");
+        jPanel3.add(jLabel5);
+        jLabel5.setBounds(440, 160, 510, 330);
+
+        jPanel7.add(jPanel3);
+        jPanel3.setBounds(10, 10, 670, 400);
+        jPanel7.add(panelCurves4);
+        panelCurves4.setBounds(0, 0, 690, 430);
+
+        tabbedSelector21.addTab("Prestamos", jPanel7);
+
+        jPanel8.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel8.setLayout(null);
 
         jPanel4.setBackground(new java.awt.Color(121, 128, 134));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Multas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(230, 231, 233))); // NOI18N
@@ -153,26 +195,41 @@ public class FrmUsuario extends javax.swing.JDialog {
         jScrollPane3.setViewportView(tblMultas);
 
         jPanel4.add(jScrollPane3);
-        jScrollPane3.setBounds(10, 20, 300, 360);
+        jScrollPane3.setBounds(20, 20, 630, 350);
 
-        jPanel1.add(jPanel4);
-        jPanel4.setBounds(480, 30, 320, 410);
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/ue_biblioteca-mediateca-icono.png"))); // NOI18N
+        jLabel6.setText("jLabel2");
+        jPanel4.add(jLabel6);
+        jLabel6.setBounds(410, 150, 510, 330);
 
-        buttonAction1.setText("Cerrar Sesion");
-        jPanel1.add(buttonAction1);
-        buttonAction1.setBounds(680, 0, 116, 30);
+        jPanel8.add(jPanel4);
+        jPanel4.setBounds(10, 10, 670, 400);
+        jPanel8.add(panelCurves3);
+        panelCurves3.setBounds(-10, -10, 700, 440);
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(20, 10, 800, 440);
+        tabbedSelector21.addTab("Multas", jPanel8);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/shutterstock_159503864.jpg"))); // NOI18N
-        jLabel2.setText("jLabel2");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 0, 830, 470);
-        getContentPane().add(jPanel5);
-        jPanel5.setBounds(610, -30, 50, 90);
+        getContentPane().add(tabbedSelector21);
+        tabbedSelector21.setBounds(0, 50, 800, 440);
 
-        setSize(new java.awt.Dimension(845, 511));
+        panel1.setForeground(new java.awt.Color(0, 102, 102));
+        panel1.setColorPrimario(new java.awt.Color(0, 102, 102));
+        panel1.setColorSecundario(new java.awt.Color(0, 204, 204));
+        panel1.setLayout(null);
+
+        jLabel2.setFont(new java.awt.Font("Sitka Subheading", 0, 24)); // NOI18N
+        jLabel2.setText("Bienvenido al Sistema biliotecario");
+        panel1.add(jLabel2);
+        jLabel2.setBounds(220, 0, 380, 50);
+
+        buttonSeven2.setText("Cerrar sesion");
+        panel1.add(buttonSeven2);
+        buttonSeven2.setBounds(670, 10, 116, 35);
+
+        getContentPane().add(panel1);
+        panel1.setBounds(0, 0, 800, 50);
+
+        setSize(new java.awt.Dimension(817, 530));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -220,21 +277,32 @@ public class FrmUsuario extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBusquedaAvanzada;
-    private javax.swing.JButton btnInformacion;
-    private javax.swing.JButton btnSolicitar;
-    private org.edisoncor.gui.button.ButtonAction buttonAction1;
+    private org.edisoncor.gui.button.ButtonSeven buttonSeven1;
+    private org.edisoncor.gui.button.ButtonSeven buttonSeven2;
+    private org.edisoncor.gui.button.ButtonSeven buttonSeven3;
     private javax.swing.JComboBox<String> cbxTipoBuscar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
+    private org.edisoncor.gui.panel.Panel panel1;
+    private org.edisoncor.gui.panel.PanelCurves panelCurves1;
+    private org.edisoncor.gui.panel.PanelCurves panelCurves2;
+    private org.edisoncor.gui.panel.PanelCurves panelCurves3;
+    private org.edisoncor.gui.panel.PanelCurves panelCurves4;
+    private org.edisoncor.gui.panel.PanelCurves panelCurves5;
+    private org.edisoncor.gui.tabbedPane.TabbedSelector2 tabbedSelector21;
     private javax.swing.JTable tblMultas;
     private javax.swing.JTable tblPrestamos;
     private javax.swing.JTable tblResultados;
