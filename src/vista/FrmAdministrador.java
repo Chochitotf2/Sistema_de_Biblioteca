@@ -39,7 +39,7 @@ public class FrmAdministrador extends javax.swing.JDialog {
         jTable1 = new javax.swing.JTable();
         buttonAeroLeft3 = new org.edisoncor.gui.button.ButtonAeroLeft();
         buttonAeroRight7 = new org.edisoncor.gui.button.ButtonAeroRight();
-        jLabel8 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         panelCurves1 = new org.edisoncor.gui.panel.PanelCurves();
         jLabel6 = new javax.swing.JLabel();
@@ -54,23 +54,22 @@ public class FrmAdministrador extends javax.swing.JDialog {
         textFieldRound5 = new org.edisoncor.gui.textField.TextFieldRound();
         jLabel16 = new javax.swing.JLabel();
         comboBoxRectIcon1 = new org.edisoncor.gui.comboBox.ComboBoxRectIcon();
-        jLabel7 = new javax.swing.JLabel();
         panelCurves2 = new org.edisoncor.gui.panel.PanelCurves();
         jLabel17 = new javax.swing.JLabel();
         textFieldRound6 = new org.edisoncor.gui.textField.TextFieldRound();
         jLabel18 = new javax.swing.JLabel();
         passwordFieldRound1 = new org.edisoncor.gui.passwordField.PasswordFieldRound();
         buttonIpod1 = new org.edisoncor.gui.button.ButtonIpod();
+        jLabel4 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         panelReflect5 = new org.edisoncor.gui.panel.PanelReflect();
         jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
-        panelReflect6 = new org.edisoncor.gui.panel.PanelReflect();
+        buttonRect1 = new org.edisoncor.gui.button.ButtonRect();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
-        buttonRect1 = new org.edisoncor.gui.button.ButtonRect();
         labelCustom2 = new org.edisoncor.gui.label.LabelCustom();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -93,7 +92,7 @@ public class FrmAdministrador extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Cantarell", 1, 15)); // NOI18N
         jLabel1.setText("Bibliotecarios");
         panelReflect1.add(jLabel1);
-        jLabel1.setBounds(270, 10, 120, 20);
+        jLabel1.setBounds(260, 30, 120, 20);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -109,40 +108,38 @@ public class FrmAdministrador extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTable1);
 
         panelReflect1.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 60, 710, 160);
-
-        jPanel2.add(panelReflect1);
-        panelReflect1.setBounds(0, 0, 740, 320);
+        jScrollPane1.setBounds(30, 80, 550, 250);
 
         buttonAeroLeft3.setBackground(new java.awt.Color(0, 255, 255));
         buttonAeroLeft3.setText("Editar");
-        jPanel2.add(buttonAeroLeft3);
-        buttonAeroLeft3.setBounds(230, 260, 110, 25);
+        panelReflect1.add(buttonAeroLeft3);
+        buttonAeroLeft3.setBounds(190, 360, 110, 25);
 
         buttonAeroRight7.setBackground(new java.awt.Color(0, 204, 204));
         buttonAeroRight7.setText("Dar de baja");
-        jPanel2.add(buttonAeroRight7);
-        buttonAeroRight7.setBounds(350, 260, 120, 25);
+        panelReflect1.add(buttonAeroRight7);
+        buttonAeroRight7.setBounds(310, 360, 120, 25);
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/books.png"))); // NOI18N
-        jLabel8.setText("jLabel7");
-        jPanel2.add(jLabel8);
-        jLabel8.setBounds(520, 150, 260, 210);
+        jPanel2.add(panelReflect1);
+        panelReflect1.setBounds(0, 0, 600, 400);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/ue_biblioteca-mediateca-icono.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        jPanel2.add(jLabel2);
+        jLabel2.setBounds(360, 160, 510, 330);
 
         tabbedSelector21.addTab("Bibliotecarios", jPanel2);
 
         jPanel3.setBackground(new java.awt.Color(0, 102, 102));
         jPanel3.setLayout(null);
         jPanel3.add(panelCurves1);
-        panelCurves1.setBounds(0, 0, 100, 100);
+        panelCurves1.setBounds(0, 0, 0, 0);
 
         jLabel6.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Telefono:");
         jPanel3.add(jLabel6);
         jLabel6.setBounds(300, 70, 70, 20);
-
-        textFieldRound1.setText("textFieldRound1");
         jPanel3.add(textFieldRound1);
         textFieldRound1.setBounds(70, 120, 520, 30);
 
@@ -151,18 +148,14 @@ public class FrmAdministrador extends javax.swing.JDialog {
         jLabel12.setText("Nombre:");
         jPanel3.add(jLabel12);
         jLabel12.setBounds(10, 20, 70, 20);
-
-        textFieldRound2.setText("textFieldRound1");
         jPanel3.add(textFieldRound2);
-        textFieldRound2.setBounds(270, 210, 160, 30);
+        textFieldRound2.setBounds(260, 220, 160, 30);
 
         jLabel13.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Apellidos:");
         jPanel3.add(jLabel13);
         jLabel13.setBounds(300, 20, 70, 20);
-
-        textFieldRound3.setText("textFieldRound1");
         jPanel3.add(textFieldRound3);
         textFieldRound3.setBounds(370, 20, 220, 30);
 
@@ -170,9 +163,7 @@ public class FrmAdministrador extends javax.swing.JDialog {
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Seccion:");
         jPanel3.add(jLabel14);
-        jLabel14.setBounds(210, 170, 70, 20);
-
-        textFieldRound4.setText("textFieldRound1");
+        jLabel14.setBounds(200, 180, 70, 20);
         jPanel3.add(textFieldRound4);
         textFieldRound4.setBounds(70, 20, 220, 30);
 
@@ -181,8 +172,6 @@ public class FrmAdministrador extends javax.swing.JDialog {
         jLabel15.setText("Cedula:");
         jPanel3.add(jLabel15);
         jLabel15.setBounds(10, 70, 70, 20);
-
-        textFieldRound5.setText("textFieldRound1");
         jPanel3.add(textFieldRound5);
         textFieldRound5.setBounds(70, 70, 220, 30);
 
@@ -190,16 +179,11 @@ public class FrmAdministrador extends javax.swing.JDialog {
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Contraseña:");
         jPanel3.add(jLabel16);
-        jLabel16.setBounds(190, 250, 100, 20);
+        jLabel16.setBounds(180, 260, 100, 20);
         jPanel3.add(comboBoxRectIcon1);
-        comboBoxRectIcon1.setBounds(270, 170, 160, 20);
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/books.png"))); // NOI18N
-        jLabel7.setText("jLabel7");
-        jPanel3.add(jLabel7);
-        jLabel7.setBounds(530, 140, 260, 210);
+        comboBoxRectIcon1.setBounds(260, 180, 160, 20);
         jPanel3.add(panelCurves2);
-        panelCurves2.setBounds(0, 0, 120, 100);
+        panelCurves2.setBounds(0, 0, 120, 0);
 
         jLabel17.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
@@ -215,15 +199,20 @@ public class FrmAdministrador extends javax.swing.JDialog {
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("Usuario:");
         jPanel3.add(jLabel18);
-        jLabel18.setBounds(210, 210, 70, 20);
-
-        passwordFieldRound1.setText("passwordFieldRound1");
+        jLabel18.setBounds(200, 220, 70, 20);
         jPanel3.add(passwordFieldRound1);
-        passwordFieldRound1.setBounds(270, 250, 160, 30);
+        passwordFieldRound1.setBounds(260, 260, 160, 30);
 
+        buttonIpod1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         buttonIpod1.setText("Registrar");
+        buttonIpod1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jPanel3.add(buttonIpod1);
-        buttonIpod1.setBounds(310, 290, 73, 20);
+        buttonIpod1.setBounds(290, 330, 80, 30);
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/ue_biblioteca-mediateca-icono.png"))); // NOI18N
+        jLabel4.setText("jLabel2");
+        jPanel3.add(jLabel4);
+        jLabel4.setBounds(350, 160, 510, 330);
 
         tabbedSelector21.addTab("Añadir Bibliotecario", jPanel3);
 
@@ -252,13 +241,15 @@ public class FrmAdministrador extends javax.swing.JDialog {
         jRadioButton2.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton2.setText("Alumno");
         panelReflect5.add(jRadioButton2);
-        jRadioButton2.setBounds(470, 10, 120, 40);
+        jRadioButton2.setBounds(470, 10, 100, 40);
 
         jPanel4.add(panelReflect5);
-        panelReflect5.setBounds(10, 10, 710, 70);
+        panelReflect5.setBounds(10, 10, 590, 70);
 
-        panelReflect6.setBackground(new java.awt.Color(0, 102, 102));
-        panelReflect6.setLayout(null);
+        buttonRect1.setBackground(new java.awt.Color(255, 51, 51));
+        buttonRect1.setText("Dar de baja");
+        jPanel4.add(buttonRect1);
+        buttonRect1.setBounds(250, 360, 111, 30);
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -273,21 +264,13 @@ public class FrmAdministrador extends javax.swing.JDialog {
         ));
         jScrollPane3.setViewportView(jTable3);
 
-        panelReflect6.add(jScrollPane3);
-        jScrollPane3.setBounds(0, 10, 700, 120);
-
-        buttonRect1.setBackground(new java.awt.Color(255, 51, 51));
-        buttonRect1.setText("Dar de baja");
-        panelReflect6.add(buttonRect1);
-        buttonRect1.setBounds(270, 150, 111, 30);
-
-        jPanel4.add(panelReflect6);
-        panelReflect6.setBounds(10, 90, 710, 220);
+        jPanel4.add(jScrollPane3);
+        jScrollPane3.setBounds(10, 90, 590, 250);
 
         tabbedSelector21.addTab("Usuarios", jPanel4);
 
         jPanel1.add(tabbedSelector21);
-        tabbedSelector21.setBounds(10, 50, 880, 330);
+        tabbedSelector21.setBounds(10, 50, 750, 430);
 
         labelCustom2.setBackground(new java.awt.Color(0, 102, 102));
         labelCustom2.setText("Administrador");
@@ -295,9 +278,9 @@ public class FrmAdministrador extends javax.swing.JDialog {
         labelCustom2.setBounds(0, 0, 890, 50);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(-10, 0, 890, 380);
+        jPanel1.setBounds(-10, 0, 760, 480);
 
-        setSize(new java.awt.Dimension(898, 422));
+        setSize(new java.awt.Dimension(762, 521));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -357,10 +340,10 @@ public class FrmAdministrador extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -377,7 +360,6 @@ public class FrmAdministrador extends javax.swing.JDialog {
     private org.edisoncor.gui.panel.PanelCurves panelCurves2;
     private org.edisoncor.gui.panel.PanelReflect panelReflect1;
     private org.edisoncor.gui.panel.PanelReflect panelReflect5;
-    private org.edisoncor.gui.panel.PanelReflect panelReflect6;
     private org.edisoncor.gui.passwordField.PasswordFieldRound passwordFieldRound1;
     private org.edisoncor.gui.tabbedPane.TabbedSelector2 tabbedSelector21;
     private org.edisoncor.gui.textField.TextFieldRound textFieldRound1;

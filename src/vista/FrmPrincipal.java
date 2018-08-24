@@ -29,6 +29,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnDocumentos = new javax.swing.JMenuItem();
@@ -40,6 +41,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
         setTitle("Sistema Bibliotecario");
         setIconImage(UtilidadesComponente.obtenerIcono());
         getContentPane().setLayout(null);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/books.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(130, 0, 490, 340);
+
+        jMenuBar1.setBackground(new java.awt.Color(51, 51, 51));
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        jMenuBar1.setForeground(new java.awt.Color(102, 102, 102));
+        jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jMenu1.setText("Archivo");
 
@@ -64,7 +75,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        setSize(new java.awt.Dimension(416, 338));
+        setSize(new java.awt.Dimension(552, 398));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -112,6 +123,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPopupMenu.Separator jSeparator1;

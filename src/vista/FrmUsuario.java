@@ -49,6 +49,7 @@ public class FrmUsuario extends javax.swing.JDialog {
         tblMultas = new javax.swing.JTable();
         buttonAction1 = new org.edisoncor.gui.button.ButtonAction();
         jLabel2 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Panel de Usuario");
@@ -109,7 +110,7 @@ public class FrmUsuario extends javax.swing.JDialog {
         btnSolicitar.setBounds(260, 230, 73, 20);
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(20, 10, 480, 260);
+        jPanel2.setBounds(0, 0, 480, 260);
 
         jPanel3.setBackground(new java.awt.Color(85, 111, 122));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Préstamos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(230, 231, 233))); // NOI18N
@@ -132,7 +133,7 @@ public class FrmUsuario extends javax.swing.JDialog {
         jScrollPane2.setBounds(10, 20, 460, 110);
 
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(20, 270, 480, 150);
+        jPanel3.setBounds(0, 260, 480, 180);
 
         jPanel4.setBackground(new java.awt.Color(121, 128, 134));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Multas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(230, 231, 233))); // NOI18N
@@ -155,19 +156,21 @@ public class FrmUsuario extends javax.swing.JDialog {
         jScrollPane3.setBounds(10, 20, 300, 360);
 
         jPanel1.add(jPanel4);
-        jPanel4.setBounds(500, 10, 320, 410);
+        jPanel4.setBounds(480, 30, 320, 410);
 
         buttonAction1.setText("Cerrar Sesion");
         jPanel1.add(buttonAction1);
-        buttonAction1.setBounds(20, 430, 116, 35);
+        buttonAction1.setBounds(680, 0, 116, 30);
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(20, 10, 800, 440);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/shutterstock_159503864.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(0, -30, 830, 500);
-
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 860, 610);
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, 0, 830, 470);
+        getContentPane().add(jPanel5);
+        jPanel5.setBounds(610, -30, 50, 90);
 
         setSize(new java.awt.Dimension(845, 511));
         setLocationRelativeTo(null);
@@ -227,6 +230,7 @@ public class FrmUsuario extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

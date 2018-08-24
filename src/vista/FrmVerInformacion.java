@@ -38,64 +38,114 @@ public class FrmVerInformacion extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jTextField5 = new javax.swing.JTextField();
+        jTextField6 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        buttonAction1 = new org.edisoncor.gui.button.ButtonAction();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Información");
         setIconImage(UtilidadesComponente.obtenerIcono()
         );
-        setPreferredSize(new java.awt.Dimension(0, 0));
         getContentPane().setLayout(null);
 
+        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
         jPanel1.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Editorial");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(40, 230, 60, 20);
+        jLabel1.setBounds(100, 190, 50, 20);
 
         jLabel2.setFont(new java.awt.Font("Century Schoolbook", 0, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Informacion");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(90, 10, 217, 40);
+        jLabel2.setBounds(110, 20, 217, 40);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Titulo");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(20, 80, 90, 20);
+        jLabel3.setBounds(90, 70, 90, 20);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Codigo");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(150, 80, 90, 20);
+        jLabel4.setBounds(100, 220, 50, 20);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Autor");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(20, 120, 90, 20);
+        jLabel5.setBounds(90, 100, 90, 20);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Tipo de Documento");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(40, 160, 130, 20);
+        jLabel6.setBounds(30, 130, 130, 20);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Edición");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(40, 190, 60, 20);
+        jLabel7.setBounds(100, 160, 60, 20);
+
+        jTextField1.setText("jTextField1");
+        jPanel1.add(jTextField1);
+        jTextField1.setBounds(170, 70, 170, 20);
+
+        jTextField2.setText("jTextField2");
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextField2);
+        jTextField2.setBounds(170, 220, 170, 20);
+
+        jTextField3.setText("jTextField2");
+        jPanel1.add(jTextField3);
+        jTextField3.setBounds(170, 100, 170, 20);
+
+        jTextField4.setText("jTextField2");
+        jPanel1.add(jTextField4);
+        jTextField4.setBounds(170, 130, 170, 20);
+
+        jTextField5.setText("jTextField2");
+        jPanel1.add(jTextField5);
+        jTextField5.setBounds(170, 160, 170, 20);
+
+        jTextField6.setText("jTextField2");
+        jPanel1.add(jTextField6);
+        jTextField6.setBounds(170, 190, 170, 20);
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/books.png"))); // NOI18N
+        jLabel8.setText("jLabel8");
+        jPanel1.add(jLabel8);
+        jLabel8.setBounds(210, 0, 410, 360);
+
+        buttonAction1.setText("Cerrar");
+        jPanel1.add(buttonAction1);
+        buttonAction1.setBounds(10, 330, 116, 30);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 400, 300);
+        jPanel1.setBounds(0, 0, 620, 360);
 
-        setSize(new java.awt.Dimension(416, 338));
+        setSize(new java.awt.Dimension(637, 401));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -140,6 +190,7 @@ public class FrmVerInformacion extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private org.edisoncor.gui.button.ButtonAction buttonAction1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -147,6 +198,13 @@ public class FrmVerInformacion extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 }
