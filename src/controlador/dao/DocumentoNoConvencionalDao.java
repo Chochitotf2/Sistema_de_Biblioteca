@@ -6,11 +6,11 @@ import modelo.DocumentoNoConvencional;
  *
  * @author Chochitotf2
  */
-public class DocumentoNoConvensionalDao extends AdaptadorDao<DocumentoNoConvencional> {
+public class DocumentoNoConvencionalDao extends AdaptadorDao<DocumentoNoConvencional> {
 
     private DocumentoNoConvencional documentoNoConvensional;
 
-    public DocumentoNoConvensionalDao() {
+    public DocumentoNoConvencionalDao() {
         super(DocumentoNoConvencional.class);
     }
 

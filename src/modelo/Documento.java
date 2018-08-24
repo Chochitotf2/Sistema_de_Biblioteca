@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import modelo.enums.TipoDocumento;
 
 /**
  *
@@ -24,12 +23,12 @@ public class Documento implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(length = 60)
-    private String Titulo;
+    private String titulo;
     @Column(length = 60)
     private String codigo;
     @Column(length = 30)
-    private TipoDocumento tipoDocumento;
-    public boolean estado = false;
+    private String tipoDocumento;
+    public Boolean estado = false;
     @OneToMany(mappedBy = "documento", cascade = CascadeType.ALL)
     private List<Prestamo> listaPrestamo = new ArrayList<>();
 

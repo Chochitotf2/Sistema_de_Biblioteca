@@ -1,6 +1,6 @@
 package controlador.servicio;
 
-import controlador.dao.DocumentoNoConvensionalDao;
+import controlador.dao.DocumentoNoConvencionalDao;
 import java.util.List;
 import modelo.DocumentoNoConvencional;
 
@@ -8,9 +8,9 @@ import modelo.DocumentoNoConvencional;
  *
  * @author Chochitotf2
  */
-public class DocumentoNoConvensionalServicio {
+public class DocumentoNoConvencionalServicio {
 
-    private DocumentoNoConvensionalDao documentoNoConvensional = new DocumentoNoConvensionalDao();
+    private DocumentoNoConvencionalDao documentoNoConvensional = new DocumentoNoConvencionalDao();
 
     public DocumentoNoConvencional obtenerDocumentoNoConvensional() {
         return documentoNoConvensional.getDocumentoNoConvensional();

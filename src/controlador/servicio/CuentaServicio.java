@@ -1,6 +1,7 @@
 package controlador.servicio;
 
 import controlador.dao.CuentaDao;
+import it.sauronsoftware.base64.Base64;
 import java.util.Date;
 import java.util.List;
 import modelo.Cuenta;
@@ -49,7 +50,7 @@ public class CuentaServicio {
             persona.obtenerPersona().setRol(new RolServicio().buscarRol("Administrador"));
             Cuenta administrador = new Cuenta();
             administrador.setUsuario("administrador");
-            administrador.setClave("administrador");
+            administrador.setClave(Base64.encode("administrador"));
             administrador.setCreadoEn(new Date());
             administrador.setModificadoEn(new Date());
             administrador.setPersona(persona.obtenerPersona());

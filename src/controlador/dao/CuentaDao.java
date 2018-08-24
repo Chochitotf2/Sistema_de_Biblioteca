@@ -1,5 +1,6 @@
 package controlador.dao;
 
+import it.sauronsoftware.base64.Base64;
 import javax.persistence.Query;
 import modelo.Cuenta;
 
@@ -49,7 +50,7 @@ public class CuentaDao extends AdaptadorDao<Cuenta> {
             Query query = getManager().createQuery("SELECT c FROM Cuenta c WHERE c.usuario = :user");
             query.setParameter("user", usuario);
             Cuenta aux = (Cuenta) query.getSingleResult();
-            if (aux != null && aux.getClave().equals(clave)) {
+            if (aux != null && aux.getClave().equals(Base64.encode(clave))) {
                 cuentaAux = aux;
             }
         } catch (Exception e) {
