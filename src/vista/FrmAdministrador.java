@@ -60,7 +60,7 @@ public class FrmAdministrador extends javax.swing.JDialog {
         textFieldRound6 = new org.edisoncor.gui.textField.TextFieldRound();
         jLabel18 = new javax.swing.JLabel();
         passwordFieldRound1 = new org.edisoncor.gui.passwordField.PasswordFieldRound();
-        btnRegistrarse2 = new rojeru_san.RSButtonRiple();
+        btnRegistrar = new rojeru_san.RSButtonRiple();
         jLabel4 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         panelReflect5 = new org.edisoncor.gui.panel.PanelReflect();
@@ -204,18 +204,18 @@ public class FrmAdministrador extends javax.swing.JDialog {
         jPanel3.add(passwordFieldRound1);
         passwordFieldRound1.setBounds(240, 270, 160, 30);
 
-        btnRegistrarse2.setBackground(new java.awt.Color(255, 255, 255));
-        btnRegistrarse2.setBorder(null);
-        btnRegistrarse2.setText("Regístrarse");
-        btnRegistrarse2.setColorHover(new java.awt.Color(169, 169, 169));
-        btnRegistrarse2.setColorText(new java.awt.Color(0, 0, 0));
-        btnRegistrarse2.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistrar.setBackground(new java.awt.Color(255, 255, 255));
+        btnRegistrar.setBorder(null);
+        btnRegistrar.setText("Regístrarse");
+        btnRegistrar.setColorHover(new java.awt.Color(169, 169, 169));
+        btnRegistrar.setColorText(new java.awt.Color(0, 0, 0));
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarse2ActionPerformed(evt);
+                btnRegistrarActionPerformed(evt);
             }
         });
-        jPanel3.add(btnRegistrarse2);
-        btnRegistrarse2.setBounds(260, 320, 110, 40);
+        jPanel3.add(btnRegistrar);
+        btnRegistrar.setBounds(260, 320, 110, 40);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/ue_biblioteca-mediateca-icono.png"))); // NOI18N
         jLabel4.setText("jLabel2");
@@ -317,13 +317,13 @@ public class FrmAdministrador extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
-        dispose();
-        new FrmRegistro(this , true).setVisible(true);
+      
+        
     }//GEN-LAST:event_btnRegistrarseActionPerformed
 
-    private void btnRegistrarse2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarse2ActionPerformed
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegistrarse2ActionPerformed
+    }//GEN-LAST:event_btnRegistrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -368,8 +368,8 @@ public class FrmAdministrador extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private rojeru_san.RSButtonRiple btnRegistrar;
     private rojeru_san.RSButtonRiple btnRegistrarse;
-    private rojeru_san.RSButtonRiple btnRegistrarse2;
     private org.edisoncor.gui.button.ButtonAero buttonAero1;
     private org.edisoncor.gui.button.ButtonAeroLeft buttonAeroLeft3;
     private org.edisoncor.gui.button.ButtonAeroRight buttonAeroRight7;
