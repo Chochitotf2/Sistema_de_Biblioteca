@@ -8,7 +8,9 @@ package vista;
 import controlador.servicio.BibliotecarioServicio;
 import controlador.servicio.CuentaServicio;
 import controlador.servicio.PersonaServicio;
+import controlador.servicio.RolServicio;
 import static controlador.utilidades.Utilidades.formatearFecha;
+import it.sauronsoftware.base64.Base64;
 import java.awt.Color;
 import java.util.Date;
 import javax.swing.ButtonGroup;
@@ -36,14 +38,13 @@ public class FrmAdministrador extends javax.swing.JDialog {
      */
     public FrmAdministrador(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        
+
         initComponents();
         ButtonGroup g2 = new ButtonGroup();
         g2.add(rd_alumno);
         g2.add(rd_todos);
         g2.add(rd_todos);
         limpiar();
-        
 
     }
 
@@ -52,7 +53,7 @@ public class FrmAdministrador extends javax.swing.JDialog {
         modeloBiblio.setLista(bS.listar());
         tabla_bibliotecarios.setModel(modeloBiblio);
         tabla_bibliotecarios.updateUI();
-       
+
     }
 
     private void cargarTablaUser() {
@@ -63,8 +64,6 @@ public class FrmAdministrador extends javax.swing.JDialog {
         tbl_user.updateUI();
     }
 
-    
-    
     private void repintarComponentes() {
         txt_nombre.setBackground(Color.WHITE);
         txt_apellidos.setBackground(Color.WHITE);
@@ -75,8 +74,8 @@ public class FrmAdministrador extends javax.swing.JDialog {
         txt_usuario.setBackground(Color.WHITE);
         txt_contraseña.setBackground(Color.WHITE);
     }
-    
-    private void limpiar(){
+
+    private void limpiar() {
         bS.fijarBibliotecario(null);
         cs.fijarCuenta(null);
         txt_nombre.setText("");
@@ -90,10 +89,14 @@ public class FrmAdministrador extends javax.swing.JDialog {
         cbx_seccion.setSelectedItem(1);
         cargartablabiblo();
         cargarTablaUser();
-        
+
     }
 
     public void cargarobjeto() {
+        cs.obtenerCuenta().setUsuario(txt_usuario.getText().trim());
+        cs.obtenerCuenta().setClave(String.valueOf(Base64.encode(txt_contraseña.getText().trim())));
+        cs.obtenerCuenta().setCreadoEn(new Date());
+        cs.obtenerCuenta().setModificadoEn(new Date());
         bS.obtenerBibliotecario().setNombres(txt_nombre.getText().trim());
         bS.obtenerBibliotecario().setApellidos(txt_apellidos.getText().trim());
         bS.obtenerBibliotecario().setDni(txt_cedula.getText().trim());
@@ -101,10 +104,11 @@ public class FrmAdministrador extends javax.swing.JDialog {
         bS.obtenerBibliotecario().setCorreo(txt_coreo.getText().trim());
         bS.obtenerBibliotecario().setDireccion(txt_dir.getText().trim());
         bS.obtenerBibliotecario().setSeccion(cbx_seccion.getSelectedItem().toString());
-        cs.obtenerCuenta().setUsuario(txt_usuario.getText().trim());
-        cs.obtenerCuenta().setClave(txt_contraseña.getText().trim());
+        bS.obtenerBibliotecario().setRol(new RolServicio().buscarRol("Bibliotecario"));
+        bS.obtenerBibliotecario().setCuenta(cs.obtenerCuenta());
+        cs.obtenerCuenta().setPersona(bS.obtenerBibliotecario());
     }
-    
+
     private void cargarEdicion() {
         int fila = tabla_bibliotecarios.getSelectedRow();
         if (fila >= 0) {
@@ -120,21 +124,20 @@ public class FrmAdministrador extends javax.swing.JDialog {
             mensajeError("Advertencia", "Debe seleccionar un Documento de la Tabla.");
         }
     }
-    
+
     private void registrar() {
         if (!errores()) {
             cargarobjeto();
-                if (bS.guardar()) {
-                    mensajeOK("Aviso", "Se ha registrado con éxito.");
-                    limpiar();
-                } else {
-                    mensajeError("Error", "Ha ocurrido un error al realizar su registro.");
-                }
-            
-            
+            if (bS.guardar()) {
+                mensajeOK("Aviso", "Se ha registrado con éxito.");
+                limpiar();
+            } else {
+                mensajeError("Error", "Ha ocurrido un error al realizar su registro.");
+            }
+
         }
     }
-    
+
     private boolean errores() {
         boolean verificador = false;
         if (mostrarError(txt_nombre, "El Nombre solo puede contener letras.", 't')) {
@@ -170,7 +173,7 @@ public class FrmAdministrador extends javax.swing.JDialog {
                 modelouser.setLista(ps.listarPersonaLike(txt_buscarUser.getText().trim()));
             } else {
                 String tipo = (rd_alumno.isSelected()) ? "Alumno" : "Profesor";
-                modelouser.setLista(ps.listarPersonaTipoLike(tipo, txt_buscarUser.getText())); 
+                modelouser.setLista(ps.listarPersonaTipoLike(tipo, txt_buscarUser.getText()));
             }
             tbl_user.setModel(modelouser);
             tbl_user.updateUI();
@@ -178,6 +181,7 @@ public class FrmAdministrador extends javax.swing.JDialog {
             cargarTablaUser();
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -429,7 +433,6 @@ public class FrmAdministrador extends javax.swing.JDialog {
         txt_buscarUser.setBounds(70, 20, 200, 20);
 
         rd_todos.setBackground(new java.awt.Color(255, 255, 255));
-        rd_todos.setSelected(true);
         rd_todos.setText("Todos");
         panelReflect5.add(rd_todos);
         rd_todos.setBounds(280, 20, 55, 23);
@@ -530,13 +533,13 @@ public class FrmAdministrador extends javax.swing.JDialog {
 
     private void buttonAeroLeft3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAeroLeft3ActionPerformed
         panelSelector.setSelectedIndex(1);
-        
+
     }//GEN-LAST:event_buttonAeroLeft3ActionPerformed
 
     private void buttonAero1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAero1ActionPerformed
-       cargarEdicion();
+        cargarEdicion();
         panelSelector.setSelectedIndex(1);
-        
+
     }//GEN-LAST:event_buttonAero1ActionPerformed
 
     private void txt_dirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_dirActionPerformed
