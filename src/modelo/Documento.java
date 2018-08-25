@@ -22,13 +22,13 @@ public class Documento implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(length = 60)
+    @Column(length = 80)
     private String titulo;
-    @Column(length = 60)
+    @Column(length = 15)
     private String codigo;
-    @Column(length = 30)
+    @Column(length = 50)
     private String tipoDocumento;
-    public Boolean estado = false;
+    public Boolean estado = true;
     @OneToMany(mappedBy = "documento", cascade = CascadeType.ALL)
     private List<Prestamo> listaPrestamo = new ArrayList<>();
 

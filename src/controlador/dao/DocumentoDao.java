@@ -1,5 +1,8 @@
 package controlador.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Query;
 import modelo.Documento;
 
 /**
@@ -41,4 +44,47 @@ public class DocumentoDao extends AdaptadorDao<Documento> {
         }
         return estado;
     }
+
+    public List<Documento> listarDocumentoTipo(String tipo) {
+        List<Documento> lista = new ArrayList<>();
+        try {
+            Query query = getManager()
+                    .createQuery("SELECT p FROM Documento p WHERE p.tipoDocumento = :tipo");
+            query.setParameter("tipo", tipo);
+            lista = query.getResultList();
+        } catch (Exception e) {
+            System.out.println("No se ha podido listar por Tipo: " + e);
+        }
+        return lista;
+    }
+
+    public List<Documento> listarDocumentoLike(String busqueda) {
+        List<Documento> lista = new ArrayList<>();
+        try {
+            Query query = getManager().createQuery("SELECT p FROM Documento p WHERE (LOWER(p.titulo) LIKE CONCAT('%', :dato, '%'))"
+                    + " OR (LOWER(p.codigo) LIKE CONCAT('%', :dato, '%'))");
+            query.setParameter("dato", busqueda);
+            lista = query.getResultList();
+        } catch (Exception e) {
+            System.out.println("No se ha podido listar por Busqueda:" + e);
+        }
+        return lista;
+    }
+
+    public List<Documento> listarDocumentoTipoLike(String tipo, String busqueda) {
+        List<Documento> lista = new ArrayList<>();
+        try {
+            Query query = getManager()
+                    .createQuery("SELECT p FROM Documento p WHERE p.tipoDocumento = :tipo"
+                            + " AND ((LOWER(p.titulo) LIKE CONCAT('%', :dato, '%'))"
+                            + " OR (LOWER(p.codigo) LIKE CONCAT('%', :dato, '%')))");
+            query.setParameter("tipo", tipo);
+            query.setParameter("dato", busqueda);
+            lista = query.getResultList();
+        } catch (Exception e) {
+            System.out.println("No se ha podido listar por Tipo-Busqueda: " + e);
+        }
+        return lista;
+    }
+
 }

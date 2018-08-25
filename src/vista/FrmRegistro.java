@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package vista;
 
 import controlador.servicio.AlumnoServicio;
@@ -20,7 +15,7 @@ import static vista.utilidades.UtilidadesComponente.*;
  * @author user
  */
 public class FrmRegistro extends javax.swing.JDialog {
-    
+
     private PersonaServicio pS = new PersonaServicio();
     private AlumnoServicio aS = new AlumnoServicio();
     private CuentaServicio cS = new CuentaServicio();
@@ -36,7 +31,7 @@ public class FrmRegistro extends javax.swing.JDialog {
         grupo.add(rdProfesor);
         limpiar();
     }
-    
+
     private void habilitarCampos() {
         if (rdAlumno.isSelected()) {
             cbxCiclo.setEnabled(true);
@@ -49,7 +44,7 @@ public class FrmRegistro extends javax.swing.JDialog {
             txtParalelo.setBackground(Color.WHITE);
         }
     }
-    
+
     private void limpiar() {
         pS.fijarPersona(null);
         aS.fijarAlumno(null);
@@ -67,7 +62,7 @@ public class FrmRegistro extends javax.swing.JDialog {
         txtParalelo.setText(null);
         habilitarCampos();
     }
-    
+
     private void cargarObjeto() {
         cS.obtenerCuenta().setUsuario(txtUsuario.getText().trim());
         cS.obtenerCuenta().setClave(String.valueOf(Base64.encode(txtClave.getText().trim())));
@@ -98,7 +93,7 @@ public class FrmRegistro extends javax.swing.JDialog {
             cS.obtenerCuenta().setPersona(pS.obtenerPersona());
         }
     }
-    
+
     private boolean errores() {
         boolean verificador = false;
         if (mostrarError(txtNombre, "El Nombre solo puede contener letras.", 't')) {
@@ -132,7 +127,7 @@ public class FrmRegistro extends javax.swing.JDialog {
         }
         return verificador;
     }
-    
+
     private void registrar() {
         if (!errores()) {
             cargarObjeto();
@@ -328,7 +323,7 @@ public class FrmRegistro extends javax.swing.JDialog {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         dispose();
-        new FrmIniciarSesion(null, true).setVisible(true);
+        new FrmInicioSesion().setVisible(true);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed

@@ -1,6 +1,8 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,6 +37,8 @@ public class Persona implements Serializable {
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(referencedColumnName = "id", name = "idRol")
     private Rol rol;
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
+    private List<Prestamo> listaPrestamo = new ArrayList<>();
 
     @Override
     public int hashCode() {

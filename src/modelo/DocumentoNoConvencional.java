@@ -15,7 +15,7 @@ import lombok.Setter;
 public class DocumentoNoConvencional extends Documento implements Serializable {
 
     private String autor;
-    @Column(length = 10)
+    @Column(length = 30)
     private String tipoNoConvencional;
 
     @Override

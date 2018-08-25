@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package vista;
 
 import controlador.servicio.CuentaServicio;
@@ -11,15 +6,14 @@ import static vista.utilidades.UtilidadesComponente.*;
 
 /**
  *
- * @author user
+ * @author Víctor Andrés Rojas
  */
-public class FrmIniciarSesion extends javax.swing.JDialog {
+public class FrmInicioSesion extends javax.swing.JFrame {
 
     /**
-     * Creates new form FrmIniciarSesion
+     * Creates new form FrmInicioSesion
      */
-    public FrmIniciarSesion(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public FrmInicioSesion() {
         initComponents();
     }
 
@@ -30,7 +24,16 @@ public class FrmIniciarSesion extends javax.swing.JDialog {
             if (Sesion.getCuenta() != null) {
                 if (Sesion.getCuenta().getEstado()) {
                     dispose();
-                    new FrmPrincipal().setVisible(true);
+                    if (Sesion.getCuenta().getPersona().getRol().getNombre().equals("Administrador")) {
+                        new FrmAdministrador(this, true).setVisible(true);
+                    } else if (Sesion.getCuenta().getPersona().getRol().getNombre().equals("Bibliotecario")) {
+                        new FrmBibliotecario(this, true).setVisible(true);
+                    } else {
+                        new FrmUsuario(this, true).setVisible(true);
+                    }
+                } else {
+                    lblMensaje.setText("Lo sentimos, su cuenta está deshabilitada.");
+                    lblMensaje.setVisible(true);
                 }
             } else {
                 lblMensaje.setText("El usuario o la clave no son correctos");
@@ -62,10 +65,10 @@ public class FrmIniciarSesion extends javax.swing.JDialog {
         txtClave = new rojeru_san.RSMPassView();
         btnIniciarSesion = new rojeru_san.RSButtonRiple();
         jLabel4 = new javax.swing.JLabel();
-        btnRegistrar = new rojeru_san.RSButtonRiple();
         lblMensaje = new javax.swing.JLabel();
+        btnRegistrarse = new rojeru_san.RSButtonRiple();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Iniciar Sesión");
         setIconImage(obtenerIcono());
         getContentPane().setLayout(null);
@@ -146,29 +149,29 @@ public class FrmIniciarSesion extends javax.swing.JDialog {
         jPanel3.add(btnIniciarSesion);
         btnIniciarSesion.setBounds(40, 230, 160, 40);
 
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("¿No tienes cuenta?");
         jPanel3.add(jLabel4);
-        jLabel4.setBounds(80, 280, 110, 14);
-
-        btnRegistrar.setBackground(new java.awt.Color(240, 240, 240));
-        btnRegistrar.setBorder(null);
-        btnRegistrar.setForeground(new java.awt.Color(0, 0, 0));
-        btnRegistrar.setText("Registrate!");
-        btnRegistrar.setColorHover(new java.awt.Color(169, 169, 169));
-        btnRegistrar.setColorText(new java.awt.Color(0, 0, 0));
-        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btnRegistrar);
-        btnRegistrar.setBounds(70, 300, 110, 20);
+        jLabel4.setBounds(40, 280, 160, 14);
 
         lblMensaje.setForeground(new java.awt.Color(255, 0, 0));
         lblMensaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblMensaje.setEnabled(false);
         jPanel3.add(lblMensaje);
         lblMensaje.setBounds(10, 210, 220, 20);
+
+        btnRegistrarse.setBackground(new java.awt.Color(240, 240, 240));
+        btnRegistrarse.setBorder(null);
+        btnRegistrarse.setText("Regístrate!");
+        btnRegistrarse.setColorHover(new java.awt.Color(169, 169, 169));
+        btnRegistrarse.setColorText(new java.awt.Color(0, 0, 0));
+        btnRegistrarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarseActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnRegistrarse);
+        btnRegistrarse.setBounds(80, 300, 80, 20);
 
         jPanel1.add(jPanel3);
         jPanel3.setBounds(0, 0, 240, 330);
@@ -180,22 +183,22 @@ public class FrmIniciarSesion extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
+    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
         inicioSesion();
-    }//GEN-LAST:event_btnIniciarSesionActionPerformed
+    }//GEN-LAST:event_txtUsuarioActionPerformed
 
     private void txtClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClaveActionPerformed
         inicioSesion();
     }//GEN-LAST:event_txtClaveActionPerformed
 
-    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
+    private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
         inicioSesion();
-    }//GEN-LAST:event_txtUsuarioActionPerformed
+    }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+    private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
         dispose();
-        new FrmRegistro(null, true).setVisible(true);
-    }//GEN-LAST:event_btnRegistrarActionPerformed
+        new FrmRegistro(this, true).setVisible(true);
+    }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,35 +217,27 @@ public class FrmIniciarSesion extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmIniciarSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmInicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmIniciarSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmInicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmIniciarSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmInicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmIniciarSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmInicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the dialog */
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FrmIniciarSesion dialog = new FrmIniciarSesion(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                new FrmInicioSesion().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rojeru_san.RSButtonRiple btnIniciarSesion;
-    private rojeru_san.RSButtonRiple btnRegistrar;
+    private rojeru_san.RSButtonRiple btnRegistrarse;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

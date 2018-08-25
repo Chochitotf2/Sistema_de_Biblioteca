@@ -1,5 +1,8 @@
 package controlador.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Query;
 import modelo.Prestamo;
 
 /**
@@ -40,5 +43,19 @@ public class PrestamoDao extends AdaptadorDao<Prestamo> {
             System.out.println("Ha ocurrido un error al Guardar o Modificar Prestamo: " + e);
         }
         return estado;
+    }
+
+    public List<Prestamo> listarPrestamoLike(String busqueda) {
+        List<Prestamo> lista = new ArrayList<>();
+        try {
+            Query query = getManager().createQuery("SELECT p FROM Prestamo p WHERE (LOWER(p.documento.titulo) LIKE CONCAT('%', :dato, '%'))"
+                    + " OR (LOWER(p.persona.nombres) LIKE CONCAT('%', :dato, '%'))"
+                    + " OR (LOWER(p.persona.apellidos) LIKE CONCAT('%', :dato, '%'))");
+            query.setParameter("dato", busqueda);
+            lista = query.getResultList();
+        } catch (Exception e) {
+            System.out.println("No se ha podido listar por Busqueda:" + e);
+        }
+        return lista;
     }
 }

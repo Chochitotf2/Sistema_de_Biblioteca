@@ -81,7 +81,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void mnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCerrarSesionActionPerformed
         dispose();
-        new FrmIniciarSesion(this, true).setVisible(true);
+//        new FrmIniciarSesion(this, true).setVisible(true);
     }//GEN-LAST:event_mnCerrarSesionActionPerformed
 
     /**

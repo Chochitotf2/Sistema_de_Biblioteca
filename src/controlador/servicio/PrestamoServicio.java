@@ -31,4 +31,8 @@ public class PrestamoServicio {
     public List<Prestamo> listar() {
         return prestamo.listar();
     }
+
+    public List<Prestamo> listarPrestamoLike(String busqueda) {
+        return prestamo.listarPrestamoLike(busqueda);
+    }
 }

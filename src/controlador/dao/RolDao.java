@@ -43,11 +43,11 @@ public class RolDao extends AdaptadorDao<Rol> {
         return estado;
     }
 
-    public Rol buscarRol(String rol) {
+    public Rol buscarRol(String nombre) {
         Rol aux = null;
         try {
             Query query = getManager().createQuery("SELECT r FROM Rol r WHERE r.nombre = :nombres");
-            query.setParameter("nombres", rol);
+            query.setParameter("nombres", nombre);
             aux = (Rol) query.getSingleResult();
         } catch (Exception e) {
             System.out.println("No se ha podido encontrar el Rol por nombre: " + e);

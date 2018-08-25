@@ -31,4 +31,16 @@ public class DocumentoServicio {
     public List<Documento> listar() {
         return documento.listar();
     }
+
+    public List<Documento> listarDocumentoTipo(String tipo) {
+        return documento.listarDocumentoTipo(tipo);
+    }
+
+    public List<Documento> listarDocumentoLike(String busqueda) {
+        return documento.listarDocumentoLike(busqueda);
+    }
+
+    public List<Documento> listarDocumentoTipoLike(String tipo, String busqueda) {
+        return documento.listarDocumentoTipoLike(tipo, busqueda);
+    }
 }

@@ -28,8 +28,11 @@ public class Prestamo implements Serializable {
     private Date fechaDevolucion;
     private Boolean estado = true;
     private String tipoPrestamo;
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(referencedColumnName = "id", name = "idPersona")
+    private Persona persona;
     @OneToMany(mappedBy = "prestamo", cascade = CascadeType.ALL)
-    private List<Sansion> listaSansion = new ArrayList<>();
+    private List<Sancion> listaSansion = new ArrayList<>();
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(referencedColumnName = "id", name = "idDocumento")
     private Documento documento;

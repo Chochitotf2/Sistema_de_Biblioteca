@@ -13,8 +13,8 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "Sansion")
-public class Sansion implements Serializable {
+@Table(name = "Sancion")
+public class Sancion implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -22,9 +22,8 @@ public class Sansion implements Serializable {
     private Long id;
     private Double monto;
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaInicio;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaFin;
+    private Date fecha;
+    private Boolean estado = true;
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(referencedColumnName = "id", name = "idPrestamo")
     private Prestamo prestamo;
@@ -39,10 +38,10 @@ public class Sansion implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Sansion)) {
+        if (!(object instanceof Sancion)) {
             return false;
         }
-        Sansion other = (Sansion) object;
+        Sancion other = (Sancion) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
