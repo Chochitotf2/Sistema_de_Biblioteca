@@ -1110,7 +1110,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 720, 530);
 
-        setSize(new java.awt.Dimension(736, 569));
+        setSize(new java.awt.Dimension(743, 569));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
