@@ -11,6 +11,7 @@ import controlador.servicio.PersonaServicio;
 import static controlador.utilidades.Utilidades.formatearFecha;
 import java.awt.Color;
 import java.util.Date;
+import javax.swing.ButtonGroup;
 import vista.tablas.ModeloTablaBibliotecario;
 import vista.tablas.ModeloTablaUsuario;
 import vista.utilidades.UtilidadesComponente;
@@ -35,9 +36,14 @@ public class FrmAdministrador extends javax.swing.JDialog {
      */
     public FrmAdministrador(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        cargartablabiblo();
-        cargarTablaUser();
+        
         initComponents();
+        ButtonGroup g2 = new ButtonGroup();
+        g2.add(rd_alumno);
+        g2.add(rd_todos);
+        g2.add(rd_todos);
+        limpiar();
+        
 
     }
 
@@ -53,8 +59,8 @@ public class FrmAdministrador extends javax.swing.JDialog {
 
         modelouser.setLista(ps.listar());
         modelouser.setLista2(cs.listar());
-        tabla_bibliotecarios.setModel(modelouser);
-        tabla_bibliotecarios.updateUI();
+        tbl_user.setModel(modelouser);
+        tbl_user.updateUI();
     }
 
     
@@ -82,6 +88,9 @@ public class FrmAdministrador extends javax.swing.JDialog {
         txt_usuario.setText("");
         txt_contraseña.setText("");
         cbx_seccion.setSelectedItem(1);
+        cargartablabiblo();
+        cargarTablaUser();
+        
     }
 
     public void cargarobjeto() {
@@ -155,6 +164,20 @@ public class FrmAdministrador extends javax.swing.JDialog {
         return verificador;
     }
 
+    private void buscarUsuarioTipo() {
+        if (txt_buscarUser.getText().trim().length() >= 3) {
+            if (rd_todos.isSelected()) {
+                modelouser.setLista(ps.listarPersonaLike(txt_buscarUser.getText().trim()));
+            } else {
+                String tipo = (rd_alumno.isSelected()) ? "Alumno" : "Profesor";
+                modelouser.setLista(ps.listarPersonaTipoLike(tipo, txt_buscarUser.getText())); 
+            }
+            tbl_user.setModel(modelouser);
+            tbl_user.updateUI();
+        } else {
+            cargarTablaUser();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -201,12 +224,13 @@ public class FrmAdministrador extends javax.swing.JDialog {
         jPanel4 = new javax.swing.JPanel();
         panelReflect5 = new org.edisoncor.gui.panel.PanelReflect();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
+        txt_buscarUser = new javax.swing.JTextField();
+        rd_todos = new javax.swing.JRadioButton();
+        rd_alumno = new javax.swing.JRadioButton();
+        rd_profe1 = new javax.swing.JRadioButton();
         buttonRect1 = new org.edisoncor.gui.button.ButtonRect();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tbl_user = new javax.swing.JTable();
         btnRegistrarse = new rojeru_san.RSButtonRiple();
         panel1 = new org.edisoncor.gui.panel.Panel();
         jLabel5 = new javax.swing.JLabel();
@@ -395,18 +419,30 @@ public class FrmAdministrador extends javax.swing.JDialog {
         jLabel3.setText("Buscar :");
         panelReflect5.add(jLabel3);
         jLabel3.setBounds(10, 20, 90, 20);
-        panelReflect5.add(jTextField2);
-        jTextField2.setBounds(70, 20, 280, 20);
 
-        jRadioButton3.setBackground(new java.awt.Color(255, 255, 255));
-        jRadioButton3.setText("Profesor");
-        panelReflect5.add(jRadioButton3);
-        jRadioButton3.setBounds(370, 20, 67, 23);
+        txt_buscarUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_buscarUserKeyTyped(evt);
+            }
+        });
+        panelReflect5.add(txt_buscarUser);
+        txt_buscarUser.setBounds(70, 20, 200, 20);
 
-        jRadioButton4.setBackground(new java.awt.Color(255, 255, 255));
-        jRadioButton4.setText("Alumno");
-        panelReflect5.add(jRadioButton4);
-        jRadioButton4.setBounds(450, 20, 61, 23);
+        rd_todos.setBackground(new java.awt.Color(255, 255, 255));
+        rd_todos.setSelected(true);
+        rd_todos.setText("Todos");
+        panelReflect5.add(rd_todos);
+        rd_todos.setBounds(280, 20, 55, 23);
+
+        rd_alumno.setBackground(new java.awt.Color(255, 255, 255));
+        rd_alumno.setText("Alumno");
+        panelReflect5.add(rd_alumno);
+        rd_alumno.setBounds(430, 20, 61, 23);
+
+        rd_profe1.setBackground(new java.awt.Color(255, 255, 255));
+        rd_profe1.setText("Profesor");
+        panelReflect5.add(rd_profe1);
+        rd_profe1.setBounds(360, 20, 67, 23);
 
         jPanel4.add(panelReflect5);
         panelReflect5.setBounds(10, 10, 590, 70);
@@ -416,7 +452,7 @@ public class FrmAdministrador extends javax.swing.JDialog {
         jPanel4.add(buttonRect1);
         buttonRect1.setBounds(240, 360, 111, 30);
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_user.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -427,7 +463,7 @@ public class FrmAdministrador extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(tbl_user);
 
         jPanel4.add(jScrollPane3);
         jScrollPane3.setBounds(10, 90, 560, 260);
@@ -489,6 +525,7 @@ public class FrmAdministrador extends javax.swing.JDialog {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         registrar();
+        limpiar();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void buttonAeroLeft3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAeroLeft3ActionPerformed
@@ -497,8 +534,9 @@ public class FrmAdministrador extends javax.swing.JDialog {
     }//GEN-LAST:event_buttonAeroLeft3ActionPerformed
 
     private void buttonAero1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAero1ActionPerformed
+       cargarEdicion();
         panelSelector.setSelectedIndex(1);
-        cargarEdicion();
+        
     }//GEN-LAST:event_buttonAero1ActionPerformed
 
     private void txt_dirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_dirActionPerformed
@@ -509,6 +547,10 @@ public class FrmAdministrador extends javax.swing.JDialog {
         dispose();
         new FrmInicioSesion().setVisible(true);
     }//GEN-LAST:event_buttonTask1ActionPerformed
+
+    private void txt_buscarUserKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_buscarUserKeyTyped
+        buscarUsuarioTipo();
+    }//GEN-LAST:event_txt_buscarUserKeyTyped
 
     /**
      * @param args the command line arguments
@@ -579,20 +621,21 @@ public class FrmAdministrador extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTextField jTextField2;
     private org.edisoncor.gui.panel.Panel panel1;
     private org.edisoncor.gui.panel.PanelCurves panelCurves1;
     private org.edisoncor.gui.panel.PanelCurves panelCurves2;
     private org.edisoncor.gui.panel.PanelReflect panelReflect1;
     private org.edisoncor.gui.panel.PanelReflect panelReflect5;
     private org.edisoncor.gui.tabbedPane.TabbedSelector2 panelSelector;
+    private javax.swing.JRadioButton rd_alumno;
+    private javax.swing.JRadioButton rd_profe1;
+    private javax.swing.JRadioButton rd_todos;
     private javax.swing.JTable tabla_bibliotecarios;
+    private javax.swing.JTable tbl_user;
     private org.edisoncor.gui.textField.TextFieldRound txt_apellidos;
+    private javax.swing.JTextField txt_buscarUser;
     private org.edisoncor.gui.textField.TextFieldRound txt_cedula;
     private org.edisoncor.gui.passwordField.PasswordFieldRound txt_contraseña;
     private org.edisoncor.gui.textField.TextFieldRound txt_coreo;

@@ -178,6 +178,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtbusquedaDocumento">
                   <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtbusquedaDocumentoActionPerformed"/>
                     <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtbusquedaDocumentoKeyReleased"/>
                   </Events>
                   <Constraints>

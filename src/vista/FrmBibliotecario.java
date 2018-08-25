@@ -642,6 +642,11 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         jPDocumento.add(jLabel3);
         jLabel3.setBounds(10, 310, 60, 20);
 
+        txtbusquedaDocumento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtbusquedaDocumentoActionPerformed(evt);
+            }
+        });
         txtbusquedaDocumento.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtbusquedaDocumentoKeyReleased(evt);
@@ -1191,6 +1196,10 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         this.dispose();
         new FrmInicioSesion().setVisible(true);
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
+
+    private void txtbusquedaDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbusquedaDocumentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtbusquedaDocumentoActionPerformed
 
     /**
      * @param args the command line arguments

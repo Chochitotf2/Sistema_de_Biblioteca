@@ -19,7 +19,7 @@ public class ModeloTablaBibliotecario extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 7;
+        return 6;
     }
 
     @Override
@@ -35,15 +35,15 @@ public class ModeloTablaBibliotecario extends AbstractTableModel {
                 return b.getNombres();
             case 1:
                 return b.getApellidos();
-            case 3:
+            case 2:
                 return b.getDni();
-            case 4:
+            case 3:
                 return b.getCorreo();
-            case 5:
+            case 4:
                 return b.getTelefono();
-            case 6:
+            case 5:
                 return b.getDireccion();
-            case 7:
+            case 6:
                 b.getSeccion();
             default:
                 return null;
@@ -57,15 +57,15 @@ public class ModeloTablaBibliotecario extends AbstractTableModel {
                 return "Nombres";
             case 1:
                 return "Apellidos";
-            case 3:
+            case 2:
                 return "DNI";
-            case 4:
+            case 3:
                 return "Correo";
-            case 5:
+            case 4:
                 return "Telefono";
-            case 6:
+            case 5:
                 return "Direccion";
-            case 7:
+            case 6:
                 return "Seccion";
             default:
                 return null;

@@ -49,23 +49,23 @@ public class ModeloTablaUsuario extends AbstractTableModel {
                 return p.getNombres();
             case 1:
                 return p.getApellidos();
-            case 3:
+            case 2:
                 return p.getDni();
-            case 4:
+            case 3:
                 return p.getCorreo();
-            case 5:
+            case 4:
                 return p.getTelefono();
-            case 6:
+            case 5:
                 return p.getDireccion();
-            case 7:
+            case 6:
                 c.getUsuario();
-            case 8:
+            case 7:
                 if (c.getEstado()) {
                     return "Activa";
                 } else {
                     return "Inactiva";
                 }
-            case 9:
+            case 8:
                 c.getCreadoEn();
             default:
                 return null;
@@ -79,21 +79,21 @@ public class ModeloTablaUsuario extends AbstractTableModel {
                 return "Nombres";
             case 1:
                 return "Apellidos";
-            case 3:
+            case 2:
                 return "Cedula";
-            case 4:
+            case 3:
                 return "Correo";
-            case 5:
+            case 4:
                 return "Telefono";
-            case 6:
+            case 5:
                 return "Direccion";
-            case 7:
+            case 6:
                 return "Usuario";
-            case 8:
+            case 7:
 
                 return "Estado";
 
-            case 9:
+            case 8:
                 return "Creado en";
             default:
                 return null;

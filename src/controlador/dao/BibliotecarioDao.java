@@ -1,6 +1,10 @@
 package controlador.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Query;
 import modelo.Bibliotecario;
+import modelo.Persona;
 
 /**
  *
@@ -41,4 +45,7 @@ public class BibliotecarioDao extends AdaptadorDao<Bibliotecario> {
         }
         return estado;
     }
+    
+    
+  
 }
