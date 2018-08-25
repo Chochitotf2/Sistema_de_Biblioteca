@@ -267,6 +267,11 @@ public class FrmRegistro extends javax.swing.JDialog {
 
         cbxCiclo.setForeground(new java.awt.Color(0, 112, 192));
         cbxCiclo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto", "Séptimo", "Octavo", "Noveno", "Décimo" }));
+        cbxCiclo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxCicloActionPerformed(evt);
+            }
+        });
         jPanel2.add(cbxCiclo);
         cbxCiclo.setBounds(50, 250, 200, 40);
 
@@ -337,6 +342,10 @@ public class FrmRegistro extends javax.swing.JDialog {
     private void rdProfesorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdProfesorItemStateChanged
         habilitarCampos();
     }//GEN-LAST:event_rdProfesorItemStateChanged
+
+    private void cbxCicloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCicloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxCicloActionPerformed
 
     /**
      * @param args the command line arguments
