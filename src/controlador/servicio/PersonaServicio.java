@@ -38,4 +38,8 @@ public class PersonaServicio {
      public List<Persona> listarPersonaTipoLike(String tipo, String busqueda) {
          return persona.listarPersonaTipoLike(tipo, busqueda);
      }
+     
+        public List<Persona> listarSinAdministradorTipo(String tipo) {
+            return persona.listarSinAdministradorTipo(tipo);
+        }
 }

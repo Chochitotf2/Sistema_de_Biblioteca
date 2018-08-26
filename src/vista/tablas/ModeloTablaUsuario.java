@@ -32,7 +32,7 @@ public class ModeloTablaUsuario extends AbstractTableModel {
     
     @Override
     public int getColumnCount() {
-        return 9;
+        return 5;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class ModeloTablaUsuario extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Persona p = lista.get(rowIndex);
-        Cuenta c = lista2.get(rowIndex);
+//        Cuenta c = lista2.get(rowIndex);
         switch (columnIndex) {
             case 0:
                 return p.getNombres();
@@ -57,16 +57,6 @@ public class ModeloTablaUsuario extends AbstractTableModel {
                 return p.getTelefono();
             case 5:
                 return p.getDireccion();
-            case 6:
-                c.getUsuario();
-            case 7:
-                if (c.getEstado()) {
-                    return "Activa";
-                } else {
-                    return "Inactiva";
-                }
-            case 8:
-                c.getCreadoEn();
             default:
                 return null;
         }
@@ -87,14 +77,6 @@ public class ModeloTablaUsuario extends AbstractTableModel {
                 return "Telefono";
             case 5:
                 return "Direccion";
-            case 6:
-                return "Usuario";
-            case 7:
-
-                return "Estado";
-
-            case 8:
-                return "Creado en";
             default:
                 return null;
         }

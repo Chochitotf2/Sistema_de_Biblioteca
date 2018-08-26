@@ -3,12 +3,31 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/vista/tablas/ModeloTablaDocumento.java</file>
+            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/vista/FrmRegistro.java</file>
+            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/controlador/dao/SancionDao.java</file>
+            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/modelo/Persona.java</file>
+            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/vista/FrmPrincipal.java</file>
+            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/modelo/Bibliotecario.java</file>
+            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/controlador/dao/DocumentoDao.java</file>
+            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/controlador/dao/BibliotecarioDao.java</file>
+            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/controlador/dao/TesisDao.java</file>
+            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/vista/tablas/ModeloTablaBibliotecario.java</file>
+            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/controlador/utilidades/Sesion.java</file>
+            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/controlador/dao/CuentaDao.java</file>
             <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/vista/FrmBibliotecario.java</file>
             <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/vista/tablas/ModeloTablaUsuario.java</file>
+            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/controlador/dao/RevistaDao.java</file>
+            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/controlador/Conexion.java</file>
+            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/controlador/dao/DocumentoNoConvencionalDao.java</file>
+            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/controlador/dao/PrestamoDao.java</file>
+            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/vista/FrmInicioSesion.java</file>
+            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/controlador/dao/AdaptadorDao.java</file>
+            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/vista/FrmUsuario.java</file>
+            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/controlador/utilidades/Utilidades.java</file>
+            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/controlador/dao/PersonaDao.java</file>
             <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/vista/FrmAdministrador.java</file>
-            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/modelo/Cuenta.java</file>
-            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/vista/tablas/ModeloTablaBibliotecario.java</file>
+            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/controlador/dao/AlumnoDao.java</file>
+            <file>file:/C:/Users/MAYLI/Documents/GitHub/Sistema_de_Biblioteca/src/modelo/Alumno.java</file>
         </group>
     </open-files>
 </project-private>
