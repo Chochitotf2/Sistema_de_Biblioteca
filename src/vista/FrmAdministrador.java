@@ -342,10 +342,13 @@ public class FrmAdministrador extends javax.swing.JDialog {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
 
-        panelSelector.setBackground(new java.awt.Color(255, 255, 255));
+        panelSelector.setBackground(new java.awt.Color(51, 51, 51));
         panelSelector.setForeground(new java.awt.Color(0, 0, 0));
-        panelSelector.setColorBackGround(new java.awt.Color(148, 169, 169));
+        panelSelector.setColorBackGround(new java.awt.Color(255, 255, 255));
+        panelSelector.setColorDeBorde(new java.awt.Color(0, 0, 0));
+        panelSelector.setColorDeSegundoBorde(new java.awt.Color(0, 0, 0));
         panelSelector.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        panelSelector.setListColor(new java.awt.Color(51, 51, 51));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(null);
@@ -619,9 +622,9 @@ public class FrmAdministrador extends javax.swing.JDialog {
         jPanel1.add(panelSelector);
         panelSelector.setBounds(10, 50, 750, 430);
 
-        panel1.setForeground(new java.awt.Color(0, 102, 102));
-        panel1.setColorPrimario(new java.awt.Color(240, 240, 240));
-        panel1.setColorSecundario(new java.awt.Color(148, 169, 169));
+        panel1.setForeground(new java.awt.Color(255, 255, 255));
+        panel1.setColorPrimario(new java.awt.Color(204, 204, 204));
+        panel1.setColorSecundario(new java.awt.Color(255, 255, 255));
         panel1.setLayout(null);
 
         jLabel5.setFont(new java.awt.Font("Sitka Subheading", 0, 24)); // NOI18N
