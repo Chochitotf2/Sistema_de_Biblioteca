@@ -17,9 +17,9 @@ public class Libro extends Documento implements Serializable {
     private String autores;
     @Column(length = 10)
     private String edicion;
-    @Column(length = 4)
+    @Column(length = 6)
     private String anio;
-    @Column(length = 60)
+    @Column(length = 70)
     private String editorial;
     @Column(length = 18)
     private String isbn;

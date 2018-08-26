@@ -65,24 +65,24 @@ public class FrmUsuario extends javax.swing.JDialog {
 
     private void cargarTablaDocumento() {
         if (cbxTipoDocumento.getSelectedItem().toString().equals("Todos")) {
-            modeloDocumento.setLista(dS.listar());
+            modeloDocumento.setLista(dS.listar().stream().sorted((a, b) -> b.getEstado().compareTo(a.getEstado())).collect(toList()));
             tblDocumentos.setModel(modeloDocumento);
         } else {
             switch (cbxTipoDocumento.getSelectedItem().toString()) {
                 case "Libro":
-                    modeloLibro.setLista(lS.listar());
+                    modeloLibro.setLista(lS.listar().stream().sorted((a, b) -> b.getEstado().compareTo(a.getEstado())).collect(toList()));
                     tblDocumentos.setModel(modeloLibro);
                     break;
                 case "Revista":
-                    modeloRevista.setLista(rS.listar());
+                    modeloRevista.setLista(rS.listar().stream().sorted((a, b) -> b.getEstado().compareTo(a.getEstado())).collect(toList()));
                     tblDocumentos.setModel(modeloRevista);
                     break;
                 case "Tesis":
-                    modeloTesis.setLista(tS.listar());
+                    modeloTesis.setLista(tS.listar().stream().sorted((a, b) -> b.getEstado().compareTo(a.getEstado())).collect(toList()));
                     tblDocumentos.setModel(modeloTesis);
                     break;
                 case "Documento no Convencional":
-                    modeloDocumentoNoConvencional.setLista(dNCS.listar());
+                    modeloDocumentoNoConvencional.setLista(dNCS.listar().stream().sorted((a, b) -> b.getEstado().compareTo(a.getEstado())).collect(toList()));
                     tblDocumentos.setModel(modeloDocumentoNoConvencional);
                     break;
             }
@@ -91,7 +91,7 @@ public class FrmUsuario extends javax.swing.JDialog {
     }
 
     private void cargarTablaPrestamo() {
-        modeloPrestamo.setLista(perS.obtenerPersona().getListaPrestamo());
+        modeloPrestamo.setLista(perS.obtenerPersona().getListaPrestamo().stream().sorted((a, b) -> b.getEstado().compareTo(a.getEstado())).collect(toList()));
         tblPrestamo.setModel(modeloPrestamo);
         tblPrestamo.updateUI();
     }
@@ -102,6 +102,7 @@ public class FrmUsuario extends javax.swing.JDialog {
                 .collect(toList()));
         tblSancion.setModel(modeloSancion);
         tblSancion.updateUI();
+
     }
 
     private void limpiar() {
@@ -115,7 +116,7 @@ public class FrmUsuario extends javax.swing.JDialog {
         lS.fijarLibro(null);
         rS.fijarRevista(null);
         tS.fijarTesis(null);
-        dNCS.fijarDocumentoNoConvensional(null);
+        dNCS.fijarDocumentoNoConvencional(null);
         txtCActual.setText(null);
         txtCNueva.setText(null);
         tipoPrestamo.setSelectedItem(null);
@@ -208,13 +209,7 @@ public class FrmUsuario extends javax.swing.JDialog {
                 if (tipoPrestamo.getSelectedItem() != null) {
                     pS.obtenerPrestamo().setDocumento(dS.obtenerDocumento());
                     pS.obtenerPrestamo().setPersona(Sesion.getCuenta().getPersona());
-                    if (tipoPrestamo.getSelectedItem().toString().equals("Dentro de la Facultad (1 Jornada).")) {
-                        pS.obtenerPrestamo().setFechaEntrega(new Date());
-                        pS.obtenerPrestamo().setFechaDevolucion(new Date());
-                    } else {
-                        pS.obtenerPrestamo().setFechaEntrega(new Date());
-                        pS.obtenerPrestamo().setFechaDevolucion(new Date());
-                    }
+                    pS.obtenerPrestamo().setFechaEntrega(new Date());
                     pS.obtenerPrestamo().setTipoPrestamo(tipoPrestamo.getSelectedItem().toString());
                     pS.obtenerPrestamo().setEstado(true);
                     dS.obtenerDocumento().setEstado(false);
@@ -238,7 +233,8 @@ public class FrmUsuario extends javax.swing.JDialog {
     private void buscarDocumento() {
         if (txtbusquedaDocumento.getText().trim().length() >= 3) {
             if (cbxTipoDocumento.getSelectedItem().toString().equals("Todos")) {
-                modeloDocumento.setLista(dS.listarDocumentoLike(txtbusquedaDocumento.getText().trim()));
+                modeloDocumento.setLista(dS.listarDocumentoLike(txtbusquedaDocumento.getText().trim())
+                        .stream().sorted((a, b) -> b.getEstado().compareTo(a.getEstado())).collect(toList()));
                 tblDocumentos.setModel(modeloDocumento);
             } else {
                 switch (cbxTipoDocumento.getSelectedItem().toString()) {
@@ -247,15 +243,18 @@ public class FrmUsuario extends javax.swing.JDialog {
                         tblDocumentos.setModel(modeloLibro);
                         break;
                     case "Revista":
-                        modeloRevista.setLista(rS.listarRevistaLike(txtbusquedaDocumento.getText().trim()));
+                        modeloRevista.setLista(rS.listarRevistaLike(txtbusquedaDocumento.getText().trim())
+                                .stream().sorted((a, b) -> b.getEstado().compareTo(a.getEstado())).collect(toList()));
                         tblDocumentos.setModel(modeloRevista);
                         break;
                     case "Tesis":
-                        modeloTesis.setLista(tS.listarTesisLike(txtbusquedaDocumento.getText().trim()));
+                        modeloTesis.setLista(tS.listarTesisLike(txtbusquedaDocumento.getText().trim())
+                                .stream().sorted((a, b) -> b.getEstado().compareTo(a.getEstado())).collect(toList()));
                         tblDocumentos.setModel(modeloTesis);
                         break;
                     case "Documento no Convencional":
-                        modeloDocumentoNoConvencional.setLista(dNCS.listarDocumentoNoConvencionalLike(txtbusquedaDocumento.getText().trim()));
+                        modeloDocumentoNoConvencional.setLista(dNCS.listarDocumentoNoConvencionalLike(txtbusquedaDocumento.getText().trim())
+                                .stream().sorted((a, b) -> b.getEstado().compareTo(a.getEstado())).collect(toList()));
                         tblDocumentos.setModel(modeloDocumentoNoConvencional);
                         break;
                 }
@@ -268,7 +267,8 @@ public class FrmUsuario extends javax.swing.JDialog {
 
     private void buscarPrestamo() {
         if (txtBusquedaPrestamo.getText().trim().length() >= 3) {
-            modeloPrestamo.setLista(pS.listarPrestamoLike(txtBusquedaPrestamo.getText().trim()));
+            modeloPrestamo.setLista(pS.listarPrestamoLike(txtBusquedaPrestamo.getText().trim())
+                    .stream().sorted((a, b) -> b.getEstado().compareTo(a.getEstado())).collect(toList()));
             tblPrestamo.setModel(modeloPrestamo);
             tblPrestamo.updateUI();
         } else {
@@ -310,7 +310,7 @@ public class FrmUsuario extends javax.swing.JDialog {
                         informacion += "\nFecha de Publicación: " + tS.obtenerTesis().getFechaPublicacion();
                         break;
                     case "Documento no Convencional":
-                        dNCS.fijarDocumentoNoConvensional(dNCS.obtenerDocumentoNoConvencional(dS.obtenerDocumento().getId()));
+                        dNCS.fijarDocumentoNoConvencional(dNCS.obtenerDocumentoNoConvencional(dS.obtenerDocumento().getId()));
                         informacion += "\nDatos del Documento no Convencional:";
                         informacion += "\nAutor: " + dNCS.obtenerDocumentoNoConvencional().getAutor();
                         informacion += "\nTipo: " + dNCS.obtenerDocumentoNoConvencional().getTipoNoConvencional();
@@ -962,6 +962,7 @@ public class FrmUsuario extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FrmUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */

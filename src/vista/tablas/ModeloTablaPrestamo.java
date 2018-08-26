@@ -45,7 +45,11 @@ public class ModeloTablaPrestamo extends AbstractTableModel {
             case 3:
                 return p.getPersona().getNombres() + " " + p.getPersona().getApellidos();
             case 4:
-                return Utilidades.formatearFecha(p.getFechaEntrega()) + "|" + Utilidades.formatearFecha(p.getFechaDevolucion());
+                if (p.getFechaDevolucion() == null) {
+                    return Utilidades.formatearFecha(p.getFechaEntrega()) + "| ---- -- --";
+                } else {
+                    return Utilidades.formatearFecha(p.getFechaEntrega()) + "|" + Utilidades.formatearFecha(p.getFechaDevolucion());
+                }
             default:
                 return null;
         }

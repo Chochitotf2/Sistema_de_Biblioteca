@@ -20,7 +20,7 @@ public class DocumentoNoConvencionalServicio {
         return documentoNoConvencional.obtener(id);
     }
 
-    public void fijarDocumentoNoConvensional(DocumentoNoConvencional documentoNoConvencional) {
+    public void fijarDocumentoNoConvencional(DocumentoNoConvencional documentoNoConvencional) {
         this.documentoNoConvencional.setDocumentoNoConvencional(documentoNoConvencional);
     }
 

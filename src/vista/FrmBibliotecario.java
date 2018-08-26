@@ -11,7 +11,6 @@ import vista.tablas.ModeloTablaDocumento;
 import vista.tablas.ModeloTablaPrestamo;
 import vista.tablas.ModeloTablaSancion;
 import static vista.utilidades.UtilidadesComponente.*;
-import static controlador.utilidades.Utilidades.*;
 import java.util.Date;
 import java.awt.Color;
 import static java.util.stream.Collectors.toList;
@@ -44,22 +43,23 @@ public class FrmBibliotecario extends javax.swing.JDialog {
 
     private void cargarTablaDocumento() {
         if (cbxTipoDocumento.getSelectedItem().toString().equals("Todos")) {
-            modeloDocumento.setLista(dS.listar());
+            modeloDocumento.setLista(dS.listar().stream().sorted((a, b) -> b.getEstado().compareTo(a.getEstado())).collect(toList()));
         } else {
-            modeloDocumento.setLista(dS.listarDocumentoTipo(cbxTipoDocumento.getSelectedItem().toString()));
+            modeloDocumento.setLista(dS.listarDocumentoTipo(cbxTipoDocumento.getSelectedItem().toString())
+                    .stream().sorted((a, b) -> b.getEstado().compareTo(a.getEstado())).collect(toList()));
         }
         tblDocumentos.setModel(modeloDocumento);
         tblDocumentos.updateUI();
     }
 
     private void cargarTablaPrestamo() {
-        modeloPrestamo.setLista(pS.listar());
+        modeloPrestamo.setLista(pS.listar().stream().sorted((a, b) -> b.getEstado().compareTo(a.getEstado())).collect(toList()));
         tblPrestamo.setModel(modeloPrestamo);
         tblPrestamo.updateUI();
     }
 
     private void cargarTablaSancion() {
-        modeloSancion.setLista(sS.listar().stream().filter(x -> x.getEstado()).collect(toList()));
+        modeloSancion.setLista(sS.listar().stream().sorted((a, b) -> b.getEstado().compareTo(a.getEstado())).collect(toList()));
         tblSanciones.setModel(modeloSancion);
         tblSanciones.updateUI();
     }
@@ -69,12 +69,12 @@ public class FrmBibliotecario extends javax.swing.JDialog {
             case "Libro":
                 txtAutor.setEnabled(true);
                 sprEdicion.setEnabled(true);
-                txtAnio.setEnabled(true);
+                jcdAnio.setEnabled(true);
                 txtEditorial.setEnabled(true);
                 txtIsbn.setEnabled(true);
                 break;
             case "Revista":
-                txtFechaPublicacion.setEnabled(true);
+                jcdFechaPublicacion.setEnabled(true);
                 txtIssn.setEnabled(true);
                 txtEditorial.setEnabled(true);
                 break;
@@ -82,7 +82,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
                 txtAutor.setEnabled(true);
                 txtAsesor.setEnabled(true);
                 txtFacultad.setEnabled(true);
-                txtFechaPublicacion.setEnabled(true);
+                jcdFechaPublicacion.setEnabled(true);
                 break;
             case "Documento no Convencional":
                 txtAutor.setEnabled(true);
@@ -94,10 +94,10 @@ public class FrmBibliotecario extends javax.swing.JDialog {
     private void deshabilitarCampos() {
         txtAutor.setEnabled(false);
         sprEdicion.setEnabled(false);
-        txtAnio.setEnabled(false);
+        jcdAnio.setEnabled(false);
         txtEditorial.setEnabled(false);
         txtIsbn.setEnabled(false);
-        txtFechaPublicacion.setEnabled(false);
+        jcdFechaPublicacion.setEnabled(false);
         txtIssn.setEnabled(false);
         txtAsesor.setEnabled(false);
         txtFacultad.setEnabled(false);
@@ -121,16 +121,16 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         lS.fijarLibro(null);
         rS.fijarRevista(null);
         tS.fijarTesis(null);
-        dNCS.fijarDocumentoNoConvensional(null);
+        dNCS.fijarDocumentoNoConvencional(null);
         cbxTipodeDocumento.setEnabled(true);
         cbxTipodeDocumento.setSelectedIndex(0);
         txtTitulo.setText(null);
         txtAutor.setText(null);
         sprEdicion.setValue(0);
-        txtAnio.setText("2000");
+        jcdAnio.setYear(2000);
         txtEditorial.setText(null);
         txtIsbn.setText(null);
-        txtFechaPublicacion.setText("01/01/2000");
+        jcdFechaPublicacion.setDateFormatString("yyyy-MM-dd");
         txtIssn.setText(null);
         txtAsesor.setText(null);
         txtFacultad.setText(null);
@@ -140,6 +140,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         repintarComponentes();
         deshabilitarCampos();
         habilitarCampos();
+        informacion();
         codigoDocumento();
         cargarTablaDocumento();
         cargarTablaPrestamo();
@@ -163,7 +164,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
                 lS.obtenerLibro().setTipoDocumento(cbxTipodeDocumento.getSelectedItem().toString());
                 lS.obtenerLibro().setAutores(txtAutor.getText().trim());
                 lS.obtenerLibro().setEdicion(sprEdicion.getValue().toString());
-                lS.obtenerLibro().setAnio(txtAnio.getText().trim());
+                lS.obtenerLibro().setAnio(String.valueOf(jcdAnio.getYear()));
                 lS.obtenerLibro().setEditorial(txtEditorial.getText().trim());
                 lS.obtenerLibro().setIsbn(txtIsbn.getText().trim());
                 break;
@@ -171,7 +172,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
                 rS.obtenerRevista().setTitulo(txtTitulo.getText().trim());
                 rS.obtenerRevista().setCodigo(txtCodigo.getText().trim());
                 rS.obtenerRevista().setTipoDocumento(cbxTipodeDocumento.getSelectedItem().toString());
-                rS.obtenerRevista().setFechaPublicacion(new Date(txtFechaPublicacion.getText()));
+                rS.obtenerRevista().setFechaPublicacion(jcdFechaPublicacion.getDate());
                 rS.obtenerRevista().setIssn(txtIssn.getText().trim());
                 rS.obtenerRevista().setEditorial(txtEditorial.getText().trim());
                 break;
@@ -182,7 +183,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
                 tS.obtenerTesis().setAutores(txtAutor.getText().trim());
                 tS.obtenerTesis().setAsesores(txtAsesor.getText().trim());
                 tS.obtenerTesis().setFacultad(txtFacultad.getText().trim());
-                tS.obtenerTesis().setFechaPublicacion(new Date(txtFechaPublicacion.getText()));
+                tS.obtenerTesis().setFechaPublicacion(jcdFechaPublicacion.getDate());
                 break;
             case "Documento no Convencional":
                 dNCS.obtenerDocumentoNoConvencional().setTitulo(txtTitulo.getText().trim());
@@ -207,13 +208,13 @@ public class FrmBibliotecario extends javax.swing.JDialog {
                     lS.fijarLibro(lS.obtenerLibro(dS.obtenerDocumento().getId()));
                     txtAutor.setText(lS.obtenerLibro().getAutores());
                     sprEdicion.setValue(Integer.parseInt(lS.obtenerLibro().getEdicion()));
-                    txtAnio.setText(lS.obtenerLibro().getAnio());
+                    jcdAnio.setYear(Integer.valueOf(lS.obtenerLibro().getAnio()));
                     txtEditorial.setText(lS.obtenerLibro().getEditorial());
                     txtIsbn.setText(lS.obtenerLibro().getIsbn());
                     break;
                 case "Revista":
                     rS.fijarRevista(rS.obtenerRevista(dS.obtenerDocumento().getId()));
-                    txtFechaPublicacion.setText(formatearFecha(rS.obtenerRevista().getFechaPublicacion()));
+                    jcdFechaPublicacion.setDate(rS.obtenerRevista().getFechaPublicacion());
                     txtIssn.setText(rS.obtenerRevista().getIssn());
                     txtEditorial.setText(rS.obtenerRevista().getEditorial());
                     break;
@@ -222,10 +223,10 @@ public class FrmBibliotecario extends javax.swing.JDialog {
                     txtAutor.setText(tS.obtenerTesis().getAutores());
                     txtAsesor.setText(tS.obtenerTesis().getAsesores());
                     txtFacultad.setText(tS.obtenerTesis().getFacultad());
-                    txtFechaPublicacion.setText(formatearFecha(tS.obtenerTesis().getFechaPublicacion()));
+                    jcdFechaPublicacion.setDate(tS.obtenerTesis().getFechaPublicacion());
                     break;
                 case "Documento no Convencional":
-                    dNCS.fijarDocumentoNoConvensional(dNCS.obtenerDocumentoNoConvencional(dS.obtenerDocumento().getId()));
+                    dNCS.fijarDocumentoNoConvencional(dNCS.obtenerDocumentoNoConvencional(dS.obtenerDocumento().getId()));
                     txtAutor.setText(dNCS.obtenerDocumentoNoConvencional().getAutor());
                     cbxTipoNoConvencional.setSelectedItem(dNCS.obtenerDocumentoNoConvencional().getTipoNoConvencional());
                     break;
@@ -245,10 +246,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         }
         switch (cbxTipodeDocumento.getSelectedItem().toString()) {
             case "Libro":
-                if (mostrarError(txtAutor, "El Autor solo puede contener letras", 't')) {
-                    verificador = true;
-                }
-                if (mostrarError(txtAnio, null, 'n')) {
+                if (mostrarError(txtAutor, "El Autor solo puede contener letras.", 't')) {
                     verificador = true;
                 }
                 if (mostrarError(txtEditorial, null, 'n')) {
@@ -259,8 +257,11 @@ public class FrmBibliotecario extends javax.swing.JDialog {
                 }
                 break;
             case "Revista":
-                if (mostrarError(txtFechaPublicacion, null, 'n')) {
+                if (jcdFechaPublicacion.getDate() == null) {
+                    mensajeError("Aviso", "Seleccione una fecha de publicación.");
                     verificador = true;
+                } else {
+
                 }
                 if (mostrarError(txtIssn, null, 'n')) {
                     verificador = true;
@@ -270,26 +271,47 @@ public class FrmBibliotecario extends javax.swing.JDialog {
                 }
                 break;
             case "Tesis":
-                if (mostrarError(txtAutor, "El Autor solo puede contener letras", 't')) {
+                if (mostrarError(txtAutor, "El Autor solo puede contener letras.", 't')) {
                     verificador = true;
                 }
-                if (mostrarError(txtAsesor, "El Asesor solo puede contener letras", 'n')) {
+                if (mostrarError(txtAsesor, "El Asesor solo puede contener letras.", 'n')) {
                     verificador = true;
                 }
                 if (mostrarError(txtFacultad, null, 'n')) {
                     verificador = true;
                 }
-                if (mostrarError(txtFechaPublicacion, null, 'n')) {
+                if (mostrarError(jcdFechaPublicacion, null, 'n')) {
                     verificador = true;
                 }
                 break;
             case "Documento no Convencional":
-                if (mostrarError(txtAutor, "El Autor solo puede contener letras", 't')) {
+                if (mostrarError(txtAutor, "El Autor solo puede contener letras.", 't')) {
                     verificador = true;
                 }
                 break;
         }
         return verificador;
+    }
+
+    private void informacion() {
+        switch (cbxTipodeDocumento.getSelectedItem().toString()) {
+            case "Libro":
+                txtInformacion.setText("Datos a llenar:\n"
+                        + "Título, Autor(es), Edición, Año. Editorial, ISBN.");
+                break;
+            case "Revista":
+                txtInformacion.setText("Datos a llenar:\n"
+                        + "Título, Fecha de Publicación, ISSN. Editorial.");
+                break;
+            case "Tesis":
+                txtInformacion.setText("Datos a llenar:\n"
+                        + "Título, Autor(es), Asesor(es), Facultad, Fecha de Publicación.");
+                break;
+            case "Documento no Convencional":
+                txtInformacion.setText("Datos a llenar:\n"
+                        + "Título, Autor, Tipo de Documento no Convencional.");
+                break;
+        }
     }
 
     private void registrar() {
@@ -375,6 +397,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
             if (rdDevuelto.isSelected()) {
                 pS.fijarPrestamo(modeloPrestamo.getLista().get(fila));
                 pS.obtenerPrestamo().setEstado(false);
+                pS.obtenerPrestamo().setFechaDevolucion(new Date());
                 pS.obtenerPrestamo().getDocumento().setEstado(true);
                 if (pS.guardar()) {
                     mensajeOK("Aviso", "Se ha confirmado la Devolución.");
@@ -417,20 +440,25 @@ public class FrmBibliotecario extends javax.swing.JDialog {
             sS.fijarSancion(modeloSancion.getLista().get(fila));
             sS.obtenerSancion().setFecha(new Date());
             txtMontoEdicion.setText(sS.obtenerSancion().getMonto().toString());
-        } else {
-            mensajeError("Advertencia", "Debe seleccionar una Sanción de la Tabla.");
         }
     }
 
     private void modificarSancion() {
-        if (!mostrarError(txtMontoEdicion, "El Monto solo puede contener números.", 'd')) {
-            sS.obtenerSancion().setMonto(Double.valueOf(txtMontoEdicion.getText().trim()));
-            if (sS.guardar()) {
-                mensajeOK("Aviso", "Se ha modificado el Monto con éxito.");
-                limpiar();
-            } else {
-                mensajeError("Error", "No se ha podido modificar la Sanción.");
+        int fila = tblSanciones.getSelectedRow();
+        if (fila >= 0) {
+            if (!mostrarError(txtMontoEdicion, "El Monto solo puede contener números.", 'd')) {
+                if (!txtMontoEdicion.getText().trim().equals(sS.obtenerSancion().getMonto().toString())) {
+                    sS.obtenerSancion().setMonto(Double.valueOf(txtMontoEdicion.getText().trim()));
+                    if (sS.guardar()) {
+                        mensajeOK("Aviso", "Se ha modificado el Monto con éxito.");
+                        limpiar();
+                    } else {
+                        mensajeError("Error", "No se ha podido modificar la Sanción.");
+                    }
+                }
             }
+        } else {
+            mensajeError("Advertencia", "Debe seleccionar una Sanción de la Tabla.");
         }
     }
 
@@ -537,14 +565,16 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         txtAsesor = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtAutor = new javax.swing.JTextArea();
-        txtAnio = new javax.swing.JFormattedTextField();
         sprEdicion = new javax.swing.JSpinner();
-        txtFechaPublicacion = new javax.swing.JFormattedTextField();
         txtIsbn = new javax.swing.JTextField();
         txtCancelar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         jLabel25 = new javax.swing.JLabel();
         cbxTipoNoConvencional = new javax.swing.JComboBox<>();
+        jcdAnio = new com.toedter.calendar.JYearChooser();
+        jcdFechaPublicacion = new com.toedter.calendar.JDateChooser();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txtInformacion = new javax.swing.JTextPane();
         jPPrestamo = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -810,20 +840,9 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         jPRegistrar.add(jScrollPane3);
         jScrollPane3.setBounds(80, 250, 240, 30);
 
-        txtAnio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy"))));
-        txtAnio.setText("2000");
-        jPRegistrar.add(txtAnio);
-        txtAnio.setBounds(380, 280, 100, 20);
-
         sprEdicion.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         jPRegistrar.add(sprEdicion);
         sprEdicion.setBounds(380, 250, 100, 20);
-
-        txtFechaPublicacion.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM))));
-        txtFechaPublicacion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtFechaPublicacion.setToolTipText("Formato: dd/MM/yyyy");
-        jPRegistrar.add(txtFechaPublicacion);
-        txtFechaPublicacion.setBounds(350, 330, 130, 20);
         jPRegistrar.add(txtIsbn);
         txtIsbn.setBounds(80, 390, 240, 20);
 
@@ -855,6 +874,19 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         cbxTipoNoConvencional.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Película", "Disco de Música", "AudioLibro" }));
         jPRegistrar.add(cbxTipoNoConvencional);
         cbxTipoNoConvencional.setBounds(350, 380, 130, 20);
+
+        jcdAnio.setToolTipText("");
+        jcdAnio.setValue(2000);
+        jPRegistrar.add(jcdAnio);
+        jcdAnio.setBounds(380, 280, 100, 20);
+        jPRegistrar.add(jcdFechaPublicacion);
+        jcdFechaPublicacion.setBounds(350, 330, 130, 20);
+
+        txtInformacion.setEditable(false);
+        jScrollPane4.setViewportView(txtInformacion);
+
+        jPRegistrar.add(jScrollPane4);
+        jScrollPane4.setBounds(340, 170, 170, 60);
 
         panelSelector.addTab("Administrar Documento", jPRegistrar);
 
@@ -904,7 +936,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         jPPrestamo.add(btnSancionar);
         btnSancionar.setBounds(80, 400, 110, 23);
 
-        txtBusquedaPrestamo.setToolTipText("La Búsqueda es por Título del Documento");
+        txtBusquedaPrestamo.setToolTipText("Título del Documento, Nombre de Persona");
         txtBusquedaPrestamo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBusquedaPrestamoKeyReleased(evt);
@@ -1001,7 +1033,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         jPSansiones.add(btnQuitarSansion);
         btnQuitarSansion.setBounds(350, 400, 140, 23);
 
-        txtBusquedaSanciones.setToolTipText("La busqueda es por el Nombre de Persona");
+        txtBusquedaSanciones.setToolTipText("Nombre o Cédula de Persona.");
         txtBusquedaSanciones.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBusquedaSancionesKeyReleased(evt);
@@ -1128,6 +1160,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         repintarComponentes();
         deshabilitarCampos();
         habilitarCampos();
+        informacion();
         if (dS.obtenerDocumento().getId() == null) {
             codigoDocumento();
         }
@@ -1204,9 +1237,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     private void tblSancionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSancionesMouseClicked
-        if (evt.getClickCount() >= 2) {
-            cargarModificarSancion();
-        }
+        cargarModificarSancion();
     }//GEN-LAST:event_tblSancionesMouseClicked
 
     /**
@@ -1242,6 +1273,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
             java.util.logging.Logger.getLogger(FrmBibliotecario.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
@@ -1319,6 +1351,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSeparator jSeparator1;
@@ -1326,13 +1359,14 @@ public class FrmBibliotecario extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
+    private com.toedter.calendar.JYearChooser jcdAnio;
+    private com.toedter.calendar.JDateChooser jcdFechaPublicacion;
     private org.edisoncor.gui.tabbedPane.TabbedSelector2 panelSelector;
     private javax.swing.JRadioButton rdDevuelto;
     private javax.swing.JSpinner sprEdicion;
     private javax.swing.JTable tblDocumentos;
     private javax.swing.JTable tblPrestamo;
     private javax.swing.JTable tblSanciones;
-    private javax.swing.JFormattedTextField txtAnio;
     private javax.swing.JTextArea txtAsesor;
     private javax.swing.JTextArea txtAutor;
     private javax.swing.JTextField txtBusquedaPrestamo;
@@ -1341,7 +1375,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtEditorial;
     private javax.swing.JTextField txtFacultad;
-    private javax.swing.JFormattedTextField txtFechaPublicacion;
+    private javax.swing.JTextPane txtInformacion;
     private javax.swing.JTextField txtIsbn;
     private javax.swing.JTextField txtIssn;
     private javax.swing.JTextField txtMonto;

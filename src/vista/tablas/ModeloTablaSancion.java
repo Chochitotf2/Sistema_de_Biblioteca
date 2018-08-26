@@ -1,5 +1,6 @@
 package vista.tablas;
 
+import controlador.utilidades.Utilidades;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -19,7 +20,7 @@ public class ModeloTablaSancion extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 5;
     }
 
     @Override
@@ -36,9 +37,15 @@ public class ModeloTablaSancion extends AbstractTableModel {
             case 1:
                 return p.getPrestamo().getPersona().getDni();
             case 2:
-                return p.getFecha();
+                return Utilidades.formatearFecha(p.getFecha());
             case 3:
                 return "$" + p.getMonto();
+            case 4:
+                if (p.getEstado()) {
+                    return "En Deuda";
+                } else {
+                    return "Pagada";
+                }
             default:
                 return null;
         }
@@ -55,6 +62,8 @@ public class ModeloTablaSancion extends AbstractTableModel {
                 return "Fecha";
             case 3:
                 return "Monto";
+            case 4:
+                return "Estado";
             default:
                 return null;
         }

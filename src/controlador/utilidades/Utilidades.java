@@ -13,7 +13,7 @@ public class Utilidades extends StringUtils {
     public static String formatearFecha(Date fecha) {
         String fechaSalida = "";
         try {
-            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             fechaSalida = formato.format(fecha);
         } catch (Exception e) {
             System.out.println("No se pudo dar formato a la Fecha: " + e);
@@ -51,7 +51,7 @@ public class Utilidades extends StringUtils {
                 }
                 break;
             case 'd'://Número Decimal
-                if (dato.trim().matches("^[0-9]+([,][0-9]+)?$")) {
+                if (dato.trim().matches("^[0-9]+([.][0-9]+)?$")) {
                     estado = true;
                 }
                 break;

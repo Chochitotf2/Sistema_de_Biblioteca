@@ -22,7 +22,7 @@ public class Documento implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(length = 80)
+    @Column(length = 90)
     private String titulo;
     @Column(length = 15)
     private String codigo;
