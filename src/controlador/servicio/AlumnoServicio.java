@@ -31,4 +31,8 @@ public class AlumnoServicio {
     public List<Alumno> listar() {
         return alumno.listar();
     }
+
+    public Alumno obtenerAlumnoCedula(String cedula) {
+        return alumno.obtenerAlumnoCedula(cedula);
+    }
 }

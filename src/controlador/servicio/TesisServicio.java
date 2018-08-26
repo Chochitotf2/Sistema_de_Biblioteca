@@ -31,4 +31,8 @@ public class TesisServicio {
     public List<Tesis> listar() {
         return tesis.listar();
     }
+
+    public List<Tesis> listarTesisLike(String busqueda) {
+        return tesis.listarTesisLike(busqueda);
+    }
 }

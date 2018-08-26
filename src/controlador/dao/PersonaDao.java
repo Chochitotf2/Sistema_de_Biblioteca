@@ -44,8 +44,8 @@ public class PersonaDao extends AdaptadorDao<Persona> {
         }
         return estado;
     }
-    
-     public List<Persona> listarSinAdministradorTipo(String tipo) {
+
+    public List<Persona> listarSinAdministradorTipo(String tipo) {
         List<Persona> lista = new ArrayList<>();
         try {
             Query q = getManager().createQuery("SELECT p FROM Persona p where p.rol.nombre != :nombre and p.rol.nombre = :tipo");
@@ -53,11 +53,12 @@ public class PersonaDao extends AdaptadorDao<Persona> {
             q.setParameter("tipo", tipo);
             lista = q.getResultList();
         } catch (Exception e) {
-            System.out.println("error "+e);
+            System.out.println("error " + e);
         }
         return lista;
     }
-       public List<Persona> listarPersonaLike(String busqueda) {
+
+    public List<Persona> listarPersonaLike(String busqueda) {
         List<Persona> lista = new ArrayList<>();
         try {
             Query query = getManager().createQuery("SELECT p FROM Persona p WHERE (LOWER(p.nombres) LIKE CONCAT('%', :dato, '%'))"
@@ -84,5 +85,16 @@ public class PersonaDao extends AdaptadorDao<Persona> {
             System.out.println("No se ha podido listar por Tipo-Busqueda: " + e);
         }
         return lista;
+    }
+
+    public Persona obtenerPersonaCedula(String cedula) {
+        Persona personaAux = null;
+        try {
+            Query query = getManager().createQuery("SELECT p FROM Persona p where p.dni = :dato");
+            query.setParameter("dato", cedula);
+            personaAux = (Persona) query.getSingleResult();
+        } catch (Exception e) {
+        }
+        return personaAux;
     }
 }

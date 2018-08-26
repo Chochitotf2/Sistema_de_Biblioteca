@@ -10,25 +10,29 @@ import modelo.DocumentoNoConvencional;
  */
 public class DocumentoNoConvencionalServicio {
 
-    private DocumentoNoConvencionalDao documentoNoConvensional = new DocumentoNoConvencionalDao();
+    private DocumentoNoConvencionalDao documentoNoConvencional = new DocumentoNoConvencionalDao();
 
-    public DocumentoNoConvencional obtenerDocumentoNoConvensional() {
-        return documentoNoConvensional.getDocumentoNoConvensional();
+    public DocumentoNoConvencional obtenerDocumentoNoConvencional() {
+        return documentoNoConvencional.getDocumentoNoConvencional();
     }
 
-    public DocumentoNoConvencional obtenerDocumentoNoConvensional(Long id) {
-        return documentoNoConvensional.obtener(id);
+    public DocumentoNoConvencional obtenerDocumentoNoConvencional(Long id) {
+        return documentoNoConvencional.obtener(id);
     }
 
-    public void fijarDocumentoNoConvensional(DocumentoNoConvencional documentoNoConvensional) {
-        this.documentoNoConvensional.setDocumentoNoConvensional(documentoNoConvensional);
+    public void fijarDocumentoNoConvensional(DocumentoNoConvencional documentoNoConvencional) {
+        this.documentoNoConvencional.setDocumentoNoConvencional(documentoNoConvencional);
     }
 
     public boolean guardar() {
-        return documentoNoConvensional.guardar();
+        return documentoNoConvencional.guardar();
     }
 
     public List<DocumentoNoConvencional> listar() {
-        return documentoNoConvensional.listar();
+        return documentoNoConvencional.listar();
+    }
+
+    public List<DocumentoNoConvencional> listarDocumentoNoConvencionalLike(String busqueda) {
+        return documentoNoConvencional.listarDocumentoNoConvencionalLike(busqueda);
     }
 }

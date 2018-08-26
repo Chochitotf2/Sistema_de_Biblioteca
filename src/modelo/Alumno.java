@@ -14,7 +14,6 @@ import lombok.Setter;
 @Entity
 public class Alumno extends Persona implements Serializable {
 
-    @Column(length = 40)
     private String carrera;
     @Column(length = 20)
     private String ciclo;

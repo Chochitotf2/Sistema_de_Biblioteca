@@ -31,4 +31,8 @@ public class LibroServicio {
     public List<Libro> listar() {
         return libro.listar();
     }
+
+    public List<Libro> listarLibroLike(String busqueda) {
+        return libro.listarLibroLike(busqueda);
+    }
 }

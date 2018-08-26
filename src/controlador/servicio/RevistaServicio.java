@@ -31,4 +31,8 @@ public class RevistaServicio {
     public List<Revista> listar() {
         return revista.listar();
     }
+
+    public List<Revista> listarRevistaLike(String busqueda) {
+        return revista.listarRevistaLike(busqueda);
+    }
 }

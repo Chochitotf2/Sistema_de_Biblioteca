@@ -1,5 +1,6 @@
 package controlador.dao;
 
+import javax.persistence.Query;
 import modelo.Alumno;
 
 /**
@@ -40,5 +41,16 @@ public class AlumnoDao extends AdaptadorDao<Alumno> {
             System.out.println("Ha ocurrido un error al Guardar o Modificar Alumno: " + e);
         }
         return estado;
+    }
+
+    public Alumno obtenerAlumnoCedula(String cedula) {
+        Alumno alumnoAux = null;
+        try {
+            Query q = getManager().createQuery("SELECT p FROM Alumno p where p.dni = :dato");
+            q.setParameter("dato", cedula);
+            alumnoAux = (Alumno) q.getSingleResult();
+        } catch (Exception e) {
+        }
+        return alumnoAux;
     }
 }

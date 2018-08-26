@@ -5,21 +5,21 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import lombok.Getter;
 import lombok.Setter;
-import modelo.Sancion;
+import modelo.Libro;
 
 /**
  *
  * @author Víctor Andrés Rojas
  */
-public class ModeloTablaSancion extends AbstractTableModel {
+public class ModeloTablaLibro extends AbstractTableModel {
 
     @Getter
     @Setter
-    private List<Sancion> lista = new ArrayList<>();
+    private List<Libro> lista = new ArrayList<>();
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 6;
     }
 
     @Override
@@ -29,16 +29,24 @@ public class ModeloTablaSancion extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Sancion p = lista.get(rowIndex);
+        Libro p = lista.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return p.getPrestamo().getPersona().getNombres() + " " + p.getPrestamo().getPersona().getApellidos();
+                return p.getCodigo();
             case 1:
-                return p.getPrestamo().getPersona().getDni();
+                return p.getTitulo();
             case 2:
-                return p.getFecha();
+                if (p.getEstado()) {
+                    return "Disponible";
+                } else {
+                    return "No Disponible";
+                }
             case 3:
-                return "$" + p.getMonto();
+                return p.getAutores();
+            case 4:
+                return p.getEditorial();
+            case 5:
+                return p.getIsbn();
             default:
                 return null;
         }
@@ -48,13 +56,17 @@ public class ModeloTablaSancion extends AbstractTableModel {
     public String getColumnName(int column) {
         switch (column) {
             case 0:
-                return "Persona";
+                return "Codigo";
             case 1:
-                return "Cédula";
+                return "Título";
             case 2:
-                return "Fecha";
+                return "Estado";
             case 3:
-                return "Monto";
+                return "Autores";
+            case 4:
+                return "Editorial";
+            case 5:
+                return "Isbn";
             default:
                 return null;
         }

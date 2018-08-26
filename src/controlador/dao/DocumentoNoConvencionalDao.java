@@ -1,5 +1,8 @@
 package controlador.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Query;
 import modelo.DocumentoNoConvencional;
 
 /**
@@ -8,37 +11,52 @@ import modelo.DocumentoNoConvencional;
  */
 public class DocumentoNoConvencionalDao extends AdaptadorDao<DocumentoNoConvencional> {
 
-    private DocumentoNoConvencional documentoNoConvensional;
+    private DocumentoNoConvencional documentoNoConvencional;
 
     public DocumentoNoConvencionalDao() {
         super(DocumentoNoConvencional.class);
     }
 
-    public DocumentoNoConvencional getDocumentoNoConvensional() {
-        if (documentoNoConvensional == null) {
-            documentoNoConvensional = new DocumentoNoConvencional();
+    public DocumentoNoConvencional getDocumentoNoConvencional() {
+        if (documentoNoConvencional == null) {
+            documentoNoConvencional = new DocumentoNoConvencional();
         }
-        return documentoNoConvensional;
+        return documentoNoConvencional;
     }
 
-    public void setDocumentoNoConvensional(DocumentoNoConvencional documentoNoConvensional) {
-        this.documentoNoConvensional = documentoNoConvensional;
+    public void setDocumentoNoConvencional(DocumentoNoConvencional documentoNoConvencional) {
+        this.documentoNoConvencional = documentoNoConvencional;
     }
 
     public boolean guardar() {
         boolean estado = false;
         try {
             getManager().getTransaction().begin();
-            if (documentoNoConvensional.getId() != null) {
-                modificar(documentoNoConvensional);
+            if (documentoNoConvencional.getId() != null) {
+                modificar(documentoNoConvencional);
             } else {
-                guardar(documentoNoConvensional);
+                guardar(documentoNoConvencional);
             }
             getManager().getTransaction().commit();
             estado = true;
         } catch (Exception e) {
-            System.out.println("Ha ocurrido un error al Guardar o Modificar DocumentoNoConvensional: " + e);
+            System.out.println("Ha ocurrido un error al Guardar o Modificar Documento No Convencional: " + e);
         }
         return estado;
+    }
+    
+    public List<DocumentoNoConvencional> listarDocumentoNoConvencionalLike(String busqueda) {
+        List<DocumentoNoConvencional> lista = new ArrayList<>();
+        try {
+            Query query = getManager().createQuery("SELECT p FROM DocumentoNoConvencional p WHERE (LOWER(p.titulo) LIKE CONCAT('%', :dato, '%'))"
+                    + " OR (LOWER(p.codigo) LIKE CONCAT('%', :dato, '%'))"
+                    + " OR (LOWER(p.autor) LIKE CONCAT('%', :dato, '%'))"
+                    + " OR (LOWER(p.tipoNoConvencional) LIKE CONCAT('%', :dato, '%'))");
+            query.setParameter("dato", busqueda);
+            lista = query.getResultList();
+        } catch (Exception e) {
+            System.out.println("No se ha podido listar por Busqueda:" + e);
+        }
+        return lista;
     }
 }

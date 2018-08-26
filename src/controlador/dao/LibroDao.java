@@ -1,5 +1,8 @@
 package controlador.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Query;
 import modelo.Libro;
 
 /**
@@ -40,5 +43,21 @@ public class LibroDao extends AdaptadorDao<Libro> {
             System.out.println("Ha ocurrido un error al Guardar o Modificar Libro: " + e);
         }
         return estado;
+    }
+
+    public List<Libro> listarLibroLike(String busqueda) {
+        List<Libro> lista = new ArrayList<>();
+        try {
+            Query query = getManager().createQuery("SELECT p FROM Libro p WHERE (LOWER(p.titulo) LIKE CONCAT('%', :dato, '%'))"
+                    + " OR (LOWER(p.codigo) LIKE CONCAT('%', :dato, '%'))"
+                    + " OR (LOWER(p.autores) LIKE CONCAT('%', :dato, '%'))"
+                    + " OR (LOWER(p.editorial) LIKE CONCAT('%', :dato, '%'))"
+                    + " OR (LOWER(p.isbn) LIKE CONCAT('%', :dato, '%'))");
+            query.setParameter("dato", busqueda);
+            lista = query.getResultList();
+        } catch (Exception e) {
+            System.out.println("No se ha podido listar por Busqueda:" + e);
+        }
+        return lista;
     }
 }

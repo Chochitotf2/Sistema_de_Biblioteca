@@ -14,13 +14,14 @@ import static vista.utilidades.UtilidadesComponente.*;
 import static controlador.utilidades.Utilidades.*;
 import java.util.Date;
 import java.awt.Color;
+import static java.util.stream.Collectors.toList;
 
 /**
  *
  * @author Víctor Andrés Rojas
  */
 public class FrmBibliotecario extends javax.swing.JDialog {
-    
+
     private SancionServicio sS = new SancionServicio();
     private PrestamoServicio pS = new PrestamoServicio();
     private DocumentoServicio dS = new DocumentoServicio();
@@ -40,7 +41,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         initComponents();
         limpiar();
     }
-    
+
     private void cargarTablaDocumento() {
         if (cbxTipoDocumento.getSelectedItem().toString().equals("Todos")) {
             modeloDocumento.setLista(dS.listar());
@@ -50,19 +51,19 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         tblDocumentos.setModel(modeloDocumento);
         tblDocumentos.updateUI();
     }
-    
+
     private void cargarTablaPrestamo() {
         modeloPrestamo.setLista(pS.listar());
         tblPrestamo.setModel(modeloPrestamo);
         tblPrestamo.updateUI();
     }
-    
+
     private void cargarTablaSancion() {
-        modeloSancion.setLista(sS.listar());
+        modeloSancion.setLista(sS.listar().stream().filter(x -> x.getEstado()).collect(toList()));
         tblSanciones.setModel(modeloSancion);
         tblSanciones.updateUI();
     }
-    
+
     private void habilitarCampos() {
         switch (cbxTipodeDocumento.getSelectedItem().toString()) {
             case "Libro":
@@ -89,7 +90,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
                 break;
         }
     }
-    
+
     private void deshabilitarCampos() {
         txtAutor.setEnabled(false);
         sprEdicion.setEnabled(false);
@@ -102,7 +103,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         txtFacultad.setEnabled(false);
         cbxTipoNoConvencional.setEnabled(false);
     }
-    
+
     private void repintarComponentes() {
         txtTitulo.setBackground(Color.WHITE);
         txtAutor.setBackground(Color.WHITE);
@@ -112,7 +113,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         txtIsbn.setBackground(Color.WHITE);
         txtIssn.setBackground(Color.WHITE);
     }
-    
+
     private void limpiar() {
         sS.fijarSancion(null);
         pS.fijarPrestamo(null);
@@ -144,7 +145,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         cargarTablaPrestamo();
         cargarTablaSancion();
     }
-    
+
     private void codigoDocumento() {
         String tipo = cbxTipodeDocumento.getSelectedItem().toString().substring(0, 4).toUpperCase() + "-";
         for (int i = 0; i < 3; i++) {
@@ -153,7 +154,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         tipo += (dS.listar().size() + 1);
         txtCodigo.setText(tipo);
     }
-    
+
     public void cargarobjeto() {
         switch (cbxTipodeDocumento.getSelectedItem().toString()) {
             case "Libro":
@@ -184,15 +185,15 @@ public class FrmBibliotecario extends javax.swing.JDialog {
                 tS.obtenerTesis().setFechaPublicacion(new Date(txtFechaPublicacion.getText()));
                 break;
             case "Documento no Convencional":
-                dNCS.obtenerDocumentoNoConvensional().setTitulo(txtTitulo.getText().trim());
-                dNCS.obtenerDocumentoNoConvensional().setCodigo(txtCodigo.getText().trim());
-                dNCS.obtenerDocumentoNoConvensional().setTipoDocumento(cbxTipodeDocumento.getSelectedItem().toString());
-                dNCS.obtenerDocumentoNoConvensional().setAutor(txtAutor.getText().trim());
-                dNCS.obtenerDocumentoNoConvensional().setTipoNoConvencional(cbxTipoNoConvencional.getSelectedItem().toString());
+                dNCS.obtenerDocumentoNoConvencional().setTitulo(txtTitulo.getText().trim());
+                dNCS.obtenerDocumentoNoConvencional().setCodigo(txtCodigo.getText().trim());
+                dNCS.obtenerDocumentoNoConvencional().setTipoDocumento(cbxTipodeDocumento.getSelectedItem().toString());
+                dNCS.obtenerDocumentoNoConvencional().setAutor(txtAutor.getText().trim());
+                dNCS.obtenerDocumentoNoConvencional().setTipoNoConvencional(cbxTipoNoConvencional.getSelectedItem().toString());
                 break;
         }
     }
-    
+
     private void cargarEdicion() {
         int fila = tblDocumentos.getSelectedRow();
         if (fila >= 0) {
@@ -224,16 +225,16 @@ public class FrmBibliotecario extends javax.swing.JDialog {
                     txtFechaPublicacion.setText(formatearFecha(tS.obtenerTesis().getFechaPublicacion()));
                     break;
                 case "Documento no Convencional":
-                    dNCS.fijarDocumentoNoConvensional(dNCS.obtenerDocumentoNoConvensional(dS.obtenerDocumento().getId()));
-                    txtAutor.setText(dNCS.obtenerDocumentoNoConvensional().getAutor());
-                    cbxTipoNoConvencional.setSelectedItem(dNCS.obtenerDocumentoNoConvensional().getTipoNoConvencional());
+                    dNCS.fijarDocumentoNoConvensional(dNCS.obtenerDocumentoNoConvencional(dS.obtenerDocumento().getId()));
+                    txtAutor.setText(dNCS.obtenerDocumentoNoConvencional().getAutor());
+                    cbxTipoNoConvencional.setSelectedItem(dNCS.obtenerDocumentoNoConvencional().getTipoNoConvencional());
                     break;
             }
         } else {
             mensajeError("Advertencia", "Debe seleccionar un Documento de la Tabla.");
         }
     }
-    
+
     private boolean errores() {
         boolean verificador = false;
         if (mostrarError(txtTitulo, null, 'n')) {
@@ -290,7 +291,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         }
         return verificador;
     }
-    
+
     private void registrar() {
         if (!errores()) {
             cargarobjeto();
@@ -347,7 +348,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
                     }
                     break;
                 case "Documento no Convencional":
-                    if (dNCS.obtenerDocumentoNoConvensional().getId() != null) {
+                    if (dNCS.obtenerDocumentoNoConvencional().getId() != null) {
                         if (dNCS.guardar()) {
                             mensajeOK("Aviso", "Se ha modificado con éxito.");
                             limpiar();
@@ -364,10 +365,10 @@ public class FrmBibliotecario extends javax.swing.JDialog {
                     }
                     break;
             }
-            
+
         }
     }
-    
+
     private void confirmarDevolucion() {
         int fila = tblPrestamo.getSelectedRow();
         if (fila >= 0) {
@@ -388,7 +389,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
             mensajeError("Advertencia", "Debe seleccionar un Documento de la Tabla.");
         }
     }
-    
+
     private void sancionarPersona() {
         int fila = tblPrestamo.getSelectedRow();
         if (fila >= 0) {
@@ -396,7 +397,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
             sS.obtenerSancion().setPrestamo(pS.obtenerPrestamo());
             sS.obtenerSancion().setFecha(new Date());
             if (!mostrarError(txtMonto, "El Monto solo puede contener números.", 'd')) {
-                sS.obtenerSancion().setMonto(Double.valueOf(txtMonto.getText()));
+                sS.obtenerSancion().setMonto(Double.valueOf(txtMonto.getText().trim()));
                 if (sS.guardar()) {
                     mensajeOK("Aviso", "Se ha generado una nueva Sanción con éxito.");
                     limpiar();
@@ -409,26 +410,30 @@ public class FrmBibliotecario extends javax.swing.JDialog {
             mensajeError("Advertencia", "Debe seleccionar una Persona de la Tabla.");
         }
     }
-    
-    private void modificarSansion() {
+
+    private void cargarModificarSancion() {
         int fila = tblSanciones.getSelectedRow();
         if (fila >= 0) {
             sS.fijarSancion(modeloSancion.getLista().get(fila));
             sS.obtenerSancion().setFecha(new Date());
-            if (!mostrarError(txtMonto, "El Monto solo puede contener números.", 'd')) {
-                txtMonto.setText(sS.obtenerSancion().getMonto().toString());
-                if (sS.guardar()) {
-                    mensajeOK("Aviso", "Se ha modificado el Monto con éxito.");
-                    limpiar();
-                } else {
-                    mensajeError("Error", "No se ha podido modificar la Sanción.");
-                }
-            }
+            txtMontoEdicion.setText(sS.obtenerSancion().getMonto().toString());
         } else {
             mensajeError("Advertencia", "Debe seleccionar una Sanción de la Tabla.");
         }
     }
-    
+
+    private void modificarSancion() {
+        if (!mostrarError(txtMontoEdicion, "El Monto solo puede contener números.", 'd')) {
+            sS.obtenerSancion().setMonto(Double.valueOf(txtMontoEdicion.getText().trim()));
+            if (sS.guardar()) {
+                mensajeOK("Aviso", "Se ha modificado el Monto con éxito.");
+                limpiar();
+            } else {
+                mensajeError("Error", "No se ha podido modificar la Sanción.");
+            }
+        }
+    }
+
     private void confirmarPago() {
         int fila = tblSanciones.getSelectedRow();
         if (fila >= 0) {
@@ -448,7 +453,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
             mensajeError("Advertencia", "Debe seleccionar una Sanción de la Tabla.");
         }
     }
-    
+
     private void buscarDocumento() {
         if (txtbusquedaDocumento.getText().trim().length() >= 3) {
             if (cbxTipoDocumento.getSelectedItem().toString().equals("Todos")) {
@@ -462,7 +467,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
             cargarTablaDocumento();
         }
     }
-    
+
     private void buscarPrestamo() {
         if (txtBusquedaPrestamo.getText().trim().length() >= 3) {
             modeloPrestamo.setLista(pS.listarPrestamoLike(txtBusquedaPrestamo.getText().trim()));
@@ -472,7 +477,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
             cargarTablaPrestamo();
         }
     }
-    
+
     private void buscarSancion() {
         if (txtBusquedaSanciones.getText().trim().length() >= 3) {
             modeloSancion.setLista(sS.listarSancionLike(txtBusquedaSanciones.getText().trim()));
@@ -642,11 +647,6 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         jPDocumento.add(jLabel3);
         jLabel3.setBounds(10, 310, 60, 20);
 
-        txtbusquedaDocumento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtbusquedaDocumentoActionPerformed(evt);
-            }
-        });
         txtbusquedaDocumento.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtbusquedaDocumentoKeyReleased(evt);
@@ -1021,6 +1021,11 @@ public class FrmBibliotecario extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblSanciones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblSancionesMouseClicked(evt);
+            }
+        });
         jScrollPane7.setViewportView(tblSanciones);
 
         jPSansiones.add(jScrollPane7);
@@ -1115,7 +1120,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 720, 530);
 
-        setSize(new java.awt.Dimension(743, 569));
+        setSize(new java.awt.Dimension(736, 569));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1138,6 +1143,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
 
     private void btnRegistrarNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarNuevoActionPerformed
         panelSelector.setSelectedIndex(1);
+        limpiar();
     }//GEN-LAST:event_btnRegistrarNuevoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -1169,7 +1175,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarSActionPerformed
 
     private void btnEditarSancionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarSancionActionPerformed
-        modificarSansion();
+        modificarSancion();
     }//GEN-LAST:event_btnEditarSancionActionPerformed
 
     private void btnCancelarS1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarS1ActionPerformed
@@ -1197,9 +1203,11 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         new FrmInicioSesion().setVisible(true);
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
-    private void txtbusquedaDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbusquedaDocumentoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtbusquedaDocumentoActionPerformed
+    private void tblSancionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSancionesMouseClicked
+        if (evt.getClickCount() >= 2) {
+            cargarModificarSancion();
+        }
+    }//GEN-LAST:event_tblSancionesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1215,21 +1223,21 @@ public class FrmBibliotecario extends javax.swing.JDialog {
                 if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                    
+
                 }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(FrmBibliotecario.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(FrmBibliotecario.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(FrmBibliotecario.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FrmBibliotecario.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);

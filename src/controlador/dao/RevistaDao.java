@@ -1,5 +1,8 @@
 package controlador.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Query;
 import modelo.Revista;
 
 /**
@@ -40,5 +43,20 @@ public class RevistaDao extends AdaptadorDao<Revista> {
             System.out.println("Ha ocurrido un error al Guardar o Modificar Revista: " + e);
         }
         return estado;
+    }
+
+    public List<Revista> listarRevistaLike(String busqueda) {
+        List<Revista> lista = new ArrayList<>();
+        try {
+            Query query = getManager().createQuery("SELECT p FROM Revista p WHERE (LOWER(p.titulo) LIKE CONCAT('%', :dato, '%'))"
+                    + " OR (LOWER(p.codigo) LIKE CONCAT('%', :dato, '%'))"
+                    + " OR (LOWER(p.issn) LIKE CONCAT('%', :dato, '%'))"
+                    + " OR (LOWER(p.editorial) LIKE CONCAT('%', :dato, '%'))");
+            query.setParameter("dato", busqueda);
+            lista = query.getResultList();
+        } catch (Exception e) {
+            System.out.println("No se ha podido listar por Busqueda:" + e);
+        }
+        return lista;
     }
 }

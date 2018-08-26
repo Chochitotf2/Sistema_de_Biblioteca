@@ -34,6 +34,10 @@ public class CuentaServicio {
         return cuenta.listar();
     }
 
+    public Cuenta obtenerUsuarioCuenta(String usuario) {
+        return cuenta.obtenerUsuarioCuenta(usuario);
+    }
+
     public Cuenta inicioSesion(String usuario, String clave) {
         return cuenta.inicioSesion(usuario, clave);
     }

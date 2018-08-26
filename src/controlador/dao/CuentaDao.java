@@ -44,6 +44,17 @@ public class CuentaDao extends AdaptadorDao<Cuenta> {
         return estado;
     }
 
+    public Cuenta obtenerUsuarioCuenta(String usuario) {
+        Cuenta cuentaAux = null;
+        try {
+            Query query = getManager().createQuery("SELECT p FROM Cuenta p where p.usuario = :dato");
+            query.setParameter("dato", usuario);
+            cuentaAux = (Cuenta) query.getSingleResult();
+        } catch (Exception e) {
+        }
+        return cuentaAux;
+    }
+
     public Cuenta inicioSesion(String usuario, String clave) {
         Cuenta cuentaAux = null;
         try {
