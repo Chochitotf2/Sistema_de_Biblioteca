@@ -1,19 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package vista;
 
 import controlador.servicio.BibliotecarioServicio;
 import controlador.servicio.CuentaServicio;
 import controlador.servicio.PersonaServicio;
 import controlador.servicio.RolServicio;
-import controlador.utilidades.Utilidades;
-import static controlador.utilidades.Utilidades.formatearFecha;
 import it.sauronsoftware.base64.Base64;
-import java.awt.Color;
 import java.util.Date;
+import static java.util.stream.Collectors.toList;
 import javax.swing.ButtonGroup;
 import vista.tablas.ModeloTablaBibliotecario;
 import vista.tablas.ModeloTablaUsuario;
@@ -39,35 +32,44 @@ public class FrmAdministrador extends javax.swing.JDialog {
      */
     public FrmAdministrador(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-
         initComponents();
         ButtonGroup g2 = new ButtonGroup();
         g2.add(rd_alumno);
         g2.add(rd_todos);
         g2.add(rd_profe1);
         limpiar();
-
     }
 
     private void cargartablabiblo() {
-
-        modeloBiblio.setLista(bS.listar());
+        modeloBiblio.setLista(bS.listar().stream()
+                .sorted((a, b) -> b.getCuenta().getEstado().compareTo(a.getCuenta().getEstado())).collect(toList()));
         tabla_bibliotecarios.setModel(modeloBiblio);
         tabla_bibliotecarios.updateUI();
-
     }
 
     private void darDeBajaBiblio() {
         int fila = tabla_bibliotecarios.getSelectedRow();
         if (fila >= 0) {
             bS.fijarBibliotecario(modeloBiblio.getLista().get(fila));
-            if (bS.obtenerBibliotecario().getCuenta().getEstado() == false) {
+            if (bS.obtenerBibliotecario().getCuenta().getEstado()) {
                 bS.obtenerBibliotecario().getCuenta().setEstado(false);
-                mensajeOK("Cuenta", "Se a desactivado la cuenta");
+                if (bS.guardar()) {
+                    mensajeOK("Aviso", "Se a desactivado la cuenta.");
+                    limpiar();
+                } else {
+                    mensajeError("Error", "No se ha podido desactivar la cuenta.");
+                }
+            } else {
+                bS.obtenerBibliotecario().getCuenta().setEstado(true);
+                if (bS.guardar()) {
+                    mensajeOK("Aviso", "Se a reactivado la cuenta.");
+                    limpiar();
+                } else {
+                    mensajeError("Error", "No se ha podido reactivar la cuenta.");
+                }
             }
         } else {
-            bS.obtenerBibliotecario().getCuenta().setEstado(true);
-            mensajeOK("Cuenta", "Se a reactivado la cuenta");
+            mensajeError("Advertencia", "Debe seleccionar un Bibliotecario de la tabla.");
         }
     }
 
@@ -75,71 +77,69 @@ public class FrmAdministrador extends javax.swing.JDialog {
         int fila = tbl_user.getSelectedRow();
         if (fila >= 0) {
             ps.fijarPersona(modelouser.getLista().get(fila));
-            if (ps.obtenerPersona().getCuenta().getEstado() == false) {
+            if (ps.obtenerPersona().getCuenta().getEstado()) {
                 ps.obtenerPersona().getCuenta().setEstado(false);
-                mensajeOK("Cuenta", "Se a desactivado la cuenta");
-            }else {
-            bS.obtenerBibliotecario().getCuenta().setEstado(true);
-            mensajeOK("Cuenta", "Se a reactivado la cuenta");
+                if (ps.guardar()) {
+                    mensajeOK("Aviso", "Se a desactivado la cuenta.");
+                    limpiar();
+                } else {
+                    mensajeError("Error", "No se ha podido desactivar la cuenta.");
+                }
+            } else {
+                ps.obtenerPersona().getCuenta().setEstado(true);
+                if (ps.guardar()) {
+                    mensajeOK("Aviso", "Se a reactivado la cuenta.");
+                    limpiar();
+                } else {
+                    mensajeError("Error", "No se ha podido reactivar la cuenta.");
+                }
+            }
+        } else {
+            mensajeError("Advertencia", "Debe seleccionar un Usuario de la tabla.");
         }
-        } 
-
-    }
-    
-    private void darDeBajaBib() {
-        int fila = tabla_bibliotecarios.getSelectedRow();
-        if (fila >= 0) {
-            bS.fijarBibliotecario(modeloBiblio.getLista().get(fila));
-            if (bS.obtenerBibliotecario().getCuenta().getEstado() == false) {
-                bS.obtenerBibliotecario().getCuenta().setEstado(false);
-                mensajeOK("Cuenta", "Se a desactivado la cuenta");
-            }else {
-            bS.obtenerBibliotecario().getCuenta().setEstado(true);
-            mensajeOK("Cuenta", "Se a reactivado la cuenta");
-        }
-        } 
-
     }
 
     private void cargarTablaUser() {
-
-        modelouser.setLista(ps.listar());
-        modelouser.setLista2(cs.listar());
+        modelouser.setLista(ps.listarSinAdministradorUsuarios().stream()
+                .sorted((a, b) -> b.getCuenta().getEstado().compareTo(a.getCuenta().getEstado())).collect(toList()));
         tbl_user.setModel(modelouser);
         tbl_user.updateUI();
     }
 
-    private void repintarComponentes() {
-        txt_nombre.setBackground(Color.WHITE);
-        txt_apellidos.setBackground(Color.WHITE);
-        txt_cedula.setBackground(Color.WHITE);
-        txt_telefono.setBackground(Color.WHITE);
-        txt_coreo.setBackground(Color.WHITE);
-        txt_dir.setBackground(Color.WHITE);
-        txt_usuario.setBackground(Color.WHITE);
-        txt_contraseña.setBackground(Color.WHITE);
+    private void listarUsuariosTipo() {
+        if (rd_todos.isSelected()) {
+            cargarTablaUser();
+        } else {
+            String tipo = (rd_profe1.isSelected()) ? "Profesor" : "Alumno";
+            modelouser.setLista(ps.listarUsuariosTipo(tipo));
+            tbl_user.setModel(modelouser);
+            tbl_user.updateUI();
+        }
     }
 
     private void limpiar() {
         bS.fijarBibliotecario(null);
+        ps.fijarPersona(null);
         cs.fijarCuenta(null);
         txt_nombre.setText("");
         txt_apellidos.setText("");
         txt_cedula.setText("");
+        txt_cedula.setEditable(true);
         txt_telefono.setText("");
         txt_coreo.setText("");
         txt_dir.setText("");
         txt_usuario.setText("");
+        txt_usuario.setEditable(true);
         txt_contraseña.setText("");
-        cbx_seccion.setSelectedItem(1);
+        cbx_seccion.setSelectedItem(0);
         cargartablabiblo();
         cargarTablaUser();
-
+        listarUsuariosTipo();
     }
 
     public void cargarobjeto() {
         cs.obtenerCuenta().setUsuario(txt_usuario.getText().trim());
-        cs.obtenerCuenta().setClave(String.valueOf(Base64.encode(txt_contraseña.getText().trim())));
+        cs.obtenerCuenta().setClave(Base64.encode(String.valueOf(txt_contraseña.getPassword())));
         cs.obtenerCuenta().setCreadoEn(new Date());
         cs.obtenerCuenta().setModificadoEn(new Date());
         bS.obtenerBibliotecario().setNombres(txt_nombre.getText().trim());
@@ -161,6 +161,7 @@ public class FrmAdministrador extends javax.swing.JDialog {
             txt_nombre.setText(bS.obtenerBibliotecario().getNombres());
             txt_apellidos.setText(bS.obtenerBibliotecario().getApellidos());
             txt_cedula.setText(bS.obtenerBibliotecario().getDni());
+            txt_cedula.setEditable(false);
             txt_telefono.setText(bS.obtenerBibliotecario().getTelefono());
             txt_coreo.setText(bS.obtenerBibliotecario().getCorreo());
             txt_dir.setText(bS.obtenerBibliotecario().getDireccion());
@@ -169,21 +170,34 @@ public class FrmAdministrador extends javax.swing.JDialog {
             txt_usuario.setText(bS.obtenerBibliotecario().getCuenta().getUsuario());
             txt_contraseña.setText(bS.obtenerBibliotecario().getCuenta().getClave());
         } else {
-            mensajeError("Advertencia", "Debe seleccionar un Documento de la Tabla.");
+            mensajeError("Advertencia", "Debe seleccionar un Bibliotecario de la Tabla.");
         }
     }
 
     private void registrar() {
         if (!errores()) {
-            txt_usuario.setEditable(true);
             cargarobjeto();
-            if (bS.guardar()) {
-                mensajeOK("Aviso", "Se ha registrado con éxito.");
-                limpiar();
+            if (bS.obtenerBibliotecario().getId() != null) {
+                if (bS.guardar()) {
+                    mensajeOK("Aviso", "Se ha modificado con éxito.");
+                    limpiar();
+                    panelSelector.setSelectedIndex(0);
+                } else {
+                    mensajeError("Error", "Ha ocurrido un error al realizar la modificación.");
+                }
             } else {
-                mensajeError("Error", "Ha ocurrido un error al realizar su registro.");
+                if (bS.obtenerBibliotecarioCedula(txt_cedula.getText().trim()) == null) {
+                    if (bS.guardar()) {
+                        mensajeOK("Aviso", "Se ha registrado con éxito.");
+                        limpiar();
+                        panelSelector.setSelectedIndex(0);
+                    } else {
+                        mensajeError("Error", "Ha ocurrido un error al realizar el registro.");
+                    }
+                } else {
+                    mensajeError("Error", "La cédula escrita ya existe.");
+                }
             }
-
         }
     }
 
@@ -216,65 +230,31 @@ public class FrmAdministrador extends javax.swing.JDialog {
         return verificador;
     }
 
-    private void guardar() {
-        String mensaje = "Se requiere este dato";
-        if (errores()) {
-            cargarobjeto();
-            if (bS.obtenerBibliotecario().getId() != null) {
-                //modificar
-                if (bS.guardar()) {
-                    UtilidadesComponente.mensajeOK("OK", "Se ha modificado correctamente");
-                    limpiar();
-                } else {
-                    UtilidadesComponente.mensajeError("Error", "No se pudo modificar");
-                }
-            } else {
-                //guardar
-
-                if (ps.guardar()) {
-                    UtilidadesComponente.mensajeOK("OK", "Se ha registrado correctamente");
-                    limpiar();
-
-                } else {
-                    UtilidadesComponente.mensajeError("Error", "No se pudo guardar");
-                }
-
-            }
-        }
-    }
-
-    private void buscar() {
-        if (rd_todos.isSelected()) {
-            cargartablabiblo();
-
+    private void buscarBibliotecario() {
+        if (txtBuscarBibliotecario.getText().trim().length() >= 3) {
+            modeloBiblio.setLista(bS.listarBibliotecarioLike(txtBuscarBibliotecario.getText().trim()).stream()
+                    .sorted((a, b) -> b.getCuenta().getEstado().compareTo(a.getCuenta().getEstado())).collect(toList()));
+            tabla_bibliotecarios.setModel(modeloBiblio);
+            tabla_bibliotecarios.updateUI();
         } else {
-            String tipo = (rd_profe1.isSelected()) ? "Profesor" : "Alumno";
-            modelouser.setLista(ps.listarSinAdministradorTipo(tipo));
-            tbl_user.setModel(modelouser);
-            tbl_user.updateUI();
+            cargartablabiblo();
         }
     }
-    
 
-    private void buscarUsuarioTipo() {
-//        
+    private void buscarUsuario() {
         if (txt_buscarUser.getText().trim().length() >= 3) {
             if (rd_todos.isSelected()) {
-                modelouser.setLista(ps.listarPersonaLike(txt_buscarUser.getText()));
+                modelouser.setLista(ps.listarSinAdministradorUsuariosLike(txt_buscarUser.getText().trim()));
             } else {
                 String tipo = (rd_profe1.isSelected()) ? "Profesor" : "Alumno";
-                modelouser.setLista(ps.listarPersonaTipoLike(tipo, txt_buscarUser.getText()));
+                modelouser.setLista(ps.listarUsuariosTipoLike(tipo, txt_buscarUser.getText().trim()));
             }
             tbl_user.setModel(modelouser);
             tbl_user.updateUI();
         } else {
-            buscar();
+            cargarTablaUser();
         }
-
     }
-    
-
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -295,9 +275,10 @@ public class FrmAdministrador extends javax.swing.JDialog {
         buttonAeroLeft3 = new org.edisoncor.gui.button.ButtonAeroLeft();
         buttonAeroRight7 = new org.edisoncor.gui.button.ButtonAeroRight();
         buttonAero1 = new org.edisoncor.gui.button.ButtonAero();
+        jLabel7 = new javax.swing.JLabel();
+        txtBuscarBibliotecario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        panelCurves1 = new org.edisoncor.gui.panel.PanelCurves();
         jLabel6 = new javax.swing.JLabel();
         txt_coreo = new org.edisoncor.gui.textField.TextFieldRound();
         jLabel12 = new javax.swing.JLabel();
@@ -310,12 +291,12 @@ public class FrmAdministrador extends javax.swing.JDialog {
         txt_cedula = new org.edisoncor.gui.textField.TextFieldRound();
         jLabel16 = new javax.swing.JLabel();
         cbx_seccion = new org.edisoncor.gui.comboBox.ComboBoxRectIcon();
-        panelCurves2 = new org.edisoncor.gui.panel.PanelCurves();
         jLabel17 = new javax.swing.JLabel();
         txt_telefono = new org.edisoncor.gui.textField.TextFieldRound();
         jLabel18 = new javax.swing.JLabel();
         txt_contraseña = new org.edisoncor.gui.passwordField.PasswordFieldRound();
         btnRegistrar = new rojeru_san.RSButtonRiple();
+        btnCancelar = new rojeru_san.RSButtonRiple();
         txt_dir = new org.edisoncor.gui.textField.TextFieldRound();
         jLabel4 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
@@ -329,14 +310,16 @@ public class FrmAdministrador extends javax.swing.JDialog {
         buttonRect1 = new org.edisoncor.gui.button.ButtonRect();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbl_user = new javax.swing.JTable();
-        btnRegistrarse = new rojeru_san.RSButtonRiple();
         panel1 = new org.edisoncor.gui.panel.Panel();
         jLabel5 = new javax.swing.JLabel();
         buttonTask1 = new org.edisoncor.gui.button.ButtonTask();
+        jToggleButton1 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Panel de Administrador");
         setIconImage(UtilidadesComponente.obtenerIcono());
+        setUndecorated(true);
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -357,9 +340,10 @@ public class FrmAdministrador extends javax.swing.JDialog {
         panelReflect1.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Cantarell", 1, 15)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Bibliotecarios");
         panelReflect1.add(jLabel1);
-        jLabel1.setBounds(240, 30, 120, 20);
+        jLabel1.setBounds(0, 0, 590, 20);
 
         tabla_bibliotecarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -375,7 +359,7 @@ public class FrmAdministrador extends javax.swing.JDialog {
         jScrollPane1.setViewportView(tabla_bibliotecarios);
 
         panelReflect1.add(jScrollPane1);
-        jScrollPane1.setBounds(30, 70, 530, 260);
+        jScrollPane1.setBounds(30, 80, 530, 250);
 
         buttonAeroLeft3.setBackground(new java.awt.Color(148, 169, 169));
         buttonAeroLeft3.setText("Nuevo");
@@ -385,17 +369,17 @@ public class FrmAdministrador extends javax.swing.JDialog {
             }
         });
         panelReflect1.add(buttonAeroLeft3);
-        buttonAeroLeft3.setBounds(140, 360, 110, 25);
+        buttonAeroLeft3.setBounds(90, 360, 110, 25);
 
         buttonAeroRight7.setBackground(new java.awt.Color(148, 169, 169));
-        buttonAeroRight7.setText("Dar de baja");
+        buttonAeroRight7.setText("Dar de baja / Reactivar");
         buttonAeroRight7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonAeroRight7ActionPerformed(evt);
             }
         });
         panelReflect1.add(buttonAeroRight7);
-        buttonAeroRight7.setBounds(340, 360, 120, 25);
+        buttonAeroRight7.setBounds(290, 360, 180, 25);
 
         buttonAero1.setBackground(new java.awt.Color(148, 169, 169));
         buttonAero1.setText("Editar");
@@ -405,12 +389,26 @@ public class FrmAdministrador extends javax.swing.JDialog {
             }
         });
         panelReflect1.add(buttonAero1);
-        buttonAero1.setBounds(260, 360, 73, 25);
+        buttonAero1.setBounds(210, 360, 73, 25);
+
+        jLabel7.setFont(new java.awt.Font("Cantarell", 1, 15)); // NOI18N
+        jLabel7.setText("Buscar :");
+        panelReflect1.add(jLabel7);
+        jLabel7.setBounds(80, 40, 90, 20);
+
+        txtBuscarBibliotecario.setToolTipText("Nombre, Apellido, Cédula, Correo Electrónico");
+        txtBuscarBibliotecario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarBibliotecarioKeyReleased(evt);
+            }
+        });
+        panelReflect1.add(txtBuscarBibliotecario);
+        txtBuscarBibliotecario.setBounds(140, 40, 370, 20);
 
         jPanel2.add(panelReflect1);
         panelReflect1.setBounds(0, 0, 590, 420);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/ue_biblioteca-mediateca-icono.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/BuscarDocumento.png"))); // NOI18N
         jLabel2.setText("jLabel2");
         jPanel2.add(jLabel2);
         jLabel2.setBounds(360, 160, 510, 330);
@@ -419,8 +417,6 @@ public class FrmAdministrador extends javax.swing.JDialog {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(null);
-        jPanel3.add(panelCurves1);
-        panelCurves1.setBounds(0, 0, 0, 0);
 
         jLabel6.setFont(new java.awt.Font("Copperplate Gothic Light", 0, 11)); // NOI18N
         jLabel6.setText("Telefono:");
@@ -465,8 +461,6 @@ public class FrmAdministrador extends javax.swing.JDialog {
         cbx_seccion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Matutina", "Vespertina", "" }));
         jPanel3.add(cbx_seccion);
         cbx_seccion.setBounds(240, 230, 160, 20);
-        jPanel3.add(panelCurves2);
-        panelCurves2.setBounds(0, 0, 120, 0);
 
         jLabel17.setFont(new java.awt.Font("Copperplate Gothic Light", 0, 11)); // NOI18N
         jLabel17.setText("Correo:");
@@ -493,20 +487,27 @@ public class FrmAdministrador extends javax.swing.JDialog {
             }
         });
         jPanel3.add(btnRegistrar);
-        btnRegistrar.setBounds(260, 360, 110, 40);
+        btnRegistrar.setBounds(250, 360, 110, 40);
 
-        txt_dir.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setBorder(null);
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setColorHover(new java.awt.Color(169, 169, 169));
+        btnCancelar.setColorText(new java.awt.Color(0, 0, 0));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_dirActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
+        jPanel3.add(btnCancelar);
+        btnCancelar.setBounds(460, 360, 110, 40);
         jPanel3.add(txt_dir);
         txt_dir.setBounds(80, 170, 490, 30);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/ue_biblioteca-mediateca-icono.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/LibroFondo.png"))); // NOI18N
         jLabel4.setText("jLabel2");
         jPanel3.add(jLabel4);
-        jLabel4.setBounds(310, 170, 510, 330);
+        jLabel4.setBounds(240, 170, 510, 330);
 
         jLabel19.setFont(new java.awt.Font("Copperplate Gothic Light", 0, 11)); // NOI18N
         jLabel19.setText("Dirección:");
@@ -526,67 +527,58 @@ public class FrmAdministrador extends javax.swing.JDialog {
         panelReflect5.add(jLabel3);
         jLabel3.setBounds(10, 20, 90, 20);
 
-        txt_buscarUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_buscarUserActionPerformed(evt);
-            }
-        });
+        txt_buscarUser.setToolTipText("Nombre, Apellido, Cédula, Correo Electrónico");
         txt_buscarUser.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_buscarUserKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_buscarUserKeyReleased(evt);
             }
         });
         panelReflect5.add(txt_buscarUser);
-        txt_buscarUser.setBounds(70, 20, 200, 20);
+        txt_buscarUser.setBounds(70, 20, 230, 20);
 
         rd_todos.setBackground(new java.awt.Color(255, 255, 255));
         rd_todos.setSelected(true);
         rd_todos.setText("Todos");
-        rd_todos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rd_todosActionPerformed(evt);
-            }
-        });
-        rd_todos.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                rd_todosPropertyChange(evt);
+        rd_todos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rd_todosItemStateChanged(evt);
             }
         });
         panelReflect5.add(rd_todos);
-        rd_todos.setBounds(280, 20, 55, 23);
+        rd_todos.setBounds(310, 20, 55, 23);
 
         rd_alumno.setBackground(new java.awt.Color(255, 255, 255));
         rd_alumno.setText("Alumno");
-        rd_alumno.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                rd_alumnoPropertyChange(evt);
+        rd_alumno.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rd_alumnoItemStateChanged(evt);
             }
         });
         panelReflect5.add(rd_alumno);
-        rd_alumno.setBounds(430, 20, 61, 23);
+        rd_alumno.setBounds(440, 20, 61, 23);
 
         rd_profe1.setBackground(new java.awt.Color(255, 255, 255));
         rd_profe1.setText("Profesor");
-        rd_profe1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                rd_profe1PropertyChange(evt);
+        rd_profe1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rd_profe1ItemStateChanged(evt);
             }
         });
         panelReflect5.add(rd_profe1);
-        rd_profe1.setBounds(360, 20, 67, 23);
+        rd_profe1.setBounds(370, 20, 67, 23);
 
         jPanel4.add(panelReflect5);
         panelReflect5.setBounds(10, 10, 590, 70);
 
         buttonRect1.setBackground(new java.awt.Color(148, 169, 169));
-        buttonRect1.setText("Dar de baja");
+        buttonRect1.setText("Dar de baja / Reactivar");
         buttonRect1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonRect1ActionPerformed(evt);
             }
         });
         jPanel4.add(buttonRect1);
-        buttonRect1.setBounds(240, 360, 111, 30);
+        buttonRect1.setBounds(210, 360, 180, 30);
 
         tbl_user.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -604,19 +596,6 @@ public class FrmAdministrador extends javax.swing.JDialog {
         jPanel4.add(jScrollPane3);
         jScrollPane3.setBounds(10, 90, 560, 260);
 
-        btnRegistrarse.setBackground(new java.awt.Color(240, 240, 240));
-        btnRegistrarse.setBorder(null);
-        btnRegistrarse.setText("Regístrate!");
-        btnRegistrarse.setColorHover(new java.awt.Color(169, 169, 169));
-        btnRegistrarse.setColorText(new java.awt.Color(0, 0, 0));
-        btnRegistrarse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarseActionPerformed(evt);
-            }
-        });
-        jPanel4.add(btnRegistrarse);
-        btnRegistrarse.setBounds(80, 300, 80, 20);
-
         panelSelector.addTab("Usuarios", jPanel4);
 
         jPanel1.add(panelSelector);
@@ -628,9 +607,10 @@ public class FrmAdministrador extends javax.swing.JDialog {
         panel1.setLayout(null);
 
         jLabel5.setFont(new java.awt.Font("Sitka Subheading", 0, 24)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Administrador");
         panel1.add(jLabel5);
-        jLabel5.setBounds(370, 0, 380, 50);
+        jLabel5.setBounds(210, 0, 380, 50);
 
         buttonTask1.setBackground(new java.awt.Color(148, 169, 169));
         buttonTask1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/Iconolgout.png"))); // NOI18N
@@ -644,80 +624,82 @@ public class FrmAdministrador extends javax.swing.JDialog {
         panel1.add(buttonTask1);
         buttonTask1.setBounds(10, 0, 200, 50);
 
+        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/Cerrar.png"))); // NOI18N
+        jToggleButton1.setBorder(null);
+        jToggleButton1.setContentAreaFilled(false);
+        jToggleButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+        panel1.add(jToggleButton1);
+        jToggleButton1.setBounds(735, 0, 20, 20);
+
         jPanel1.add(panel1);
         panel1.setBounds(0, 0, 760, 50);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(-10, 0, 760, 480);
 
-        setSize(new java.awt.Dimension(766, 515));
+        setSize(new java.awt.Dimension(750, 476));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
-
-
-    }//GEN-LAST:event_btnRegistrarseActionPerformed
-
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         registrar();
-        limpiar();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void buttonAeroLeft3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAeroLeft3ActionPerformed
         panelSelector.setSelectedIndex(1);
-
+        limpiar();
     }//GEN-LAST:event_buttonAeroLeft3ActionPerformed
 
     private void buttonAero1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAero1ActionPerformed
         cargarEdicion();
         panelSelector.setSelectedIndex(1);
-
     }//GEN-LAST:event_buttonAero1ActionPerformed
-
-    private void txt_dirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_dirActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_dirActionPerformed
 
     private void buttonTask1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTask1ActionPerformed
         dispose();
         new FrmInicioSesion().setVisible(true);
     }//GEN-LAST:event_buttonTask1ActionPerformed
 
-    private void txt_buscarUserKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_buscarUserKeyTyped
-        buscarUsuarioTipo();
-    }//GEN-LAST:event_txt_buscarUserKeyTyped
-
     private void buttonAeroRight7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAeroRight7ActionPerformed
         darDeBajaBiblio();
-        bS.fijarBibliotecario(null);
     }//GEN-LAST:event_buttonAeroRight7ActionPerformed
 
     private void buttonRect1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRect1ActionPerformed
         darDeBajaUser();
-        ps.fijarPersona(null);
-        tbl_user.updateUI();
     }//GEN-LAST:event_buttonRect1ActionPerformed
 
-    private void txt_buscarUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_buscarUserActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_buscarUserActionPerformed
+    private void rd_todosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rd_todosItemStateChanged
+        listarUsuariosTipo();
+    }//GEN-LAST:event_rd_todosItemStateChanged
 
-    private void rd_profe1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_rd_profe1PropertyChange
-        buscar();
-    }//GEN-LAST:event_rd_profe1PropertyChange
+    private void rd_profe1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rd_profe1ItemStateChanged
+        listarUsuariosTipo();
+    }//GEN-LAST:event_rd_profe1ItemStateChanged
 
-    private void rd_alumnoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_rd_alumnoPropertyChange
-        buscar();        // TODO add your handling code here:
-    }//GEN-LAST:event_rd_alumnoPropertyChange
+    private void rd_alumnoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rd_alumnoItemStateChanged
+        listarUsuariosTipo();
+    }//GEN-LAST:event_rd_alumnoItemStateChanged
 
-    private void rd_todosPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_rd_todosPropertyChange
-              cargarTablaUser();
-    }//GEN-LAST:event_rd_todosPropertyChange
+    private void txtBuscarBibliotecarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarBibliotecarioKeyReleased
+        buscarBibliotecario();
+    }//GEN-LAST:event_txtBuscarBibliotecarioKeyReleased
 
-    private void rd_todosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_todosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rd_todosActionPerformed
+    private void txt_buscarUserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_buscarUserKeyReleased
+        buscarUsuario();
+    }//GEN-LAST:event_txt_buscarUserKeyReleased
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        limpiar();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -762,8 +744,8 @@ public class FrmAdministrador extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private rojeru_san.RSButtonRiple btnCancelar;
     private rojeru_san.RSButtonRiple btnRegistrar;
-    private rojeru_san.RSButtonRiple btnRegistrarse;
     private org.edisoncor.gui.button.ButtonAero buttonAero1;
     private org.edisoncor.gui.button.ButtonAeroLeft buttonAeroLeft3;
     private org.edisoncor.gui.button.ButtonAeroRight buttonAeroRight7;
@@ -784,15 +766,15 @@ public class FrmAdministrador extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JToggleButton jToggleButton1;
     private org.edisoncor.gui.panel.Panel panel1;
-    private org.edisoncor.gui.panel.PanelCurves panelCurves1;
-    private org.edisoncor.gui.panel.PanelCurves panelCurves2;
     private org.edisoncor.gui.panel.PanelReflect panelReflect1;
     private org.edisoncor.gui.panel.PanelReflect panelReflect5;
     private org.edisoncor.gui.tabbedPane.TabbedSelector2 panelSelector;
@@ -801,6 +783,7 @@ public class FrmAdministrador extends javax.swing.JDialog {
     private javax.swing.JRadioButton rd_todos;
     private javax.swing.JTable tabla_bibliotecarios;
     private javax.swing.JTable tbl_user;
+    private javax.swing.JTextField txtBuscarBibliotecario;
     private org.edisoncor.gui.textField.TextFieldRound txt_apellidos;
     private javax.swing.JTextField txt_buscarUser;
     private org.edisoncor.gui.textField.TextFieldRound txt_cedula;

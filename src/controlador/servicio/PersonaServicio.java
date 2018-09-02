@@ -32,16 +32,20 @@ public class PersonaServicio {
         return persona.listar();
     }
 
-    public List<Persona> listarPersonaLike(String busqueda) {
-        return persona.listarPersonaLike(busqueda);
+    public List<Persona> listarSinAdministradorUsuarios() {
+        return persona.listarSinAdministradorUsuarios();
     }
 
-    public List<Persona> listarPersonaTipoLike(String tipo, String busqueda) {
-        return persona.listarPersonaTipoLike(tipo, busqueda);
+    public List<Persona> listarUsuariosTipo(String tipo) {
+        return persona.listarUsuariosTipo(tipo);
     }
 
-    public List<Persona> listarSinAdministradorTipo(String tipo) {
-        return persona.listarSinAdministradorTipo(tipo);
+    public List<Persona> listarSinAdministradorUsuariosLike(String busqueda) {
+        return persona.listarSinAdministradorUsuariosLike(busqueda);
+    }
+
+    public List<Persona> listarUsuariosTipoLike(String tipo, String busqueda) {
+        return persona.listarUsuariosTipoLike(tipo, busqueda);
     }
 
     public Persona obtenerPersonaCedula(String cedula) {

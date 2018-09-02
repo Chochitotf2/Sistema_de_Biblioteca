@@ -31,4 +31,12 @@ public class BibliotecarioServicio {
     public List<Bibliotecario> listar() {
         return bibliotecario.listar();
     }
+
+    public List<Bibliotecario> listarBibliotecarioLike(String busqueda) {
+        return bibliotecario.listarBibliotecarioLike(busqueda);
+    }
+
+    public Bibliotecario obtenerBibliotecarioCedula(String cedula) {
+        return bibliotecario.obtenerBibliotecarioCedula(cedula);
+    }
 }

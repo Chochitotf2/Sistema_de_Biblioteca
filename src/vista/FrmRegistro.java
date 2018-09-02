@@ -137,6 +137,7 @@ public class FrmRegistro extends javax.swing.JDialog {
                         if (aS.guardar()) {
                             mensajeOK("Aviso", "Se ha registrado con éxito.");
                             limpiar();
+                            new FrmInicioSesion().setVisible(true);
                         } else {
                             mensajeError("Error", "Ha ocurrido un error al realizar su registro.");
                         }
@@ -148,6 +149,7 @@ public class FrmRegistro extends javax.swing.JDialog {
                         if (pS.guardar()) {
                             mensajeOK("Aviso", "Se ha registrado con éxito.");
                             limpiar();
+                            new FrmInicioSesion().setVisible(true);
                         } else {
                             mensajeError("Error", "Ha ocurrido un error al realizar su registro.");
                         }
@@ -171,6 +173,7 @@ public class FrmRegistro extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -192,17 +195,22 @@ public class FrmRegistro extends javax.swing.JDialog {
         rdAlumno = new javax.swing.JRadioButton();
         txtTelefono = new rojeru_san.RSMTextFull();
         panelCurves1 = new org.edisoncor.gui.panel.PanelCurves();
+        btnCerrar = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
+
+        jLabel3.setText("jLabel3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrarse");
         setIconImage(obtenerIcono());
+        setUndecorated(true);
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
 
-        jPanel2.setBackground(new java.awt.Color(148, 169, 169));
+        jPanel2.setBackground(new java.awt.Color(80, 80, 80));
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.setLayout(null);
 
@@ -211,7 +219,7 @@ public class FrmRegistro extends javax.swing.JDialog {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Nuevo Registro");
         jPanel2.add(jLabel5);
-        jLabel5.setBounds(130, 10, 210, 30);
+        jLabel5.setBounds(140, 10, 210, 30);
 
         txtNombre.setPlaceholder("Nombre");
         jPanel2.add(txtNombre);
@@ -264,7 +272,7 @@ public class FrmRegistro extends javax.swing.JDialog {
         jPanel2.add(btnRegistrarse);
         btnRegistrarse.setBounds(160, 350, 170, 40);
 
-        btnRegresar.setText("< Regresar");
+        btnRegresar.setLabel("←Regresar");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarActionPerformed(evt);
@@ -322,7 +330,18 @@ public class FrmRegistro extends javax.swing.JDialog {
         jPanel1.add(jPanel2);
         jPanel2.setBounds(50, 20, 490, 410);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/B004.jpg"))); // NOI18N
+        btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/Cerrar.png"))); // NOI18N
+        btnCerrar.setContentAreaFilled(false);
+        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCerrar);
+        btnCerrar.setBounds(570, 0, 30, 30);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/LibroFondo.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
         jPanel1.add(jLabel1);
         jLabel1.setBounds(0, 0, 600, 450);
@@ -330,7 +349,7 @@ public class FrmRegistro extends javax.swing.JDialog {
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 600, 450);
 
-        setSize(new java.awt.Dimension(616, 488));
+        setSize(new java.awt.Dimension(600, 449));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -350,6 +369,10 @@ public class FrmRegistro extends javax.swing.JDialog {
     private void rdProfesorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdProfesorItemStateChanged
         habilitarCampos();
     }//GEN-LAST:event_rdProfesorItemStateChanged
+
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnCerrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -397,12 +420,14 @@ public class FrmRegistro extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton btnCerrar;
     private rojeru_san.RSButtonRiple btnRegistrarse;
     private org.edisoncor.gui.button.ButtonAction btnRegresar;
     private javax.swing.JComboBox<String> cbxCarrera;
     private javax.swing.JComboBox<String> cbxCiclo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

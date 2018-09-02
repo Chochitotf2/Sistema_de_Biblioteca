@@ -5,8 +5,6 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import lombok.Getter;
 import lombok.Setter;
-import modelo.Cuenta;
-
 import modelo.Persona;
 
 /**
@@ -18,21 +16,10 @@ public class ModeloTablaUsuario extends AbstractTableModel {
     @Getter
     @Setter
     private List<Persona> lista = new ArrayList<>();
-    private List<Cuenta> lista2 = new ArrayList<>();
 
-    public List<Cuenta> getLista2() {
-        return lista2;
-    }
-
-    public void setLista2(List<Cuenta> lista2) {
-        this.lista2 = lista2;
-    }
-
-    
-    
     @Override
     public int getColumnCount() {
-        return 5;
+        return 7;
     }
 
     @Override
@@ -43,19 +30,24 @@ public class ModeloTablaUsuario extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Persona p = lista.get(rowIndex);
-//        Cuenta c = lista2.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return p.getNombres();
+                if (p.getCuenta().getEstado()) {
+                    return "Activa";
+                } else {
+                    return "Inactiva";
+                }
             case 1:
-                return p.getApellidos();
+                return p.getNombres() + " " + p.getApellidos();
             case 2:
-                return p.getDni();
+                return p.getRol().getNombre();
             case 3:
-                return p.getCorreo();
+                return p.getDni();
             case 4:
-                return p.getTelefono();
+                return p.getCorreo();
             case 5:
+                return p.getTelefono();
+            case 6:
                 return p.getDireccion();
             default:
                 return null;
@@ -66,17 +58,19 @@ public class ModeloTablaUsuario extends AbstractTableModel {
     public String getColumnName(int column) {
         switch (column) {
             case 0:
-                return "Nombres";
+                return "Cuenta";
             case 1:
-                return "Apellidos";
+                return "Nombres";
             case 2:
-                return "Cedula";
+                return "Tipo";
             case 3:
-                return "Correo";
+                return "Cédula";
             case 4:
-                return "Telefono";
+                return "Correo";
             case 5:
-                return "Direccion";
+                return "Teléfono";
+            case 6:
+                return "Dirección";
             default:
                 return null;
         }

@@ -562,6 +562,7 @@ public class FrmUsuario extends javax.swing.JDialog {
         jPDocumento.add(jLabel3);
         jLabel3.setBounds(10, 360, 60, 20);
 
+        txtbusquedaDocumento.setToolTipText("");
         txtbusquedaDocumento.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtbusquedaDocumentoKeyReleased(evt);
@@ -660,7 +661,7 @@ public class FrmUsuario extends javax.swing.JDialog {
         jPPrestamo.add(jScrollPane8);
         jScrollPane8.setBounds(10, 180, 640, 210);
 
-        txtBusquedaPrestamo.setToolTipText("La busqueda es por el Título del Documento");
+        txtBusquedaPrestamo.setToolTipText("Título del Documento");
         txtBusquedaPrestamo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBusquedaPrestamoKeyReleased(evt);

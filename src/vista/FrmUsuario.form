@@ -302,6 +302,9 @@
                   </Constraints>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtbusquedaDocumento">
+                  <Properties>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
+                  </Properties>
                   <Events>
                     <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtbusquedaDocumentoKeyReleased"/>
                   </Events>
@@ -520,7 +523,7 @@
                 </Container>
                 <Component class="javax.swing.JTextField" name="txtBusquedaPrestamo">
                   <Properties>
-                    <Property name="toolTipText" type="java.lang.String" value="La busqueda es por el T&#xed;tulo del Documento"/>
+                    <Property name="toolTipText" type="java.lang.String" value="T&#xed;tulo del Documento"/>
                   </Properties>
                   <Events>
                     <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtBusquedaPrestamoKeyReleased"/>

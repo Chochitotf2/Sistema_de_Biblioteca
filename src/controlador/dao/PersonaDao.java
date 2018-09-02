@@ -45,44 +45,66 @@ public class PersonaDao extends AdaptadorDao<Persona> {
         return estado;
     }
 
-    public List<Persona> listarSinAdministradorTipo(String tipo) {
+    public List<Persona> listarSinAdministradorUsuarios() {
         List<Persona> lista = new ArrayList<>();
         try {
-            Query q = getManager().createQuery("SELECT p FROM Persona p where p.rol.nombre != :nombre and p.rol.nombre = :tipo");
-            q.setParameter("nombre", "Administrador");
+            Query q = getManager().createQuery("SELECT p FROM Persona p where p.rol.nombre != :admin and p.rol.nombre != :biblio");
+            q.setParameter("admin", "Administrador");
+            q.setParameter("biblio", "Bibliotecario");
+            lista = q.getResultList();
+        } catch (Exception e) {
+            System.out.println("Ha ocurrido un error al Listar Usuarios: " + e);
+        }
+        return lista;
+    }
+
+    public List<Persona> listarUsuariosTipo(String tipo) {
+        List<Persona> lista = new ArrayList<>();
+        try {
+            Query q = getManager().createQuery("SELECT p FROM Persona p where p.rol.nombre != :admin and p.rol.nombre != :biblio"
+                    + " and p.rol.nombre = :tipo");
+            q.setParameter("admin", "Administrador");
+            q.setParameter("biblio", "Bibliotecario");
             q.setParameter("tipo", tipo);
             lista = q.getResultList();
         } catch (Exception e) {
-            System.out.println("error " + e);
+            System.out.println("Ha ocurrido un error al Listar Usuarios por tipo: " + e);
         }
         return lista;
     }
 
-    public List<Persona> listarPersonaLike(String busqueda) {
+    public List<Persona> listarSinAdministradorUsuariosLike(String busqueda) {
         List<Persona> lista = new ArrayList<>();
         try {
-            Query query = getManager().createQuery("SELECT p FROM Persona p WHERE (LOWER(p.nombres) LIKE CONCAT('%', :dato, '%'))"
-                    + " OR (LOWER(p.dni) LIKE CONCAT('%', :dato, '%'))");
+            Query query = getManager().createQuery("SELECT p FROM Persona p where p.rol.nombre != :admin and p.rol.nombre != :biblio"
+                    + " AND ((LOWER(p.apellidos) LIKE CONCAT('%', :dato, '%'))"
+                    + " OR (LOWER(p.nombres) LIKE CONCAT('%', :dato, '%')) OR (LOWER(p.dni) LIKE CONCAT('%', :dato, '%'))"
+                    + " OR (LOWER(p.correo) LIKE CONCAT('%', :dato, '%')))");
+            query.setParameter("admin", "Administrador");
+            query.setParameter("biblio", "Bibliotecario");
             query.setParameter("dato", busqueda);
             lista = query.getResultList();
         } catch (Exception e) {
-            System.out.println("No se ha podido listar por Busqueda:" + e);
+            System.out.println("Ha ocurrido un error al buscar Usuarios: " + e);
         }
         return lista;
     }
 
-    public List<Persona> listarPersonaTipoLike(String tipo, String busqueda) {
+    public List<Persona> listarUsuariosTipoLike(String tipo, String busqueda) {
         List<Persona> lista = new ArrayList<>();
         try {
-            Query query = getManager()
-                    .createQuery("SELECT p FROM Persona p WHERE p.rol = :tipo"
-                            + " AND ((LOWER(p.nombres) LIKE CONCAT('%', :dato, '%'))"
-                            + " OR (LOWER(p.dni) LIKE CONCAT('%', :dato, '%')))");
+            Query query = getManager().createQuery("SELECT p FROM Persona p where p.rol.nombre != :admin and p.rol.nombre != :biblio"
+                    + " and p.rol.nombre = :tipo"
+                    + " AND ((LOWER(p.apellidos) LIKE CONCAT('%', :dato, '%'))"
+                    + " OR (LOWER(p.nombres) LIKE CONCAT('%', :dato, '%')) OR (LOWER(p.dni) LIKE CONCAT('%', :dato, '%'))"
+                    + " OR (LOWER(p.correo) LIKE CONCAT('%', :dato, '%')))");
+            query.setParameter("admin", "Administrador");
+            query.setParameter("biblio", "Bibliotecario");
             query.setParameter("tipo", tipo);
             query.setParameter("dato", busqueda);
             lista = query.getResultList();
         } catch (Exception e) {
-            System.out.println("No se ha podido listar por Tipo-Busqueda: " + e);
+            System.out.println("Ha ocurrido un error al buscar Usuarios por tipo: " + e);
         }
         return lista;
     }

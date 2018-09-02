@@ -45,7 +45,29 @@ public class BibliotecarioDao extends AdaptadorDao<Bibliotecario> {
         }
         return estado;
     }
-    
-    
-  
+
+    public List<Bibliotecario> listarBibliotecarioLike(String busqueda) {
+        List<Bibliotecario> lista = new ArrayList<>();
+        try {
+            Query query = getManager().createQuery("SELECT p FROM Bibliotecario p WHERE (LOWER(p.apellidos) LIKE CONCAT('%', :dato, '%'))"
+                    + " OR (LOWER(p.nombres) LIKE CONCAT('%', :dato, '%')) OR (LOWER(p.dni) LIKE CONCAT('%', :dato, '%'))"
+                    + " OR (LOWER(p.correo) LIKE CONCAT('%', :dato, '%'))");
+            query.setParameter("dato", busqueda);
+            lista = query.getResultList();
+        } catch (Exception e) {
+            System.out.println("No se ha podido listar por Busqueda: " + e);
+        }
+        return lista;
+    }
+
+    public Bibliotecario obtenerBibliotecarioCedula(String cedula) {
+        Bibliotecario alumnoAux = null;
+        try {
+            Query q = getManager().createQuery("SELECT p FROM Bibliotecario p where p.dni = :dato");
+            q.setParameter("dato", cedula);
+            alumnoAux = (Bibliotecario) q.getSingleResult();
+        } catch (Exception e) {
+        }
+        return alumnoAux;
+    }
 }

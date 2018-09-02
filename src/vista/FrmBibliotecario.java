@@ -7,6 +7,7 @@ import controlador.servicio.PrestamoServicio;
 import controlador.servicio.RevistaServicio;
 import controlador.servicio.SancionServicio;
 import controlador.servicio.TesisServicio;
+import controlador.utilidades.Sesion;
 import vista.tablas.ModeloTablaDocumento;
 import vista.tablas.ModeloTablaPrestamo;
 import vista.tablas.ModeloTablaSancion;
@@ -39,6 +40,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         limpiar();
+        lblSaludo.setText("Bienvenida(o) " + Sesion.getCuenta().getPersona().getNombres());
     }
 
     private void cargarTablaDocumento() {
@@ -231,6 +233,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
                     cbxTipoNoConvencional.setSelectedItem(dNCS.obtenerDocumentoNoConvencional().getTipoNoConvencional());
                     break;
             }
+            panelSelector.setSelectedIndex(1);
         } else {
             mensajeError("Advertencia", "Debe seleccionar un Documento de la Tabla.");
         }
@@ -260,8 +263,6 @@ public class FrmBibliotecario extends javax.swing.JDialog {
                 if (jcdFechaPublicacion.getDate() == null) {
                     mensajeError("Aviso", "Seleccione una fecha de publicación.");
                     verificador = true;
-                } else {
-
                 }
                 if (mostrarError(txtIssn, null, 'n')) {
                     verificador = true;
@@ -280,7 +281,8 @@ public class FrmBibliotecario extends javax.swing.JDialog {
                 if (mostrarError(txtFacultad, null, 'n')) {
                     verificador = true;
                 }
-                if (mostrarError(jcdFechaPublicacion, null, 'n')) {
+                if (jcdFechaPublicacion.getDate() == null) {
+                    mensajeError("Aviso", "Seleccione una fecha de publicación.");
                     verificador = true;
                 }
                 break;
@@ -613,13 +615,17 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         jSeparator5 = new javax.swing.JSeparator();
         jPPiedePagina = new javax.swing.JPanel();
         btnCerrarSesion = new rojeru_san.RSButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblSaludo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jToggleButton1 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Panel De Bibliotecario");
+        setUndecorated(true);
+        setResizable(false);
         getContentPane().setLayout(null);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
 
         panelSelector.setBackground(new java.awt.Color(255, 255, 255));
@@ -677,6 +683,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         jPDocumento.add(jLabel3);
         jLabel3.setBounds(10, 310, 60, 20);
 
+        txtbusquedaDocumento.setToolTipText("Título, Código de Documento");
         txtbusquedaDocumento.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtbusquedaDocumentoKeyReleased(evt);
@@ -1121,7 +1128,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         panelSelector.addTab("Sanciones", jPSansiones);
 
         jPanel1.add(panelSelector);
-        panelSelector.setBounds(0, 0, 720, 470);
+        panelSelector.setBounds(0, 20, 720, 470);
 
         jPPiedePagina.setLayout(null);
 
@@ -1136,10 +1143,10 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         jPPiedePagina.add(btnCerrarSesion);
         btnCerrarSesion.setBounds(530, 10, 150, 40);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setText("Bienvenido Bibliotecario");
-        jPPiedePagina.add(jLabel1);
-        jLabel1.setBounds(60, 10, 300, 40);
+        lblSaludo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSaludo.setText("Bienvenido Bibliotecario");
+        jPPiedePagina.add(lblSaludo);
+        lblSaludo.setBounds(60, 10, 300, 40);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/Icono.png"))); // NOI18N
@@ -1147,12 +1154,23 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         jLabel2.setBounds(0, 0, 60, 60);
 
         jPanel1.add(jPPiedePagina);
-        jPPiedePagina.setBounds(0, 470, 720, 60);
+        jPPiedePagina.setBounds(0, 490, 720, 60);
+
+        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/CerrarVentana.png"))); // NOI18N
+        jToggleButton1.setContentAreaFilled(false);
+        jToggleButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jToggleButton1);
+        jToggleButton1.setBounds(685, 0, 30, 20);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 720, 530);
 
-        setSize(new java.awt.Dimension(736, 569));
+        setSize(new java.awt.Dimension(720, 550));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1180,7 +1198,6 @@ public class FrmBibliotecario extends javax.swing.JDialog {
     }//GEN-LAST:event_btnRegistrarNuevoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        panelSelector.setSelectedIndex(1);
         cargarEdicion();
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -1239,6 +1256,10 @@ public class FrmBibliotecario extends javax.swing.JDialog {
     private void tblSancionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSancionesMouseClicked
         cargarModificarSancion();
     }//GEN-LAST:event_tblSancionesMouseClicked
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1306,7 +1327,6 @@ public class FrmBibliotecario extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbxTipoNoConvencional;
     private javax.swing.JComboBox<String> cbxTipodeDocumento;
     private javax.swing.JCheckBox chbxSi;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
@@ -1359,8 +1379,10 @@ public class FrmBibliotecario extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JToggleButton jToggleButton1;
     private com.toedter.calendar.JYearChooser jcdAnio;
     private com.toedter.calendar.JDateChooser jcdFechaPublicacion;
+    private javax.swing.JLabel lblSaludo;
     private org.edisoncor.gui.tabbedPane.TabbedSelector2 panelSelector;
     private javax.swing.JRadioButton rdDevuelto;
     private javax.swing.JSpinner sprEdicion;

@@ -32,9 +32,13 @@ public class ModeloTablaBibliotecario extends AbstractTableModel {
         Bibliotecario b = lista.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return b.getNombres();
+                return b.getNombres() + " " + b.getApellidos();
             case 1:
-                return b.getApellidos();
+                if (b.getCuenta().getEstado()) {
+                    return "Activa";
+                } else {
+                    return "Inactiva";
+                }
             case 2:
                 return b.getDni();
             case 3:
@@ -54,19 +58,19 @@ public class ModeloTablaBibliotecario extends AbstractTableModel {
     public String getColumnName(int column) {
         switch (column) {
             case 0:
-                return "Nombres";
+                return "Bibliotecario";
             case 1:
-                return "Apellidos";
+                return "Cuenta";
             case 2:
-                return "DNI";
+                return "Cédula";
             case 3:
-                return "Correo";
+                return "Correo Electrónico";
             case 4:
-                return "Telefono";
+                return "Teléfono";
             case 5:
-                return "Direccion";
+                return "Dirección";
             case 6:
-                return "Seccion";
+                return "Sección";
             default:
                 return null;
         }
