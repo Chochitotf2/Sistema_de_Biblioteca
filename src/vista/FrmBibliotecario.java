@@ -399,14 +399,16 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         if (fila >= 0) {
             if (rdDevuelto.isSelected()) {
                 pS.fijarPrestamo(modeloPrestamo.getLista().get(fila));
-                pS.obtenerPrestamo().setEstado(false);
-                pS.obtenerPrestamo().setFechaDevolucion(new Date());
-                pS.obtenerPrestamo().getDocumento().setEstado(true);
-                if (pS.guardar()) {
-                    mensajeOK("Aviso", "Se ha confirmado la Devolución.");
-                    limpiar();
-                } else {
-                    mensajeError("Error", "No se ha podido confirmar la Devolución.");
+                if (pS.obtenerPrestamo().getEstado()) {
+                    pS.obtenerPrestamo().setEstado(false);
+                    pS.obtenerPrestamo().setFechaDevolucion(new Date());
+                    pS.obtenerPrestamo().getDocumento().setEstado(true);
+                    if (pS.guardar()) {
+                        mensajeOK("Aviso", "Se ha confirmado la Devolución.");
+                        limpiar();
+                    } else {
+                        mensajeError("Error", "No se ha podido confirmar la Devolución.");
+                    }
                 }
             } else {
                 mensajeError("Advertencia", "Active la casilla para confirmar que se ha devuelto el Documento seleccionado.");
@@ -1169,7 +1171,7 @@ public class FrmBibliotecario extends javax.swing.JDialog {
         jToggleButton1.setBounds(685, 0, 30, 20);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 720, 530);
+        jPanel1.setBounds(0, 0, 720, 550);
 
         setSize(new java.awt.Dimension(720, 550));
         setLocationRelativeTo(null);

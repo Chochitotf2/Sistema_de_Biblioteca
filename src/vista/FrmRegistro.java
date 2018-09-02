@@ -108,6 +108,9 @@ public class FrmRegistro extends javax.swing.JDialog {
         }
         if (mostrarError(txtClave, null, 'n')) {
             verificador = true;
+        } else if (String.valueOf(txtClave.getPassword()).trim().length() < 6) {
+            mensajeError("Seguridad", "Por seguridad se recomienda una contraseña que mínimo contenga 6 caractéres.");
+            verificador = true;
         }
         if (mostrarError(txtCorreoElectronico, "El Email ingresado no es válido.", 'm')) {
             verificador = true;
@@ -138,6 +141,7 @@ public class FrmRegistro extends javax.swing.JDialog {
                         if (aS.guardar()) {
                             mensajeOK("Aviso", "Se ha registrado con éxito.");
                             limpiar();
+                            dispose();
                             new FrmInicioSesion().setVisible(true);
                         } else {
                             mensajeError("Error", "Ha ocurrido un error al realizar su registro.");
