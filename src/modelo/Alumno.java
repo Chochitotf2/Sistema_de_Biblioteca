@@ -6,8 +6,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * Esta clase contiene la información básica de un Alumno.
  *
  * @author Víctor Andrés Rojas
+ * @author Mario Orellana
  */
 @Getter
 @Setter

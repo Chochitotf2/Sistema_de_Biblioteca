@@ -6,8 +6,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * Esta clase contiene la información básica de un Documento no Convencional de
+ * Biblioteca. La información de este tipo de Documento contiene adicionalmente:
+ * un nombre de autor y un tipo de Documento no Convencional.
  *
  * @author Víctor Andrés Rojas
+ * @author Mario Orellana
  */
 @Getter
 @Setter

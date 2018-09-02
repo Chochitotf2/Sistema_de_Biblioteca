@@ -7,6 +7,7 @@ import static vista.utilidades.UtilidadesComponente.*;
 /**
  *
  * @author Víctor Andrés Rojas
+ * @author Mario Orellana
  */
 public class FrmInicioSesion extends javax.swing.JFrame {
 

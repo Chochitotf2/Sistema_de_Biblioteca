@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package vista;
 
 import controlador.servicio.DocumentoNoConvencionalServicio;
@@ -30,7 +25,8 @@ import static vista.utilidades.UtilidadesComponente.*;
 
 /**
  *
- * @author user
+ * @author Víctor Andrés Rojas
+ * @author Mario Orellana
  */
 public class FrmUsuario extends javax.swing.JDialog {
 

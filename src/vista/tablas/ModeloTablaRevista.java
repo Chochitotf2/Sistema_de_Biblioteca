@@ -10,6 +10,7 @@ import modelo.Revista;
 /**
  *
  * @author Víctor Andrés Rojas
+ * @author Mario Orellana
  */
 public class ModeloTablaRevista extends AbstractTableModel {
 

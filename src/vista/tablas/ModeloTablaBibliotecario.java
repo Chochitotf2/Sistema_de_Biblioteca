@@ -10,6 +10,7 @@ import modelo.Bibliotecario;
 /**
  *
  * @author Víctor Andrés Rojas
+ * @author Mario Orellana
  */
 public class ModeloTablaBibliotecario extends AbstractTableModel {
 

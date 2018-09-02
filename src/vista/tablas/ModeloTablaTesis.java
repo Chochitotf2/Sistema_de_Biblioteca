@@ -10,6 +10,7 @@ import modelo.Tesis;
 /**
  *
  * @author Víctor Andrés Rojas
+ * @author Mario Orellana
  */
 public class ModeloTablaTesis extends AbstractTableModel {
 

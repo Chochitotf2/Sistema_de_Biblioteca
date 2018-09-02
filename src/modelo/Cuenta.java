@@ -7,8 +7,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * Esta clase contiene la información necesaria de una Cuenta de usuario,
+ * información que servirá para su respectivo inicio de sesión al sistema.
  *
  * @author Víctor Andrés Rojas
+ * @author Mario Orellana
  */
 @Getter
 @Setter

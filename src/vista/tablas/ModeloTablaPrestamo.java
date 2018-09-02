@@ -11,6 +11,7 @@ import modelo.Prestamo;
 /**
  *
  * @author Víctor Andrés Rojas
+ * @author Mario Orellana
  */
 public class ModeloTablaPrestamo extends AbstractTableModel {
 

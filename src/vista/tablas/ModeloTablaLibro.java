@@ -10,6 +10,7 @@ import modelo.Libro;
 /**
  *
  * @author Víctor Andrés Rojas
+ * @author Mario Orellana
  */
 public class ModeloTablaLibro extends AbstractTableModel {
 

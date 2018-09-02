@@ -7,8 +7,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * Esta clase contiene la información básica de una Tésis de Biblioteca. La
+ * información de este tipo de Documento contiene adicionalmente: uno o varios
+ * nombres de autores, uno o varios nombres de asesores de tesis, el nombre de
+ * la facultad y fecha de publicación
  *
  * @author Víctor Andrés Rojas
+ * @author Mario Orellana
  */
 @Getter
 @Setter

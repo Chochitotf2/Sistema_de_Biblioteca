@@ -10,6 +10,7 @@ import modelo.DocumentoNoConvencional;
 /**
  *
  * @author Víctor Andrés Rojas
+ * @author Mario Orellana
  */
 public class ModeloTablaDocumentoNoConvencional extends AbstractTableModel {
 

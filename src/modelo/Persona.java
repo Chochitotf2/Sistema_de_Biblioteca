@@ -8,8 +8,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * Esta clase contiene la información básica de una Persona. La información de
+ * una persona es primordial para identificar los distintos roles que puede
+ * cumplir la misma dentro del sistema.
  *
  * @author Víctor Andrés Rojas
+ * @author Mario Orellana
  */
 @Getter
 @Setter

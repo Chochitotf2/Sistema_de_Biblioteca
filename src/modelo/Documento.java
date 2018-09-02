@@ -8,8 +8,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * Esta clase contiene la información básica de un Documento de Biblioteca. La
+ * información de un Documento es necesaria para su respectiva busqueda dentro
+ * del sistema.
  *
- * @author MAYLI
+ * @author Víctor Andrés Rojas
+ * @author Mario Orellana
  */
 @Getter
 @Setter
@@ -28,7 +32,7 @@ public class Documento implements Serializable {
     private String codigo;
     @Column(length = 50)
     private String tipoDocumento;
-    public Boolean estado = true;
+    private Boolean estado = true;
     @OneToMany(mappedBy = "documento", cascade = CascadeType.ALL)
     private List<Prestamo> listaPrestamo = new ArrayList<>();
 

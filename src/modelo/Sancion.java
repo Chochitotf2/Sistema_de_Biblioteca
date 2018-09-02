@@ -7,8 +7,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * Esta clase contiene los datos de una Sanción adquirida por el Usuario. Una
+ * sanción ocurre cuando el Usuario no ha seguido las restricciones detalladas
+ * en el préstamo de un documento en el sistema.
  *
- * @author MAYLI
+ * @author Víctor Andrés Rojas
+ * @author Mario Orellana
  */
 @Entity
 @Getter

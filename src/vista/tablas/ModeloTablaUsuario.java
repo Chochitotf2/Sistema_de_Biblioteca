@@ -10,6 +10,7 @@ import modelo.Persona;
 /**
  *
  * @author Víctor Andrés Rojas
+ * @author Mario Orellana
  */
 public class ModeloTablaUsuario extends AbstractTableModel {
 

@@ -6,8 +6,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * Esta clase contiene la información básica de un Bibliotecario.
  *
  * @author Víctor Andrés Rojas
+ * @author Mario Orellana
  */
 @Getter
 @Setter
@@ -19,6 +21,6 @@ public class Bibliotecario extends Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.Bibliotecario[ id=" +""+ getId() + " ]";
+        return "modelo.Bibliotecario[ id=" + "" + getId() + " ]";
     }
 }

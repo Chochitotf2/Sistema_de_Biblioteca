@@ -17,7 +17,8 @@ import static vista.utilidades.UtilidadesComponente.mostrarError;
 
 /**
  *
- * @author user
+ * @author Víctor Andrés Rojas
+ * @author Mario Orellana
  */
 public class FrmAdministrador extends javax.swing.JDialog {
 

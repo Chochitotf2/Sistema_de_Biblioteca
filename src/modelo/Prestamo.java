@@ -9,8 +9,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * Esta clase contiene la información necesaria de un Préstamo Bibliotecario. La
+ * información de un préstamo será útil para tener una referencia entre el
+ * documento prestado, y la persona que adquirió dicho documento.
  *
- * @author MAYLI
+ * @author Víctor Andrés Rojas
+ * @author Mario Orellana
  */
 @Entity
 @Getter

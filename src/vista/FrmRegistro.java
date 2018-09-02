@@ -12,7 +12,8 @@ import static vista.utilidades.UtilidadesComponente.*;
 
 /**
  *
- * @author user
+ * @author Víctor Andrés Rojas
+ * @author Mario Orellana
  */
 public class FrmRegistro extends javax.swing.JDialog {
 

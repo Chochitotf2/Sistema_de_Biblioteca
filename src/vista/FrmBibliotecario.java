@@ -19,6 +19,7 @@ import static java.util.stream.Collectors.toList;
 /**
  *
  * @author Víctor Andrés Rojas
+ * @author Mario Orellana
  */
 public class FrmBibliotecario extends javax.swing.JDialog {
 

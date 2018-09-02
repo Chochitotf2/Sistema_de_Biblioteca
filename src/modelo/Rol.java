@@ -8,8 +8,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * Esta clase contiene los distintos roles que un objeto de tipo Persona puede
+ * tener en el sistema. Los roles ayudarán a definir los distintos caminos que
+ * una persona puede tomar en el sistema.
  *
  * @author Víctor Andrés Rojas
+ * @author Mario Orellana
  */
 @Getter
 @Setter

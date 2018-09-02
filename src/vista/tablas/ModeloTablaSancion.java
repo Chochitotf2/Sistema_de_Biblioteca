@@ -11,6 +11,7 @@ import modelo.Sancion;
 /**
  *
  * @author Víctor Andrés Rojas
+ * @author Mario Orellana
  */
 public class ModeloTablaSancion extends AbstractTableModel {
 

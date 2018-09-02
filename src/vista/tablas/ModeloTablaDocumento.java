@@ -10,6 +10,7 @@ import modelo.Documento;
 /**
  *
  * @author Víctor Andrés Rojas
+ * @author Mario Orellana
  */
 public class ModeloTablaDocumento extends AbstractTableModel {
 
